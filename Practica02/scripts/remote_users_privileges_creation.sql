@@ -49,27 +49,20 @@ GRANT SELECT, INSERT, UPDATE ON db_test.tb_users TO 'support';
 GRANT SELECT, INSERT, UPDATE ON db_test.tb_products TO 'support';
 
 -- 6. ASIGNACIÓN DE ROLES Y PRIVILEGIOS DIRECTOS A USUARIOS
--- Asignación directa de Superusuario para evitar el ERROR 1410
 GRANT ALL PRIVILEGES ON *.* TO 'yazmin.esquivel'@'%' WITH GRANT OPTION;
 
--- Asignación de Roles
+-- Asignación de Roles (Únicamente a los usuarios que llevan rol)
 GRANT 'superadmin' TO 'yazmin.esquivel'@'%';
 GRANT 'admin' TO 'marco.ramirez'@'%';
-GRANT 'support' TO 'natalia.carrasco'@'%'; --insertar 3 usuarios
-
-GRANT 'seller' TO 'aylin.esteban'@'%';
-GRANT 'seller' TO 'uriel.valenzuela'@'%';
+GRANT 'support' TO 'aylin.esteban'@'%'; 
+GRANT 'seller' TO 'natalia.carrasco'@'%';
 GRANT 'seller' TO 'uriel.gonzalez'@'%';
-GRANT 'seller' TO 'luis.cazarez'@'%';
-
--- Permisos individuales extra
-GRANT SELECT, INSERT, UPDATE ON db_test.tb_users TO 'aylin.esteban'@'%';
 
 -- 7. ACTIVACIÓN DE ROLES POR DEFECTO
 SET DEFAULT ROLE 'superadmin' TO 'yazmin.esquivel'@'%';
 SET DEFAULT ROLE 'admin' TO 'marco.ramirez'@'%';
-SET DEFAULT ROLE 'support' TO 'natalia.carrasco'@'%';
-SET DEFAULT ROLE 'seller' TO 'aylin.esteban'@'%', 'uriel.valenzuela'@'%', 'uriel.gonzalez'@'%', 'luis.cazarez'@'%';
+SET DEFAULT ROLE 'support' TO 'aylin.esteban'@'%';
+SET DEFAULT ROLE 'seller' TO 'natalia.carrasco'@'%', 'uriel.gonzalez'@'%';
 
 FLUSH PRIVILEGES;
 

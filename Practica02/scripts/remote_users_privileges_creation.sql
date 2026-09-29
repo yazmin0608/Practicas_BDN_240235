@@ -45,8 +45,8 @@ GRANT ALL PRIVILEGES ON db_test.* TO 'admin';
 GRANT SELECT, INSERT, UPDATE ON db_test.tb_products TO 'seller';
 
 /* SUPPORT */
-GRANT SELECT, INSERT, UPDATE ON db_test.tb_users TO 'support';
-GRANT SELECT, INSERT, UPDATE ON db_test.tb_products TO 'support';
+GRANT SELECT, UPDATE ON db_test.tb_users TO 'support';
+GRANT SELECT, UPDATE ON db_test.tb_products TO 'support';
 
 -- 6. ASIGNACIÓN DE ROLES Y PRIVILEGIOS DIRECTOS A USUARIOS
 GRANT ALL PRIVILEGES ON *.* TO 'yazmin.esquivel'@'%' WITH GRANT OPTION;

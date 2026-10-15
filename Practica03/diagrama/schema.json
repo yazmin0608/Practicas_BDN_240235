@@ -1,0 +1,1761 @@
+{
+  "database": "db_test",
+  "source": "Practica03/backups/Respaldo_1410.sql",
+  "serverVersion": "8.0.36",
+  "created": "2026-10-14 17:28:50",
+  "tables": [
+    {
+      "name": "tb_carts",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "uk_cart_user"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": true,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_cart_user",
+          "kind": "UNIQUE",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tb_carts_ibfk_1",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tb_logs",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "table_name",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "operation",
+          "type": "enum('Create','Read','Update','Delete')",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "db_users",
+          "type": "varchar(80)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "operation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "operation_status",
+          "type": "bit(1)",
+          "nullable": true,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 25411,
+      "countSource": "backup inserts"
+    },
+    {
+      "name": "tb_payment_transactions",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "payment_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "payment_ID"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "event_type",
+          "type": "enum('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded')",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "event_reference",
+          "type": "varchar(150)",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "remarks",
+          "type": "text",
+          "nullable": true,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "payment_ID",
+          "kind": "INDEX",
+          "columns": [
+            "payment_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tb_payment_transactions_ibfk_1",
+          "columns": [
+            "payment_ID"
+          ],
+          "table": "tb_payments",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tb_payment_transactions_chk_1` CHECK ((`amount` >= 0))"
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tb_payments",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "order_ID"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "payment_method_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "payment_method_ID"
+          ]
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "currency",
+          "type": "char(3)",
+          "nullable": false,
+          "default": "'MXN'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "provider",
+          "type": "varchar(50)",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "uk_payment_reference"
+          ]
+        },
+        {
+          "name": "provider_reference",
+          "type": "varchar(150)",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "uk_payment_reference"
+          ]
+        },
+        {
+          "name": "payment_status",
+          "type": "enum('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded')",
+          "nullable": false,
+          "default": "'Pending'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "paid_date",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_payment_reference",
+          "kind": "UNIQUE",
+          "columns": [
+            "provider",
+            "provider_reference"
+          ]
+        },
+        {
+          "name": "order_ID",
+          "kind": "INDEX",
+          "columns": [
+            "order_ID"
+          ]
+        },
+        {
+          "name": "payment_method_ID",
+          "kind": "INDEX",
+          "columns": [
+            "payment_method_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tb_payments_ibfk_1",
+          "columns": [
+            "order_ID"
+          ],
+          "table": "tbb_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tb_payments_chk_1` CHECK ((`amount` > 0))"
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tb_products",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "SKU",
+          "type": "varchar(50)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "SKU"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "varchar(250)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "current_price",
+          "type": "decimal(10,2)",
+          "nullable": false,
+          "default": "'0.00'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "current_stock",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": "'0'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": true,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "SKU",
+          "kind": "UNIQUE",
+          "columns": [
+            "SKU"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 15005,
+      "countSource": "backup inserts"
+    },
+    {
+      "name": "tb_seller_orders",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "uk_order_seller"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "seller_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "uk_order_seller"
+          ],
+          "indexes": [
+            "seller_ID"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "default": "'0.00'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "shipping_cost",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "default": "'0.00'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "fulfillment_status",
+          "type": "enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')",
+          "nullable": false,
+          "default": "'Pending'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_order_seller",
+          "kind": "UNIQUE",
+          "columns": [
+            "order_ID",
+            "seller_ID"
+          ]
+        },
+        {
+          "name": "seller_ID",
+          "kind": "INDEX",
+          "columns": [
+            "seller_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tb_seller_orders_ibfk_1",
+          "columns": [
+            "order_ID"
+          ],
+          "table": "tbb_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "tb_seller_orders_ibfk_2",
+          "columns": [
+            "seller_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tb_seller_orders_chk_1` CHECK ((`subtotal` >= 0))",
+        "CONSTRAINT `tb_seller_orders_chk_2` CHECK ((`shipping_cost` >= 0))"
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tb_users",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "varchar(80)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "email"
+          ]
+        },
+        {
+          "name": "nick",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "nickname"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        },
+        {
+          "name": "last_login",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": false,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "email",
+          "kind": "UNIQUE",
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "nickname",
+          "kind": "UNIQUE",
+          "columns": [
+            "nick"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 8,
+      "countSource": "backup inserts"
+    },
+    {
+      "name": "tbb_orders",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "User_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "fk_user_2"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "order_key",
+          "type": "varchar(40)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "total_products",
+          "type": "int",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "total_cost",
+          "type": "decimal(10,3)",
+          "nullable": false,
+          "default": "'0.000'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "status_string",
+          "type": "enum('Registered','Wishlist','Paid','Canceled','Delivered','Devolved','Attended','Sent')",
+          "nullable": false,
+          "default": "'Registered'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": true,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "fk_user_2",
+          "kind": "INDEX",
+          "columns": [
+            "User_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_user_2",
+          "columns": [
+            "User_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tbc_categories",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "varchar(120)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": [
+            "name"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "sup_id_category",
+          "type": "int unsigned",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "fk_superior_category"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": false,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "name",
+          "kind": "UNIQUE",
+          "columns": [
+            "name"
+          ]
+        },
+        {
+          "name": "fk_superior_category",
+          "kind": "INDEX",
+          "columns": [
+            "sup_id_category"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_superior_category",
+          "columns": [
+            "sup_id_category"
+          ],
+          "table": "tbc_categories",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 101,
+      "countSource": "backup inserts"
+    },
+    {
+      "name": "tbd_cart_items",
+      "columns": [
+        {
+          "name": "cart_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK",
+            "FK"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "product_offer_ID"
+          ],
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": "'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "cart_ID",
+        "product_offer_ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "cart_ID",
+            "product_offer_ID"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "kind": "INDEX",
+          "columns": [
+            "product_offer_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tbd_cart_items_ibfk_1",
+          "columns": [
+            "cart_ID"
+          ],
+          "table": "tb_carts",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_cart_quantity_positive` CHECK ((`quantity` > 0))"
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tbd_order_items",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": true,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "seller_order_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "seller_order_ID"
+          ],
+          "keys": [
+            "FK"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "product_offer_ID"
+          ]
+        },
+        {
+          "name": "product_name",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "unit_price",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)",
+          "nullable": true,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "seller_order_ID",
+          "kind": "INDEX",
+          "columns": [
+            "seller_order_ID"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "kind": "INDEX",
+          "columns": [
+            "product_offer_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tbd_order_items_ibfk_1",
+          "columns": [
+            "seller_order_ID"
+          ],
+          "table": "tb_seller_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tbd_order_items_chk_1` CHECK ((`quantity` > 0))",
+        "CONSTRAINT `tbd_order_items_chk_2` CHECK ((`unit_price` >= 0))"
+      ],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tbd_products_categories",
+      "columns": [
+        {
+          "name": "category_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK",
+            "FK"
+          ]
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "fk_product"
+          ],
+          "keys": [
+            "PK",
+            "FK"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": false,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "category_ID",
+        "product_ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "category_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_product",
+          "kind": "INDEX",
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_category",
+          "columns": [
+            "category_ID"
+          ],
+          "table": "tbc_categories",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_product",
+          "columns": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 10279,
+      "countSource": "backup inserts"
+    },
+    {
+      "name": "tbd_products_users_providers",
+      "columns": [
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK",
+            "FK"
+          ]
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "indexes": [
+            "fk_products2"
+          ],
+          "keys": [
+            "PK",
+            "FK"
+          ]
+        },
+        {
+          "name": "type_ownership",
+          "type": "enum('Owner','Reseller','Distributor')",
+          "nullable": true,
+          "default": "NULL",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": false,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "avalaible_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "user_ID",
+        "product_ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "user_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_products2",
+          "kind": "INDEX",
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_products2",
+          "columns": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_user1",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    },
+    {
+      "name": "tbd_users_wishlist_products",
+      "columns": [
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null,
+          "uniqueIndexes": null,
+          "keys": [
+            "PK"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "nullable": false,
+          "default": "b'1'",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP",
+          "autoIncrement": false,
+          "onUpdate": null,
+          "comment": null
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "nullable": false,
+          "default": null,
+          "autoIncrement": false,
+          "onUpdate": "CURRENT_TIMESTAMP",
+          "comment": null
+        }
+      ],
+      "primaryKey": [
+        "user_ID",
+        "product_ID"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "user_ID",
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "checks": [],
+      "engine": "InnoDB",
+      "charset": "utf8mb4",
+      "collation": "utf8mb4_0900_ai_ci",
+      "rowCount": 0,
+      "countSource": "backup data section; no INSERT rows"
+    }
+  ],
+  "counts": {
+    "tb_logs": 25411,
+    "tb_products": 15005,
+    "tb_users": 8,
+    "tbc_categories": 101,
+    "tbd_products_categories": 10279
+  },
+  "views": [
+    "vw_total_products_by_category",
+    "vw_trazabilidad_categorias",
+    "vw_trazabilidad_productos",
+    "vw_trazabilidad_productos_proveedores",
+    "vw_trazabilidad_usuarios"
+  ],
+  "triggers": [
+    "trg_categories_after_delete",
+    "trg_categories_after_insert",
+    "trg_categories_after_update",
+    "trg_products_after_delete",
+    "trg_products_after_insert",
+    "trg_products_after_update",
+    "trg_products_categories_after_delete",
+    "trg_products_categories_after_insert",
+    "trg_products_categories_after_update",
+    "trg_tbd_products_users_providers_after_delete",
+    "trg_tbd_products_users_providers_after_insert",
+    "trg_tbd_products_users_providers_after_update",
+    "trg_users_after_delete",
+    "trg_users_after_insert",
+    "trg_users_after_update"
+  ],
+  "procedures": [
+    "sp_soft_delete_user"
+  ],
+  "events": []
+}

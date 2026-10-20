@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "erd",
+  "quality": "standard",
+  "specification": {
+    "path": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\candidate.json",
+    "sha256": "46e8d3fa147b75b602f02bd3c788b4dc9b11bbcbe93bacdf58bbdbda85de627c",
+    "bytes": 19246
+  },
+  "artifact": {
+    "path": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\modelo-relacional.html",
+    "sha256": "16ddb07fb5e99200cb607b28a65ccc07e587d1106cf7dfa155ce44ed2f08231a",
+    "bytes": 906786
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\modelo-relacional.finalize.json",
+    "summaryReceipt": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\modelo-relacional.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\modelo-relacional.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-20T17:04:04.286Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 4447,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  },
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "routesOverSuggestedBends": 5,
+      "routesOverSuggestedStretch": 4
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [],
+      "detours": [
+        {
+          "relationship": {
+            "id": "tb_carts_ibfk_1",
+            "from": "tb_carts",
+            "to": "tb_users",
+            "label": "user_ID → ID",
+            "collectionIndex": 1,
+            "artifactIndex": 2
+          },
+          "bends": 4,
+          "stretch": 2.003,
+          "directCorridorBlockers": [
+            {
+              "id": "tb_products",
+              "label": "tb_products",
+              "box": [
+                947.5,
+                276,
+                300,
+                216
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "fk_cart_items_cart",
+            "from": "tbd_carts_items",
+            "to": "tb_carts",
+            "label": "cart_ID → ID",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "bends": 6,
+          "stretch": 1.749,
+          "directCorridorBlockers": [
+            {
+              "id": "tb_products",
+              "label": "tb_products",
+              "box": [
+                947.5,
+                276,
+                300,
+                216
+              ]
+            },
+            {
+              "id": "tb_users",
+              "label": "tb_users",
+              "box": [
+                947.5,
+                532,
+                300,
+                196
+              ]
+            },
+            {
+              "id": "tbc_payment_methods_types",
+              "label": "tbc_payment_methods_types",
+              "box": [
+                947.5,
+                848,
+                300,
+                156
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "tbd_carts_items_ibfk_1",
+            "from": "tbd_carts_items",
+            "to": "tb_carts",
+            "label": "cart_ID → ID",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "bends": 6,
+          "stretch": 1.776,
+          "directCorridorBlockers": [
+            {
+              "id": "tb_products",
+              "label": "tb_products",
+              "box": [
+                947.5,
+                276,
+                300,
+                216
+              ]
+            },
+            {
+              "id": "tb_users",
+              "label": "tb_users",
+              "box": [
+                947.5,
+                532,
+                300,
+                196
+              ]
+            },
+            {
+              "id": "tbc_payment_methods_types",
+              "label": "tbc_payment_methods_types",
+              "box": [
+                947.5,
+                848,
+                300,
+                156
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "tbd_order_items_ibfk_1",
+            "from": "tbd_order_items",
+            "to": "tb_buyer_orders",
+            "label": "seller_order_ID → ID",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "bends": 4,
+          "stretch": 1.43,
+          "directCorridorBlockers": [
+            {
+              "id": "tb_logs",
+              "label": "tb_logs",
+              "box": [
+                183.5,
+                276,
+                402,
+                176
+              ]
+            },
+            {
+              "id": "tb_user_addresses",
+              "label": "tb_user_addresses",
+              "box": [
+                222.5,
+                532,
+                324,
+                276
+              ]
+            },
+            {
+              "id": "tbc_categories",
+              "label": "tbc_categories",
+              "box": [
+                234.5,
+                848,
+                300,
+                176
+              ]
+            },
+            {
+              "id": "tbd_address_components",
+              "label": "tbd_address_components",
+              "box": [
+                234.5,
+                1064,
+                300,
+                196
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "fk_products2",
+            "from": "tbd_products_users_providers",
+            "to": "tb_products",
+            "label": "product_ID → ID",
+            "collectionIndex": 11,
+            "artifactIndex": 12
+          },
+          "bends": 3,
+          "stretch": 1.024
+        }
+      ],
+      "truncated": false
+    },
+    "repair": "Advisory only: this mode places or routes these relationships itself. Report them; do not remove relationships or meaning to reduce crossings."
+  }
+}

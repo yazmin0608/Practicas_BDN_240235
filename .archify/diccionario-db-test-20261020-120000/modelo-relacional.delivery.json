@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "b3c2108f-07f8-4c66-a4c9-2b0a79ed4ebd",
+  "status": "current",
+  "command": "deliver",
+  "type": "erd",
+  "input": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\candidate.json",
+  "output": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\.archify\\diccionario-db-test-20261020-120000\\modelo-relacional.html",
+  "specification": {
+    "sha256": "328668f456cffe8e82eda4feff5593fca7dbfd5f73ff39b86ffcffd44a008ea4",
+    "bytes": 19248
+  },
+  "artifact": {
+    "sha256": "f7f93eb0f0d6448d84105c119a99ebd8cbc686edf92e31399c67d96ee2100925",
+    "bytes": 907061
+  }
+}

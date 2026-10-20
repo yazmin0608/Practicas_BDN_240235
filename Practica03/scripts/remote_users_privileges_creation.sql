@@ -7,6 +7,7 @@ DROP USER IF EXISTS 'yazmin.esquivel'@'%';
 DROP USER IF EXISTS 'uriel.gonzalez'@'%';
 DROP USER IF EXISTS 'luis.cazarez'@'%';
 DROP USER IF EXISTS 'olaf.gutierrez'@'%';
+DROP USER IF EXISTS 'olaf.gutierres'@'%';
 
 -- 2. ELIMINACIÓN DE ROLES
 DROP ROLE IF EXISTS 'superadmin';
@@ -15,7 +16,6 @@ DROP ROLE IF EXISTS 'seller';
 DROP ROLE IF EXISTS 'buyer';
 DROP ROLE IF EXISTS 'user_not_registered';
 DROP ROLE IF EXISTS 'support';
-DROP ROLE IF EXISTS 'buyer';
 
 -- 3. CREACIÓN DE USUARIOS REMOTOS
 CREATE USER 'natalia.carrasco'@'%' IDENTIFIED BY '240853';
@@ -37,7 +37,6 @@ CREATE ROLE 'seller';
 CREATE ROLE 'buyer';
 CREATE ROLE 'user_not_registered';
 CREATE ROLE 'support';
-CREATE ROLE 'buyer';
 
 -- 5. ASIGNACIÓN DE PRIVILEGIOS A LOS ROLES
 /* SUPERADMIN */
@@ -66,7 +65,7 @@ ON db_test.tb_buyer_orders
 TO  'buyer';
 
 GRANT SELECT, INSERT, UPDATE
-ON db_test.tbd_users_whishlist_products
+ON db_test.tbd_users_wishlist_products
 TO  'buyer';
 
 

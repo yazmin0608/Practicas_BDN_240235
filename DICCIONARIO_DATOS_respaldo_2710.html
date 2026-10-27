@@ -1,0 +1,824 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diccionario de datos | db_test</title><style>:root{color-scheme:light dark;--bg:#f4f6fa;--paper:#fff;--ink:#172033;--line:#dce2ec;--accent:#2459a6;--head:#edf2fa}@media(prefers-color-scheme:dark){:root{--bg:#101522;--paper:#171f30;--ink:#e8edf8;--line:#313c52;--accent:#9bbcff;--head:#202b40}}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,sans-serif}header{position:sticky;top:0;z-index:2;background:var(--paper);padding:14px 3vw;border-bottom:1px solid var(--line)}header h1{font-size:1.2rem;margin:0 0 8px}input{width:min(720px,100%);padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}.layout{max-width:1700px;margin:auto;padding:18px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:16px}nav,main{background:var(--paper);border:1px solid var(--line);border-radius:12px}nav{position:sticky;top:125px;align-self:start;height:calc(100vh - 145px);overflow:auto;padding:14px}nav a{display:block;padding:5px;color:var(--accent);text-decoration:none;overflow-wrap:anywhere}main{min-width:0;padding:clamp(16px,3vw,36px)}h2{margin-top:2.4rem;padding-bottom:.4rem;border-bottom:1px solid var(--line);scroll-margin-top:125px}p{max-width:110ch}code{background:var(--head);padding:.08em .3em;border-radius:4px;overflow-wrap:anywhere}.table-wrap{overflow:auto;margin:12px 0 22px;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;min-width:680px;font-size:.9rem}th,td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:var(--head)}tbody tr:nth-child(even){background:var(--head)}.hidden{display:none!important}@media(max-width:850px){.layout{grid-template-columns:1fr;padding:10px}nav{position:relative;top:auto;height:auto;max-height:240px}header{position:relative}}@media print{header,nav{display:none}.layout{display:block}body{background:white;color:black}}</style></head><body><header><h1>Diccionario de datos | db_test</h1><input id="q" type="search" placeholder="Buscar tabla, atributo, tipo o restricción…" aria-label="Buscar"></header><div class="layout"><nav><b>Índice de tablas</b><a href="#tb_buyer_orders">tb_buyer_orders</a><a href="#tb_cancellations">tb_cancellations</a><a href="#tb_carts">tb_carts</a><a href="#tb_logs">tb_logs</a><a href="#tb_payment_methods">tb_payment_methods</a><a href="#tb_payment_transactions">tb_payment_transactions</a><a href="#tb_payments">tb_payments</a><a href="#tb_people">tb_people</a><a href="#tb_products">tb_products</a><a href="#tb_refunds">tb_refunds</a><a href="#tb_returns">tb_returns</a><a href="#tb_shipments">tb_shipments</a><a href="#tb_user_addresses">tb_user_addresses</a><a href="#tb_users">tb_users</a><a href="#tbc_categories">tbc_categories</a><a href="#tbc_payment_methods_types">tbc_payment_methods_types</a><a href="#tbd_address_components">tbd_address_components</a><a href="#tbd_cancellation_items">tbd_cancellation_items</a><a href="#tbd_carts_items">tbd_carts_items</a><a href="#tbd_order_items">tbd_order_items</a><a href="#tbd_products_categories">tbd_products_categories</a><a href="#tbd_products_users_providers">tbd_products_users_providers</a><a href="#tbd_return_items">tbd_return_items</a><a href="#tbd_user_payment_methods">tbd_user_payment_methods</a><a href="#tbd_users_wishlist_products">tbd_users_wishlist_products</a></nav><main><h1 id="diccionario-de-datos-respaldo-2710">Diccionario de datos — Respaldo 2710</h1>
+<p><strong>Base:</strong> <code>db_test</code> · <strong>Fuente:</strong> <code>Practica03/backups/Respaldo_2710.sql</code> · <strong>Servidor indicado:</strong> MySQL 8.0.36.</p>
+<p>Inventario extraído de las definiciones SQL: <strong>25 tablas</strong>, <strong>226 columnas</strong>, <strong>36 FK</strong>. No se ejecutó SQL. Las descripciones no declaradas por el esquema se marcan como inferidas.</p>
+<h2 id="tb_buyer_orders">tb_buyer_orders</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 8 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_buyer_orders(ID, order_ID, seller_ID, subtotal, shipping_cost, fulfillment_status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A8) · <strong>Grado:</strong> 8 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>tb_buyer_orders_chk_1</code> CHECK ((<code>subtotal</code> &gt;= 0)); CONSTRAINT <code>tb_buyer_orders_chk_2</code> CHECK ((<code>shipping_cost</code> &gt;= 0))</p>
+<p><strong>Relaciones:</strong> seller_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_seller_orders_seller; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>seller_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>subtotal</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A5</td><td><code>shipping_cost</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A6</td><td><code>fulfillment_status</code></td><td><code>ENUM('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A8</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>seller_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>subtotal</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A5</td><td><code>shipping_cost</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A6</td><td><code>fulfillment_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned'); NOT NULL; DEFAULT 'Pending'</code></td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A8</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX fk_seller_orders_seller_idx(seller_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_cancellations">tb_cancellations</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 11 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_cancellations(ID, buyer_order_ID, user_ID, cancellation_reason, cancellation_status, requested_date, resolved_date, resolution_notes, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A11) · <strong>Grado:</strong> 11 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> buyer_order_ID → tb_buyer_orders(ID); muchos-a-uno desde esta tabla; restricción fk_cancellations_order; acciones no especificadas; user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_cancellations_user; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>cancellation_reason</code></td><td><code>VARCHAR(500)</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>cancellation_status</code></td><td><code>ENUM('Requested','Approved','Rejected','Completed')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>requested_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A7</td><td><code>resolved_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A8</td><td><code>resolution_notes</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A10</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td>FK → tb_buyer_orders.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>user_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>cancellation_reason</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(500); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>cancellation_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Requested','Approved','Rejected','Completed'); NOT NULL; DEFAULT 'Requested'</code></td></tr>
+<tr><td>A6</td><td><code>requested_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A7</td><td><code>resolved_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>resolution_notes</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A9</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A10</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_cancellation_order(buyer_order_ID); INDEX idx_cancellation_user(user_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_carts">tb_carts</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 5 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_carts(ID, user_ID, creation_date, last_update, status)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A5) · <strong>Grado:</strong> 5 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción tb_carts_ibfk_1; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK, UNIQUE</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A4</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A5</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td>FK → tb_users.ID, UNIQUE</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A4</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A5</td><td><code>status</code></td><td>Atributo no clave</td><td>Sí</td><td><code>BIT(1); NULL permitido; DEFAULT b'1'</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE uk_cart_user(user_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_logs">tb_logs</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Auditoría/trazabilidad; el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 7 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Auditoría/trazabilidad.</p>
+<p><strong>Esquema:</strong> <code>tb_logs(ID, table_name, operation, db_users, description, operation_date, operation_status)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A7) · <strong>Grado:</strong> 7 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> Sin FK declaradas.</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>table_name</code></td><td><code>VARCHAR(100)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A3</td><td><code>operation</code></td><td><code>ENUM('Create','Read','Update','Delete')</code></td><td>Dato operation; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>db_users</code></td><td><code>VARCHAR(80)</code></td><td>Dato db users; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>description</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>operation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A7</td><td><code>operation_status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>table_name</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(100); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>operation</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Create','Read','Update','Delete'); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>db_users</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(80); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>description</code></td><td>Atributo no clave</td><td>No</td><td><code>TEXT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>operation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A7</td><td><code>operation_status</code></td><td>Atributo no clave</td><td>Sí</td><td><code>BIT(1); NULL permitido; DEFAULT b'1'</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_payment_methods">tb_payment_methods</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 13 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_payment_methods(ID, order_ID, user_ID, payment_method_type_ID, payment_reference, amount, currency, payment_status, payment_date, notes, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A13) · <strong>Grado:</strong> 13 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_payment_methods_amount</code> CHECK ((<code>amount</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> payment_method_type_ID → tbc_payment_methods_types(ID); muchos-a-uno desde esta tabla; restricción fk_payment_methods_type; acciones no especificadas; user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_payment_methods_user; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>payment_method_type_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A5</td><td><code>payment_reference</code></td><td><code>VARCHAR(150)</code></td><td>Dato payment reference; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A7</td><td><code>currency</code></td><td><code>CHAR(3)</code></td><td>Dato currency; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>payment_status</code></td><td><code>ENUM('Pending','Authorized','Paid','Failed','Cancelled','Refunded')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>payment_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A10</td><td><code>notes</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A11</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A12</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A13</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>user_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>payment_method_type_ID</code></td><td>FK → tbc_payment_methods_types.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>payment_reference</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A6</td><td><code>amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A7</td><td><code>currency</code></td><td>Atributo no clave</td><td>No</td><td><code>CHAR(3); NOT NULL; DEFAULT 'MXN'</code></td></tr>
+<tr><td>A8</td><td><code>payment_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Pending','Authorized','Paid','Failed','Cancelled','Refunded'); NOT NULL; DEFAULT 'Pending'</code></td></tr>
+<tr><td>A9</td><td><code>payment_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A10</td><td><code>notes</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A11</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A12</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A13</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_payment_methods_order(order_ID); INDEX idx_payment_methods_user(user_ID); INDEX idx_payment_methods_type(payment_method_type_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_payment_transactions">tb_payment_transactions</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 7 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_payment_transactions(ID, payment_ID, event_type, amount, event_reference, remarks, creation_date)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A7) · <strong>Grado:</strong> 7 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_transaction_amount</code> CHECK ((<code>amount</code> &gt;= 0))</p>
+<p><strong>Relaciones:</strong> payment_ID → tb_payments(ID); muchos-a-uno desde esta tabla; restricción fk_transactions_payments; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>payment_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>event_type</code></td><td><code>ENUM('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded')</code></td><td>Dato event type; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A5</td><td><code>event_reference</code></td><td><code>VARCHAR(150)</code></td><td>Dato event reference; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>remarks</code></td><td><code>TEXT</code></td><td>Dato remarks; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>payment_ID</code></td><td>FK → tb_payments.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>event_type</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded'); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>event_reference</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A6</td><td><code>remarks</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX fk_transactions_payments(payment_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_payments">tb_payments</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 11 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_payments(ID, order_ID, amount, currency, payment_method, provider, provider_reference, payment_status, creation_date, paid_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A11) · <strong>Grado:</strong> 11 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_payment_amount</code> CHECK ((<code>amount</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> order_ID → tb_buyer_orders(ID); muchos-a-uno desde esta tabla; restricción fk_payments_buyer_orders; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A4</td><td><code>currency</code></td><td><code>CHAR(3)</code></td><td>Dato currency; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>payment_method</code></td><td><code>ENUM('Card','SPEI','Transfer','Cash')</code></td><td>Dato payment method; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>provider</code></td><td><code>VARCHAR(50)</code></td><td>Dato provider; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>provider_reference</code></td><td><code>VARCHAR(150)</code></td><td>Dato provider reference; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>payment_status</code></td><td><code>ENUM('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A10</td><td><code>paid_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>order_ID</code></td><td>FK → tb_buyer_orders.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>currency</code></td><td>Atributo no clave</td><td>No</td><td><code>CHAR(3); NOT NULL; DEFAULT 'MXN'</code></td></tr>
+<tr><td>A5</td><td><code>payment_method</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Card','SPEI','Transfer','Cash'); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>provider</code></td><td>UNIQUE</td><td>Sí</td><td><code>VARCHAR(50); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>provider_reference</code></td><td>UNIQUE</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>payment_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded'); NOT NULL; DEFAULT 'Pending'</code></td></tr>
+<tr><td>A9</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A10</td><td><code>paid_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE uk_payment_reference(provider, provider_reference); INDEX fk_payments_buyer_orders(order_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_people">tb_people</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Entidad; propósito pendiente de validar; el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 12 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Entidad; propósito pendiente de validar.</p>
+<p><strong>Esquema:</strong> <code>tb_people(person_ID, user_ID, courtesy_title, given_names, family_names, birth_date, gender_ID, country_code, phone, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A12) · <strong>Grado:</strong> 12 · <strong>PK:</strong> person_ID</p>
+<p><strong>Relaciones:</strong> user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_persons_user; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>person_ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK, UNIQUE</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>courtesy_title</code></td><td><code>VARCHAR(50)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>given_names</code></td><td><code>VARCHAR(150)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>family_names</code></td><td><code>VARCHAR(150)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>birth_date</code></td><td><code>DATE</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATE).</td></tr>
+<tr><td>A7</td><td><code>gender_ID</code></td><td><code>TINYINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A8</td><td><code>country_code</code></td><td><code>CHAR(2)</code></td><td>Dato country code; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>phone</code></td><td><code>VARCHAR(25)</code></td><td>Dato phone; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A10</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A11</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A12</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>person_ID</code></td><td>PK</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td>FK → tb_users.ID, UNIQUE</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>courtesy_title</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(50); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A4</td><td><code>given_names</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(150); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>family_names</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A6</td><td><code>birth_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATE; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>gender_ID</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TINYINT; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>country_code</code></td><td>Atributo no clave</td><td>Sí</td><td><code>CHAR(2); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A9</td><td><code>phone</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(25); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A10</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A11</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A12</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(person_ID); UNIQUE uk_persons_user(user_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_products">tb_products</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 9 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_products(ID, SKU, name, description, current_price, current_stock, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A9) · <strong>Grado:</strong> 9 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> Sin FK declaradas.</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>SKU</code></td><td><code>VARCHAR(50)</code></td><td>Dato sku; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A3</td><td><code>name</code></td><td><code>VARCHAR(250)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>description</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>current_price</code></td><td><code>DECIMAL(10,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A6</td><td><code>current_stock</code></td><td><code>INT</code></td><td>Dato current stock; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A7</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A9</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>SKU</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(50); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>name</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(250); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>description</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>current_price</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(10,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A6</td><td><code>current_stock</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT '0'</code></td></tr>
+<tr><td>A7</td><td><code>status</code></td><td>Atributo no clave</td><td>Sí</td><td><code>BIT(1); NULL permitido; DEFAULT b'1'</code></td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A9</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE SKU(SKU)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_refunds">tb_refunds</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Entidad; propósito pendiente de validar; el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 15 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Entidad; propósito pendiente de validar.</p>
+<p><strong>Esquema:</strong> <code>tb_refunds(ID, payment_ID, cancellation_ID, return_ID, amount, currency, refund_reason, refund_status, provider_reference, requested_date, processed_date, resolution_notes, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A15) · <strong>Grado:</strong> 15 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_refund_amount</code> CHECK ((<code>amount</code> &gt; 0)); CONSTRAINT <code>chk_refund_origin</code> CHECK (((<code>cancellation_ID</code> is not null) or (<code>return_ID</code> is not null)))</p>
+<p><strong>Relaciones:</strong> cancellation_ID → tb_cancellations(ID); muchos-a-uno desde esta tabla; restricción fk_refunds_cancellation; acciones no especificadas; payment_ID → tb_payments(ID); muchos-a-uno desde esta tabla; restricción fk_refunds_payment; acciones no especificadas; return_ID → tb_returns(ID); muchos-a-uno desde esta tabla; restricción fk_refunds_return; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>payment_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>cancellation_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Opcional, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>return_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Opcional, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A5</td><td><code>amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A6</td><td><code>currency</code></td><td><code>CHAR(3)</code></td><td>Dato currency; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>refund_reason</code></td><td><code>VARCHAR(500)</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>refund_status</code></td><td><code>ENUM('Requested','Approved','Processing','Completed','Rejected','Failed')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>provider_reference</code></td><td><code>VARCHAR(150)</code></td><td>Dato provider reference; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A10</td><td><code>requested_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>processed_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A12</td><td><code>resolution_notes</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A13</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A14</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A15</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>payment_ID</code></td><td>FK → tb_payments.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>cancellation_ID</code></td><td>FK → tb_cancellations.ID</td><td>Sí</td><td><code>INT; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A4</td><td><code>return_ID</code></td><td>FK → tb_returns.ID</td><td>Sí</td><td><code>INT; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A5</td><td><code>amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>currency</code></td><td>Atributo no clave</td><td>No</td><td><code>CHAR(3); NOT NULL; DEFAULT 'MXN'</code></td></tr>
+<tr><td>A7</td><td><code>refund_reason</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(500); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A8</td><td><code>refund_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Requested','Approved','Processing','Completed','Rejected','Failed'); NOT NULL; DEFAULT 'Requested'</code></td></tr>
+<tr><td>A9</td><td><code>provider_reference</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A10</td><td><code>requested_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A11</td><td><code>processed_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A12</td><td><code>resolution_notes</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A13</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A14</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A15</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_refund_payment(payment_ID); INDEX idx_refund_cancellation(cancellation_ID); INDEX idx_refund_return(return_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_returns">tb_returns</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Entidad; propósito pendiente de validar; el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 14 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Entidad; propósito pendiente de validar.</p>
+<p><strong>Esquema:</strong> <code>tb_returns(ID, buyer_order_ID, order_item_ID, user_ID, quantity, return_reason, return_status, requested_date, received_date, resolved_date, resolution_notes, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A14) · <strong>Grado:</strong> 14 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_return_quantity</code> CHECK ((<code>quantity</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> order_item_ID → tbd_order_items(ID); muchos-a-uno desde esta tabla; restricción fk_returns_item; acciones no especificadas; buyer_order_ID → tb_buyer_orders(ID); muchos-a-uno desde esta tabla; restricción fk_returns_order; acciones no especificadas; user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_returns_user; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A5</td><td><code>quantity</code></td><td><code>INT</code></td><td>Dato quantity; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A6</td><td><code>return_reason</code></td><td><code>VARCHAR(500)</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>return_status</code></td><td><code>ENUM('Requested','Authorized','Rejected','InTransit','Received','Inspected','Completed')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>requested_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A9</td><td><code>received_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A10</td><td><code>resolved_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>resolution_notes</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A12</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A13</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A14</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td>FK → tb_buyer_orders.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td>FK → tbd_order_items.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>user_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>quantity</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT '1'</code></td></tr>
+<tr><td>A6</td><td><code>return_reason</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(500); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A7</td><td><code>return_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Requested','Authorized','Rejected','InTransit','Received','Inspected','Completed'); NOT NULL; DEFAULT 'Requested'</code></td></tr>
+<tr><td>A8</td><td><code>requested_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A9</td><td><code>received_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A10</td><td><code>resolved_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A11</td><td><code>resolution_notes</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A12</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A13</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A14</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_return_order(buyer_order_ID); INDEX idx_return_item(order_item_ID); INDEX idx_return_user(user_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_shipments">tb_shipments</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Entidad; propósito pendiente de validar; el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 13 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Entidad; propósito pendiente de validar.</p>
+<p><strong>Esquema:</strong> <code>tb_shipments(ID, buyer_order_ID, address_ID, carrier, tracking_number, shipping_cost, shipment_status, shipped_date, estimated_delivery_date, delivered_date, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A13) · <strong>Grado:</strong> 13 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_shipment_cost</code> CHECK ((<code>shipping_cost</code> &gt;= 0))</p>
+<p><strong>Relaciones:</strong> address_ID → tb_user_addresses(ID); muchos-a-uno desde esta tabla; restricción fk_shipments_address; acciones no especificadas; buyer_order_ID → tb_buyer_orders(ID); muchos-a-uno desde esta tabla; restricción fk_shipments_order; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>address_ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>carrier</code></td><td><code>VARCHAR(100)</code></td><td>Dato carrier; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>tracking_number</code></td><td><code>VARCHAR(150)</code></td><td>Dato tracking number; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>shipping_cost</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A7</td><td><code>shipment_status</code></td><td><code>ENUM('Pending','Preparing','Shipped','InTransit','Delivered','Failed','Returned')</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>shipped_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A9</td><td><code>estimated_delivery_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A10</td><td><code>delivered_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A12</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A13</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>buyer_order_ID</code></td><td>FK → tb_buyer_orders.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>address_ID</code></td><td>FK → tb_user_addresses.ID</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>carrier</code></td><td>UNIQUE</td><td>Sí</td><td><code>VARCHAR(100); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A5</td><td><code>tracking_number</code></td><td>UNIQUE</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A6</td><td><code>shipping_cost</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A7</td><td><code>shipment_status</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Pending','Preparing','Shipped','InTransit','Delivered','Failed','Returned'); NOT NULL; DEFAULT 'Pending'</code></td></tr>
+<tr><td>A8</td><td><code>shipped_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A9</td><td><code>estimated_delivery_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A10</td><td><code>delivered_date</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A11</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A12</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A13</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE uk_shipment_tracking(carrier, tracking_number); INDEX idx_shipment_order(buyer_order_ID); INDEX idx_shipment_address(address_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_user_addresses">tb_user_addresses</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 12 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_user_addresses(ID, user_ID, address_label, recipient_name, recipient_phone, delivery_instructions, latitude, longitude, is_default, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A12) · <strong>Grado:</strong> 12 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_coordinates</code> CHECK ((((<code>latitude</code> is null) and (<code>longitude</code> is null)) or ((<code>latitude</code> is not null) and (<code>longitude</code> is not null)))); CONSTRAINT <code>chk_latitude</code> CHECK ((<code>latitude</code> between -(90) and 90)); CONSTRAINT <code>chk_longitude</code> CHECK ((<code>longitude</code> between -(180) and 180))</p>
+<p><strong>Relaciones:</strong> user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_addresses_user; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>address_label</code></td><td><code>VARCHAR(100)</code></td><td>Dato address label; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>recipient_name</code></td><td><code>VARCHAR(150)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>recipient_phone</code></td><td><code>VARCHAR(25)</code></td><td>Dato recipient phone; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>delivery_instructions</code></td><td><code>VARCHAR(500)</code></td><td>Dato delivery instructions; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>latitude</code></td><td><code>DECIMAL(10,7)</code></td><td>Dato latitude; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A8</td><td><code>longitude</code></td><td><code>DECIMAL(10,7)</code></td><td>Dato longitude; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A9</td><td><code>is_default</code></td><td><code>TINYINT(1)</code></td><td>Dato is default; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A10</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A11</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A12</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>address_label</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(100); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>recipient_name</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(150); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A5</td><td><code>recipient_phone</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(25); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A6</td><td><code>delivery_instructions</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(500); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>latitude</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DECIMAL(10,7); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>longitude</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DECIMAL(10,7); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A9</td><td><code>is_default</code></td><td>Atributo no clave</td><td>No</td><td><code>TINYINT(1); NOT NULL; DEFAULT '0'</code></td></tr>
+<tr><td>A10</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A11</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A12</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_user_addresses(user_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tb_users">tb_users</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 8 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tb_users(ID, email, nick, password, creation_date, last_update, last_login, status)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A8) · <strong>Grado:</strong> 8 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> Sin FK declaradas.</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>email</code></td><td><code>VARCHAR(80)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A3</td><td><code>nick</code></td><td><code>VARCHAR(100)</code></td><td>Dato nick; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>password</code></td><td><code>VARCHAR(255)</code></td><td>Dato password; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A6</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A7</td><td><code>last_login</code></td><td><code>DATETIME</code></td><td>Dato last login; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A8</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>email</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(80); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>nick</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(100); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>password</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(255); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A6</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A7</td><td><code>last_login</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE email(email); UNIQUE nickname(nick)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbc_categories">tbc_categories</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Catálogo (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 7 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Catálogo (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbc_categories(ID, name, description, sup_id_category, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A7) · <strong>Grado:</strong> 7 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> sup_id_category → tbc_categories(ID); muchos-a-uno desde esta tabla; restricción fk_superior_category; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>name</code></td><td><code>VARCHAR(120)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A3</td><td><code>description</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>sup_id_category</code></td><td><code>INT</code></td><td>Dato sup id category; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, FK</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A5</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A7</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>name</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(120); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>description</code></td><td>Atributo no clave</td><td>Sí</td><td><code>TEXT; NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>sup_id_category</code></td><td>FK → tbc_categories.ID</td><td>Sí</td><td><code>INT; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A5</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A6</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A7</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE name(name); INDEX fk_superior_category(sup_id_category)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbc_payment_methods_types">tbc_payment_methods_types</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 6 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbc_payment_methods_types(ID, code, description, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A6) · <strong>Grado:</strong> 6 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> Sin FK declaradas.</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>code</code></td><td><code>VARCHAR(30)</code></td><td>Dato code; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A3</td><td><code>description</code></td><td><code>TEXT</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A6</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>code</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(30); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>description</code></td><td>Atributo no clave</td><td>No</td><td><code>TEXT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A6</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE code_UNIQUE(code)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_address_components">tbd_address_components</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Detalle/intermedia o auxiliar (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 8 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Detalle/intermedia o auxiliar (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_address_components(ID, address_ID, value, component_type, status, address_sup_ID, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A8) · <strong>Grado:</strong> 8 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> address_ID → tb_user_addresses(ID); muchos-a-uno desde esta tabla; restricción fk_component_address; acciones ON DELETE RESTRICT; address_ID, address_sup_ID → tbd_address_components(address_ID, ID); muchos-a-uno desde esta tabla; restricción fk_component_parent; acciones ON DELETE RESTRICT</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, UNIQUE</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>address_ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK, UNIQUE</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>value</code></td><td><code>VARCHAR(255)</code></td><td>Dato value; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>component_type</code></td><td><code>VARCHAR(50)</code></td><td>Dato component type; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>address_sup_ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Opcional, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A8</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK, UNIQUE</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>address_ID</code></td><td>FK → tb_user_addresses.ID, FK → tbd_address_components.address_ID, UNIQUE</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>value</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(255); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>component_type</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(50); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A6</td><td><code>address_sup_ID</code></td><td>FK → tbd_address_components.ID</td><td>Sí</td><td><code>BIGINT; NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A8</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE uk_address_component(address_ID, ID); INDEX idx_address_parent(address_ID, address_sup_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_cancellation_items">tbd_cancellation_items</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 9 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_cancellation_items(ID, cancellation_ID, order_item_ID, quantity, unit_amount, item_reason, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A9) · <strong>Grado:</strong> 9 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_cancellation_items_amount</code> CHECK ((<code>unit_amount</code> &gt;= 0)); CONSTRAINT <code>chk_cancellation_items_quantity</code> CHECK ((<code>quantity</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> cancellation_ID → tb_cancellations(ID); muchos-a-uno desde esta tabla; restricción fk_cancellation_items_cancellation; acciones no especificadas; order_item_ID → tbd_order_items(ID); muchos-a-uno desde esta tabla; restricción fk_cancellation_items_order_item; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>cancellation_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td><code>INT</code></td><td>Dato quantity; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A5</td><td><code>unit_amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A6</td><td><code>item_reason</code></td><td><code>VARCHAR(500)</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A9</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>cancellation_ID</code></td><td>FK → tb_cancellations.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td>FK → tbd_order_items.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT '1'</code></td></tr>
+<tr><td>A5</td><td><code>unit_amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A6</td><td><code>item_reason</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(500); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A9</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_cancellation_items_cancellation(cancellation_ID); INDEX idx_cancellation_items_order_item(order_item_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_carts_items">tbd_carts_items</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 5 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_carts_items(cart_ID, provider_ID, product_ID, quantity, creation_date)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A5) · <strong>Grado:</strong> 5 · <strong>PK:</strong> cart_ID, provider_ID, product_ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_cart_quantity</code> CHECK ((<code>quantity</code> &gt; 0)); CONSTRAINT <code>chk_cart_quantity_positive</code> CHECK ((<code>quantity</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> cart_ID → tb_carts(ID); muchos-a-uno desde esta tabla; restricción fk_cart_items_cart; acciones no especificadas; product_ID → tbd_products_users_providers(product_ID); muchos-a-uno desde esta tabla; restricción fk_cart_items_product; acciones no especificadas; provider_ID → tbd_products_users_providers(user_ID); muchos-a-uno desde esta tabla; restricción fk_cart_items_provider; acciones no especificadas; cart_ID → tb_carts(ID); muchos-a-uno desde esta tabla; restricción tbd_carts_items_ibfk_1; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>cart_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>provider_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>product_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td><code>INT</code></td><td>Dato quantity; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>cart_ID</code></td><td>PK, FK → tb_carts.ID, FK → tb_carts.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A2</td><td><code>provider_ID</code></td><td>PK, FK → tbd_products_users_providers.user_ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>product_ID</code></td><td>PK, FK → tbd_products_users_providers.product_ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT '1'</code></td></tr>
+<tr><td>A5</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(cart_ID, provider_ID, product_ID); INDEX fk_cart_items_provider(provider_ID); INDEX fk_cart_items_product(product_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_order_items">tbd_order_items</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 8 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_order_items(ID, seller_order_ID, product_offer_ID, product_name, quantity, unit_price, subtotal, creation_date)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A8) · <strong>Grado:</strong> 8 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>tbd_order_items_chk_1</code> CHECK ((<code>quantity</code> &gt; 0)); CONSTRAINT <code>tbd_order_items_chk_2</code> CHECK ((<code>unit_price</code> &gt;= 0))</p>
+<p><strong>Relaciones:</strong> seller_order_ID → tb_buyer_orders(ID); muchos-a-uno desde esta tabla; restricción tbd_order_items_ibfk_1; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>seller_order_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>product_offer_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>product_name</code></td><td><code>VARCHAR(255)</code></td><td>Dato identificativo/descriptivo cuyo uso se infiere del nombre de columna.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>quantity</code></td><td><code>INT</code></td><td>Dato quantity; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A6</td><td><code>unit_price</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A7</td><td><code>subtotal</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>seller_order_ID</code></td><td>FK → tb_buyer_orders.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>product_offer_ID</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>product_name</code></td><td>Atributo no clave</td><td>No</td><td><code>VARCHAR(255); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>quantity</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>unit_price</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A7</td><td><code>subtotal</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DECIMAL(12,2); NULL permitido; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A8</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX seller_order_ID(seller_order_ID); INDEX product_offer_ID(product_offer_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_products_categories">tbd_products_categories</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 5 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_products_categories(category_ID, product_ID, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A5) · <strong>Grado:</strong> 5 · <strong>PK:</strong> category_ID, product_ID</p>
+<p><strong>Relaciones:</strong> category_ID → tbc_categories(ID); muchos-a-uno desde esta tabla; restricción fk_category; acciones no especificadas; product_ID → tb_products(ID); muchos-a-uno desde esta tabla; restricción fk_product; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>category_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A5</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>category_ID</code></td><td>PK, FK → tbc_categories.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td>PK, FK → tb_products.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A4</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A5</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(category_ID, product_ID); INDEX fk_product(product_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_products_users_providers">tbd_products_users_providers</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 7 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_products_users_providers(user_ID, product_ID, type_ownership, status, avalaible_date, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A7) · <strong>Grado:</strong> 7 · <strong>PK:</strong> user_ID, product_ID</p>
+<p><strong>Relaciones:</strong> product_ID → tb_products(ID); muchos-a-uno desde esta tabla; restricción fk_products2; acciones no especificadas; user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción fk_user1; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>type_ownership</code></td><td><code>ENUM('Owner','Reseller','Distributor')</code></td><td>Dato type ownership; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>avalaible_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A6</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A7</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>user_ID</code></td><td>PK, FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td>PK, FK → tb_products.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>type_ownership</code></td><td>Atributo no clave</td><td>Sí</td><td><code>ENUM('Owner','Reseller','Distributor'); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A4</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A5</td><td><code>avalaible_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A7</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(user_ID, product_ID); INDEX fk_products2(product_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_return_items">tbd_return_items</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Detalle/intermedia o auxiliar (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 10 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Detalle/intermedia o auxiliar (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_return_items(ID, return_ID, order_item_ID, quantity, unit_amount, item_reason, item_condition, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A10) · <strong>Grado:</strong> 10 · <strong>PK:</strong> ID</p>
+<p><strong>CHECK:</strong> CONSTRAINT <code>chk_return_items_amount</code> CHECK ((<code>unit_amount</code> &gt;= 0)); CONSTRAINT <code>chk_return_items_quantity</code> CHECK ((<code>quantity</code> &gt; 0))</p>
+<p><strong>Relaciones:</strong> order_item_ID → tbd_order_items(ID); muchos-a-uno desde esta tabla; restricción fk_return_items_order_item; acciones no especificadas; return_ID → tb_returns(ID); muchos-a-uno desde esta tabla; restricción fk_return_items_return; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>return_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td><code>INT</code></td><td>Dato quantity; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A5</td><td><code>unit_amount</code></td><td><code>DECIMAL(12,2)</code></td><td>Importe/magnitud monetaria inferida por el nombre; moneda no especificada aquí.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa continua por representación numérica; semántica inferida.</td></tr>
+<tr><td>A6</td><td><code>item_reason</code></td><td><code>VARCHAR(500)</code></td><td>Texto descriptivo asociado al registro (inferencia por nombre).</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>item_condition</code></td><td><code>ENUM('Unknown','New','Opened','Damaged')</code></td><td>Dato item condition; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A9</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A10</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>return_ID</code></td><td>FK → tb_returns.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>order_item_ID</code></td><td>FK → tbd_order_items.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>quantity</code></td><td>Atributo no clave</td><td>No</td><td><code>INT; NOT NULL; DEFAULT '1'</code></td></tr>
+<tr><td>A5</td><td><code>unit_amount</code></td><td>Atributo no clave</td><td>No</td><td><code>DECIMAL(12,2); NOT NULL; DEFAULT '0.00'</code></td></tr>
+<tr><td>A6</td><td><code>item_reason</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(500); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>item_condition</code></td><td>Atributo no clave</td><td>No</td><td><code>ENUM('Unknown','New','Opened','Damaged'); NOT NULL; DEFAULT 'Unknown'</code></td></tr>
+<tr><td>A8</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A9</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A10</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); INDEX idx_return_items_return(return_ID); INDEX idx_return_items_order_item(order_item_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_user_payment_methods">tbd_user_payment_methods</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Transaccional (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 11 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Transaccional (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_user_payment_methods(ID, user_ID, payment_method_type_ID, provider, provider_method_ref, label, last_four, is_default, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A11) · <strong>Grado:</strong> 11 · <strong>PK:</strong> ID</p>
+<p><strong>Relaciones:</strong> user_ID → tb_users(ID); muchos-a-uno desde esta tabla; restricción tbd_user_payment_methods_ibfk_1; acciones no especificadas; payment_method_type_ID → tbc_payment_methods_types(ID); muchos-a-uno desde esta tabla; restricción tbd_user_payment_methods_ibfk_2; acciones no especificadas</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td><code>BIGINT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>payment_method_type_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, FK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A4</td><td><code>provider</code></td><td><code>VARCHAR(60)</code></td><td>Dato provider; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A5</td><td><code>provider_method_ref</code></td><td><code>VARCHAR(255)</code></td><td>Dato provider method ref; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, UNIQUE</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A6</td><td><code>label</code></td><td><code>VARCHAR(100)</code></td><td>Dato label; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A7</td><td><code>last_four</code></td><td><code>CHAR(4)</code></td><td>Dato last four; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A8</td><td><code>is_default</code></td><td><code>TINYINT</code></td><td>Dato is default; significado funcional inferido por el nombre y pendiente de validación.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cuantitativa discreta si es conteo; si es código/indicador, nominal (validar).</td></tr>
+<tr><td>A9</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A10</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Opcional, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>ID</code></td><td>PK</td><td>No</td><td><code>BIGINT; NOT NULL; DEFAULT sin DEFAULT; AUTO_INCREMENT</code></td></tr>
+<tr><td>A2</td><td><code>user_ID</code></td><td>FK → tb_users.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>payment_method_type_ID</code></td><td>FK → tbc_payment_methods_types.ID</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A4</td><td><code>provider</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(60); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A5</td><td><code>provider_method_ref</code></td><td>UNIQUE</td><td>No</td><td><code>VARCHAR(255); NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A6</td><td><code>label</code></td><td>Atributo no clave</td><td>Sí</td><td><code>VARCHAR(100); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A7</td><td><code>last_four</code></td><td>Atributo no clave</td><td>Sí</td><td><code>CHAR(4); NULL permitido; DEFAULT NULL</code></td></tr>
+<tr><td>A8</td><td><code>is_default</code></td><td>Atributo no clave</td><td>No</td><td><code>TINYINT; NOT NULL; DEFAULT '0'</code></td></tr>
+<tr><td>A9</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A10</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A11</td><td><code>last_update</code></td><td>Atributo no clave</td><td>Sí</td><td><code>DATETIME; NULL permitido; DEFAULT NULL</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(ID); UNIQUE uk_provider_method(provider, provider_method_ref); INDEX user_ID(user_ID); INDEX payment_method_type_ID(payment_method_type_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="tbd_users_wishlist_products">tbd_users_wishlist_products</h2>
+<p><strong>Descripción general:</strong> Entidad indicada por el nombre de la tabla; explicación funcional inferida y pendiente de validación con la aplicación.</p>
+<p><strong>Propósito de negocio:</strong> Maestra o asociativa (inferido por nombre); el respaldo no contiene especificación funcional explícita.</p>
+<p><strong>Propósito técnico:</strong> Persistir 5 atributos; las claves, índices y restricciones se listan abajo.</p>
+<p><strong>Clasificación:</strong> Maestra o asociativa (inferido por nombre).</p>
+<p><strong>Esquema:</strong> <code>tbd_users_wishlist_products(user_ID, product_ID, status, creation_date, last_update)</code></p>
+<p><strong>Notación:</strong> R(A1, A2, …, A5) · <strong>Grado:</strong> 5 · <strong>PK:</strong> user_ID, product_ID</p>
+<p><strong>Relaciones:</strong> Sin FK declaradas.</p>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>Tipo SQL</th><th>Descripción</th><th>Clasificación</th><th>Naturaleza</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>user_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td><code>INT</code></td><td>Identificador de registro o referencia; el destino solo se afirma si existe FK declarada.</td><td>Monovalorado por fila, Almacenado, Obligatorio, PK</td><td>Cualitativa nominal: identificador, no magnitud.</td></tr>
+<tr><td>A3</td><td><code>status</code></td><td><code>BIT(1)</code></td><td>Estado/indicador del registro; dominio explícito en SQL cuando es ENUM o BIT.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Cualitativa nominal; sin orden definido por SQL.</td></tr>
+<tr><td>A4</td><td><code>creation_date</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido).</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+<tr><td>A5</td><td><code>last_update</code></td><td><code>DATETIME</code></td><td>Marca temporal asociada al evento nombrado (significado inferido). <code>ON UPDATE CURRENT_TIMESTAMP</code>.</td><td>Monovalorado por fila, Almacenado, Obligatorio, No clave</td><td>Temporal (DATETIME).</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Posición</th><th>Atributo</th><th>PK/FK/UNIQUE</th><th>NULL</th><th>Dominio técnico</th></tr></thead><tbody>
+<tr><td>A1</td><td><code>user_ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A2</td><td><code>product_ID</code></td><td>PK</td><td>No</td><td><code>INT; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+<tr><td>A3</td><td><code>status</code></td><td>Atributo no clave</td><td>No</td><td><code>BIT(1); NOT NULL; DEFAULT b'1'</code></td></tr>
+<tr><td>A4</td><td><code>creation_date</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP</code></td></tr>
+<tr><td>A5</td><td><code>last_update</code></td><td>Atributo no clave</td><td>No</td><td><code>DATETIME; NOT NULL; DEFAULT sin DEFAULT</code></td></tr>
+</tbody></table></div>
+<p><strong>Índices:</strong> PK PRIMARY(user_ID, product_ID)</p>
+<p><strong>Reglas respaldadas:</strong> NOT NULL, DEFAULT, AUTO_INCREMENT, ON UPDATE, ENUM/SET, PK, FK, UNIQUE y CHECK según lo declarado en SQL. La semántica de negocio de estas reglas queda pendiente cuando no se expresa en la restricción.</p>
+<h2 id="objetos-adicionales">Objetos adicionales</h2>
+<p><strong>Triggers:</strong> trg_address_components_after_delete, trg_address_components_after_insert, trg_address_components_after_update, trg_buyer_orders_after_delete, trg_buyer_orders_after_insert, trg_buyer_orders_after_update, trg_cancellation_items_ad, trg_cancellation_items_ai, trg_cancellation_items_au, trg_cancellations_after_delete, trg_cancellations_after_insert, trg_cancellations_after_update, trg_carts_after_delete, trg_carts_after_insert, trg_carts_after_update, trg_carts_items_after_delete, trg_carts_items_after_insert, trg_carts_items_after_update, trg_categories_after_delete, trg_categories_after_insert, trg_categories_after_update, trg_order_items_after_delete, trg_order_items_after_insert, trg_order_items_after_update, trg_payment_methods_ad, trg_payment_methods_ai, trg_payment_methods_au, trg_payment_methods_types_after_delete, trg_payment_methods_types_after_insert, trg_payment_methods_types_after_update, trg_payment_transactions_ad, trg_payment_transactions_ai, trg_payment_transactions_au, trg_payments_ad, trg_payments_ai, trg_payments_au, trg_people_after_delete, trg_people_after_insert, trg_people_after_update, trg_products_after_delete, trg_products_after_insert, trg_products_after_update, trg_products_categories_after_delete, trg_products_categories_after_insert, trg_products_categories_after_update, trg_refunds_after_delete, trg_refunds_after_insert, trg_refunds_after_update, trg_return_items_ad, trg_return_items_ai, trg_return_items_au, trg_returns_after_delete, trg_returns_after_insert, trg_returns_after_update, trg_shipments_after_delete, trg_shipments_after_insert, trg_shipments_after_update, trg_tbd_products_users_providers_after_delete, trg_tbd_products_users_providers_after_insert, trg_tbd_products_users_providers_after_update, trg_user_addresses_after_delete, trg_user_addresses_after_insert, trg_user_addresses_after_update, trg_user_payment_methods_after_delete, trg_user_payment_methods_after_insert, trg_user_payment_methods_after_update, trg_users_after_delete, trg_users_after_insert, trg_users_after_update, trg_users_wishlist_products_after_delete, trg_users_wishlist_products_after_insert, trg_users_wishlist_products_after_update</p>
+<p><strong>Vistas:</strong> vw_total_products_by_category, vw_trazabilidad_address_components, vw_trazabilidad_buyer_orders, vw_trazabilidad_cancellation_items, vw_trazabilidad_cancellations, vw_trazabilidad_carts, vw_trazabilidad_carts_items, vw_trazabilidad_categorias, vw_trazabilidad_general, vw_trazabilidad_order_items, vw_trazabilidad_orders, vw_trazabilidad_payment_methods, vw_trazabilidad_payment_methods_types, vw_trazabilidad_people, vw_trazabilidad_productos, vw_trazabilidad_productos_proveedores, vw_trazabilidad_refunds, vw_trazabilidad_return_items, vw_trazabilidad_returns, vw_trazabilidad_shipments, vw_trazabilidad_tb_payment_transactions, vw_trazabilidad_tb_payments, vw_trazabilidad_tb_products, vw_trazabilidad_tbd_products_categories, vw_trazabilidad_user_addresses, vw_trazabilidad_user_payment_methods, vw_trazabilidad_users_wishlist_products, vw_trazabilidad_usuarios</p>
+<p><strong>Procedimientos:</strong> sp_register_user, sp_soft_delete_user</p>
+<p><strong>Funciones:</strong> ninguna detectada.</p>
+<h2 id="interpretaci-n-y-cardinalidad">Interpretación y cardinalidad</h2>
+<p>Las claves foráneas describen dependencias muchos-a-uno; si la FK tiene índice UNIQUE, la multiplicidad del lado dependiente es como máximo uno. La opcionalidad en SQL se deriva de NULL/NOT NULL. El número de filas no se reporta aquí: para respaldarlo habría que contar con precisión los INSERT de cada tabla. Las clasificaciones de propósito son inferencias por nombre; naturaleza temporal y tipos de almacenamiento se derivan del tipo SQL. Los identificadores enteros se clasifican como cualitativos nominales.</p></main></div><script>const q=document.querySelector('#q'),hs=[...document.querySelectorAll('main h2')];q.addEventListener('input',()=>{let v=q.value.trim().toLocaleLowerCase();for(let h of hs){let ns=[];for(let n=h.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)ns.push(n);let yes=!v||h.textContent.toLocaleLowerCase().includes(v)||ns.some(n=>n.textContent.toLocaleLowerCase().includes(v));h.classList.toggle('hidden',!yes);ns.forEach(n=>n.classList.toggle('hidden',!yes))}})</script></body></html>

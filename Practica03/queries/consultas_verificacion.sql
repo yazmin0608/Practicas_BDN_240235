@@ -104,3 +104,32 @@ ORDER BY fecha_operacion DESC, log_id DESC;
 
 /*Consulta para la incerción masiva de usuarios*/
 select * from vw_trazabilidad_usuarios ORDER BY operation_date desc;
+
+/*Consultar cada trazabilidad por separado*/
+
+-- Pedidos
+SELECT *
+FROM vw_trazabilidad_orders
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+-- Registros de pago
+SELECT *
+FROM vw_trazabilidad_payment_methods
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+-- Articulos cancelados
+SELECT *
+FROM vw_trazabilidad_cancellation_items
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+-- Articulos devueltos
+SELECT *
+FROM vw_trazabilidad_return_items
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+/*Total de vistas*/
+SELECT COUNT(*) AS total_vistas_trazabilidad
+FROM information_schema.VIEWS
+WHERE TABLE_SCHEMA = 'db_test'
+  AND TABLE_NAME LIKE 'vw_trazabilidad_%';
+

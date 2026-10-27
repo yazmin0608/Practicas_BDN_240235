@@ -1,0 +1,1230 @@
+{
+  "database": "db_test",
+  "source": "Practica03/backups/Respaldo_2710.sql",
+  "tables": 25,
+  "columns": 226,
+  "relationships": 36,
+  "indexes": 67,
+  "triggers": 72,
+  "views": 28,
+  "procedures": 2,
+  "functions": 0,
+  "documented_tables": 25,
+  "documented_columns": 226,
+  "table_coverage": 1.0,
+  "column_coverage": 1.0,
+  "sql_executed": false,
+  "interpretation_pending": true,
+  "validation_note": "Cobertura calculada sobre todas las definiciones CREATE TABLE reconocidas; interpretaciÃ³n funcional pendiente.",
+  "tables_detail": [
+    {
+      "name": "tb_buyer_orders",
+      "columns": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_seller_orders_seller",
+          "cols": [
+            "seller_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tb_buyer_orders_chk_1` CHECK ((`subtotal` >= 0))",
+        "CONSTRAINT `tb_buyer_orders_chk_2` CHECK ((`shipping_cost` >= 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "fk_seller_orders_seller_idx",
+          "kind": "INDEX",
+          "cols": [
+            "seller_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_cancellations",
+      "columns": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cancellations_order",
+          "cols": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_cancellations_user",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_order",
+          "kind": "INDEX",
+          "cols": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_user",
+          "kind": "INDEX",
+          "cols": [
+            "user_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_carts",
+      "columns": 5,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tb_carts_ibfk_1",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_cart_user",
+          "kind": "UNIQUE",
+          "cols": [
+            "user_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_logs",
+      "columns": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_payment_methods",
+      "columns": 13,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_payment_methods_type",
+          "cols": [
+            "payment_method_type_ID"
+          ],
+          "table": "tbc_payment_methods_types",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_payment_methods_user",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_payment_methods_amount` CHECK ((`amount` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_order",
+          "kind": "INDEX",
+          "cols": [
+            "order_ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_user",
+          "kind": "INDEX",
+          "cols": [
+            "user_ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_type",
+          "kind": "INDEX",
+          "cols": [
+            "payment_method_type_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_payment_transactions",
+      "columns": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_transactions_payments",
+          "cols": [
+            "payment_ID"
+          ],
+          "table": "tb_payments",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_transaction_amount` CHECK ((`amount` >= 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "fk_transactions_payments",
+          "kind": "INDEX",
+          "cols": [
+            "payment_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_payments",
+      "columns": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_payments_buyer_orders",
+          "cols": [
+            "order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_payment_amount` CHECK ((`amount` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_payment_reference",
+          "kind": "UNIQUE",
+          "cols": [
+            "provider",
+            "provider_reference"
+          ]
+        },
+        {
+          "name": "fk_payments_buyer_orders",
+          "kind": "INDEX",
+          "cols": [
+            "order_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_people",
+      "columns": 12,
+      "primary_key": [
+        "person_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_persons_user",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "person_ID"
+          ]
+        },
+        {
+          "name": "uk_persons_user",
+          "kind": "UNIQUE",
+          "cols": [
+            "user_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_products",
+      "columns": 9,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "SKU",
+          "kind": "UNIQUE",
+          "cols": [
+            "SKU"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_refunds",
+      "columns": 15,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_refunds_cancellation",
+          "cols": [
+            "cancellation_ID"
+          ],
+          "table": "tb_cancellations",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_refunds_payment",
+          "cols": [
+            "payment_ID"
+          ],
+          "table": "tb_payments",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_refunds_return",
+          "cols": [
+            "return_ID"
+          ],
+          "table": "tb_returns",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_refund_amount` CHECK ((`amount` > 0))",
+        "CONSTRAINT `chk_refund_origin` CHECK (((`cancellation_ID` is not null) or (`return_ID` is not null)))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_refund_payment",
+          "kind": "INDEX",
+          "cols": [
+            "payment_ID"
+          ]
+        },
+        {
+          "name": "idx_refund_cancellation",
+          "kind": "INDEX",
+          "cols": [
+            "cancellation_ID"
+          ]
+        },
+        {
+          "name": "idx_refund_return",
+          "kind": "INDEX",
+          "cols": [
+            "return_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_returns",
+      "columns": 14,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_returns_item",
+          "cols": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_returns_order",
+          "cols": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_returns_user",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_return_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_return_order",
+          "kind": "INDEX",
+          "cols": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_return_item",
+          "kind": "INDEX",
+          "cols": [
+            "order_item_ID"
+          ]
+        },
+        {
+          "name": "idx_return_user",
+          "kind": "INDEX",
+          "cols": [
+            "user_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_shipments",
+      "columns": 13,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_shipments_address",
+          "cols": [
+            "address_ID"
+          ],
+          "table": "tb_user_addresses",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_shipments_order",
+          "cols": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_shipment_cost` CHECK ((`shipping_cost` >= 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_shipment_tracking",
+          "kind": "UNIQUE",
+          "cols": [
+            "carrier",
+            "tracking_number"
+          ]
+        },
+        {
+          "name": "idx_shipment_order",
+          "kind": "INDEX",
+          "cols": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_shipment_address",
+          "kind": "INDEX",
+          "cols": [
+            "address_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_user_addresses",
+      "columns": 12,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_addresses_user",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_coordinates` CHECK ((((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null))))",
+        "CONSTRAINT `chk_latitude` CHECK ((`latitude` between -(90) and 90))",
+        "CONSTRAINT `chk_longitude` CHECK ((`longitude` between -(180) and 180))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_user_addresses",
+          "kind": "INDEX",
+          "cols": [
+            "user_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tb_users",
+      "columns": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "email",
+          "kind": "UNIQUE",
+          "cols": [
+            "email"
+          ]
+        },
+        {
+          "name": "nickname",
+          "kind": "UNIQUE",
+          "cols": [
+            "nick"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbc_categories",
+      "columns": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_superior_category",
+          "cols": [
+            "sup_id_category"
+          ],
+          "table": "tbc_categories",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "name",
+          "kind": "UNIQUE",
+          "cols": [
+            "name"
+          ]
+        },
+        {
+          "name": "fk_superior_category",
+          "kind": "INDEX",
+          "cols": [
+            "sup_id_category"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbc_payment_methods_types",
+      "columns": 6,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "code_UNIQUE",
+          "kind": "UNIQUE",
+          "cols": [
+            "code"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_address_components",
+      "columns": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_component_address",
+          "cols": [
+            "address_ID"
+          ],
+          "table": "tb_user_addresses",
+          "refs": [
+            "ID"
+          ],
+          "actions": "ON DELETE RESTRICT"
+        },
+        {
+          "name": "fk_component_parent",
+          "cols": [
+            "address_ID",
+            "address_sup_ID"
+          ],
+          "table": "tbd_address_components",
+          "refs": [
+            "address_ID",
+            "ID"
+          ],
+          "actions": "ON DELETE RESTRICT"
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_address_component",
+          "kind": "UNIQUE",
+          "cols": [
+            "address_ID",
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_address_parent",
+          "kind": "INDEX",
+          "cols": [
+            "address_ID",
+            "address_sup_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_cancellation_items",
+      "columns": 9,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cancellation_items_cancellation",
+          "cols": [
+            "cancellation_ID"
+          ],
+          "table": "tb_cancellations",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_cancellation_items_order_item",
+          "cols": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_cancellation_items_amount` CHECK ((`unit_amount` >= 0))",
+        "CONSTRAINT `chk_cancellation_items_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_items_cancellation",
+          "kind": "INDEX",
+          "cols": [
+            "cancellation_ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_items_order_item",
+          "kind": "INDEX",
+          "cols": [
+            "order_item_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_carts_items",
+      "columns": 5,
+      "primary_key": [
+        "cart_ID",
+        "provider_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cart_items_cart",
+          "cols": [
+            "cart_ID"
+          ],
+          "table": "tb_carts",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_cart_items_product",
+          "cols": [
+            "product_ID"
+          ],
+          "table": "tbd_products_users_providers",
+          "refs": [
+            "product_ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_cart_items_provider",
+          "cols": [
+            "provider_ID"
+          ],
+          "table": "tbd_products_users_providers",
+          "refs": [
+            "user_ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "tbd_carts_items_ibfk_1",
+          "cols": [
+            "cart_ID"
+          ],
+          "table": "tb_carts",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_cart_quantity` CHECK ((`quantity` > 0))",
+        "CONSTRAINT `chk_cart_quantity_positive` CHECK ((`quantity` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "cart_ID",
+            "provider_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_cart_items_provider",
+          "kind": "INDEX",
+          "cols": [
+            "provider_ID"
+          ]
+        },
+        {
+          "name": "fk_cart_items_product",
+          "kind": "INDEX",
+          "cols": [
+            "product_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_order_items",
+      "columns": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tbd_order_items_ibfk_1",
+          "cols": [
+            "seller_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tbd_order_items_chk_1` CHECK ((`quantity` > 0))",
+        "CONSTRAINT `tbd_order_items_chk_2` CHECK ((`unit_price` >= 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "seller_order_ID",
+          "kind": "INDEX",
+          "cols": [
+            "seller_order_ID"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "kind": "INDEX",
+          "cols": [
+            "product_offer_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_products_categories",
+      "columns": 5,
+      "primary_key": [
+        "category_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_category",
+          "cols": [
+            "category_ID"
+          ],
+          "table": "tbc_categories",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_product",
+          "cols": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "category_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_product",
+          "kind": "INDEX",
+          "cols": [
+            "product_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_products_users_providers",
+      "columns": 7,
+      "primary_key": [
+        "user_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_products2",
+          "cols": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_user1",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "user_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_products2",
+          "kind": "INDEX",
+          "cols": [
+            "product_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_return_items",
+      "columns": 10,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_return_items_order_item",
+          "cols": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "fk_return_items_return",
+          "cols": [
+            "return_ID"
+          ],
+          "table": "tb_returns",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_return_items_amount` CHECK ((`unit_amount` >= 0))",
+        "CONSTRAINT `chk_return_items_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_return_items_return",
+          "kind": "INDEX",
+          "cols": [
+            "return_ID"
+          ]
+        },
+        {
+          "name": "idx_return_items_order_item",
+          "kind": "INDEX",
+          "cols": [
+            "order_item_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_user_payment_methods",
+      "columns": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tbd_user_payment_methods_ibfk_1",
+          "cols": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        },
+        {
+          "name": "tbd_user_payment_methods_ibfk_2",
+          "cols": [
+            "payment_method_type_ID"
+          ],
+          "table": "tbc_payment_methods_types",
+          "refs": [
+            "ID"
+          ],
+          "actions": ""
+        }
+      ],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_provider_method",
+          "kind": "UNIQUE",
+          "cols": [
+            "provider",
+            "provider_method_ref"
+          ]
+        },
+        {
+          "name": "user_ID",
+          "kind": "INDEX",
+          "cols": [
+            "user_ID"
+          ]
+        },
+        {
+          "name": "payment_method_type_ID",
+          "kind": "INDEX",
+          "cols": [
+            "payment_method_type_ID"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tbd_users_wishlist_products",
+      "columns": 5,
+      "primary_key": [
+        "user_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [],
+      "checks": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PK",
+          "cols": [
+            "user_ID",
+            "product_ID"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -67,6 +67,40 @@ ORDER BY category_id is null;
 SELECT * FROM vw_trazabilidad_categorizacion_productos;
 SELECT * FROM vw_trazabilidad_categorias LIMIT 0, 1000;
 SELECT * FROM vw_trazabilidad_productos LIMIT 0, 1000;
+SELECT * FROM vw_trazabilidad_usuarios LIMIT 0, 1000;
 
 /* 10. Muestra los procedimientos de la base de datos  */
 SHOW PROCEDURE STATUS WHERE Db = 'db_test';
+
+/* Trazabilidad de la tabla people*/
+SELECT *
+FROM vw_trazabilidad_general
+ORDER BY fecha_operacion DESC;
+
+/* Consulta de triggers contados*/
+SELECT COUNT(*) AS total_triggers
+FROM information_schema.TRIGGERS
+WHERE TRIGGER_SCHEMA = 'db_test';
+
+/*Trazabilidad de envíos vw_trazabilidad_shipments*/
+SELECT *
+FROM vw_trazabilidad_shipments
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+/*Trazabilidad de cancelaciones vw_trazabilidad_cancellations*/
+SELECT *
+FROM vw_trazabilidad_cancellations
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+/*Trazabilidad de devoluciones vw_trazabilidad_returns*/
+SELECT *
+FROM vw_trazabilidad_returns
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+/*Trazabilidad de reembolsos vw_trazabilidad_refunds*/
+SELECT *
+FROM vw_trazabilidad_refunds
+ORDER BY fecha_operacion DESC, log_id DESC;
+
+/*Consulta para la incerción masiva de usuarios*/
+select * from vw_trazabilidad_usuarios ORDER BY operation_date desc;

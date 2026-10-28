@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "running",
+  "type": "erd",
+  "quality": "standard",
+  "startedAt": "2026-10-28T16:51:44.460Z",
+  "specification": {
+    "path": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\candidate.json",
+    "sha256": "a002b9e338c1c6ae06682caa724a1d2ff7415115f834e3afa5507841b4e59828",
+    "bytes": 41355
+  },
+  "artifact": {
+    "path": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.html"
+  },
+  "stages": {},
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [],
+  "evidence": {
+    "receipt": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.finalize.json",
+    "summaryReceipt": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.finalize-summary.json"
+  },
+  "visualReview": "not-requested"
+}

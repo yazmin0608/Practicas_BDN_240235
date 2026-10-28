@@ -1,0 +1,4589 @@
+{
+  "database": "db_test",
+  "source": "Practica03/backups/Respaldo_2710.sql",
+  "server_version": "8.0.36",
+  "tables": 25,
+  "columns": 226,
+  "relationships": 36,
+  "indexes": 67,
+  "triggers": 72,
+  "trigger_names": [
+    "trg_address_components_after_delete",
+    "trg_address_components_after_insert",
+    "trg_address_components_after_update",
+    "trg_buyer_orders_after_delete",
+    "trg_buyer_orders_after_insert",
+    "trg_buyer_orders_after_update",
+    "trg_cancellation_items_ad",
+    "trg_cancellation_items_ai",
+    "trg_cancellation_items_au",
+    "trg_cancellations_after_delete",
+    "trg_cancellations_after_insert",
+    "trg_cancellations_after_update",
+    "trg_carts_after_delete",
+    "trg_carts_after_insert",
+    "trg_carts_after_update",
+    "trg_carts_items_after_delete",
+    "trg_carts_items_after_insert",
+    "trg_carts_items_after_update",
+    "trg_categories_after_delete",
+    "trg_categories_after_insert",
+    "trg_categories_after_update",
+    "trg_order_items_after_delete",
+    "trg_order_items_after_insert",
+    "trg_order_items_after_update",
+    "trg_payment_methods_ad",
+    "trg_payment_methods_ai",
+    "trg_payment_methods_au",
+    "trg_payment_methods_types_after_delete",
+    "trg_payment_methods_types_after_insert",
+    "trg_payment_methods_types_after_update",
+    "trg_payment_transactions_ad",
+    "trg_payment_transactions_ai",
+    "trg_payment_transactions_au",
+    "trg_payments_ad",
+    "trg_payments_ai",
+    "trg_payments_au",
+    "trg_people_after_delete",
+    "trg_people_after_insert",
+    "trg_people_after_update",
+    "trg_products_after_delete",
+    "trg_products_after_insert",
+    "trg_products_after_update",
+    "trg_products_categories_after_delete",
+    "trg_products_categories_after_insert",
+    "trg_products_categories_after_update",
+    "trg_refunds_after_delete",
+    "trg_refunds_after_insert",
+    "trg_refunds_after_update",
+    "trg_return_items_ad",
+    "trg_return_items_ai",
+    "trg_return_items_au",
+    "trg_returns_after_delete",
+    "trg_returns_after_insert",
+    "trg_returns_after_update",
+    "trg_shipments_after_delete",
+    "trg_shipments_after_insert",
+    "trg_shipments_after_update",
+    "trg_tbd_products_users_providers_after_delete",
+    "trg_tbd_products_users_providers_after_insert",
+    "trg_tbd_products_users_providers_after_update",
+    "trg_user_addresses_after_delete",
+    "trg_user_addresses_after_insert",
+    "trg_user_addresses_after_update",
+    "trg_user_payment_methods_after_delete",
+    "trg_user_payment_methods_after_insert",
+    "trg_user_payment_methods_after_update",
+    "trg_users_after_delete",
+    "trg_users_after_insert",
+    "trg_users_after_update",
+    "trg_users_wishlist_products_after_delete",
+    "trg_users_wishlist_products_after_insert",
+    "trg_users_wishlist_products_after_update"
+  ],
+  "views": 28,
+  "view_names": [
+    "vw_total_products_by_category",
+    "vw_trazabilidad_address_components",
+    "vw_trazabilidad_buyer_orders",
+    "vw_trazabilidad_cancellation_items",
+    "vw_trazabilidad_cancellations",
+    "vw_trazabilidad_carts",
+    "vw_trazabilidad_carts_items",
+    "vw_trazabilidad_categorias",
+    "vw_trazabilidad_general",
+    "vw_trazabilidad_order_items",
+    "vw_trazabilidad_orders",
+    "vw_trazabilidad_payment_methods",
+    "vw_trazabilidad_payment_methods_types",
+    "vw_trazabilidad_people",
+    "vw_trazabilidad_productos",
+    "vw_trazabilidad_productos_proveedores",
+    "vw_trazabilidad_refunds",
+    "vw_trazabilidad_return_items",
+    "vw_trazabilidad_returns",
+    "vw_trazabilidad_shipments",
+    "vw_trazabilidad_tb_payment_transactions",
+    "vw_trazabilidad_tb_payments",
+    "vw_trazabilidad_tb_products",
+    "vw_trazabilidad_tbd_products_categories",
+    "vw_trazabilidad_user_addresses",
+    "vw_trazabilidad_user_payment_methods",
+    "vw_trazabilidad_users_wishlist_products",
+    "vw_trazabilidad_usuarios"
+  ],
+  "procedures": 2,
+  "procedure_names": [
+    "sp_register_user",
+    "sp_soft_delete_user"
+  ],
+  "functions": 0,
+  "function_names": [],
+  "documented_tables": 25,
+  "documented_columns": 226,
+  "table_coverage": 1.0,
+  "column_coverage": 1.0,
+  "insert_row_counts": {
+    "tb_buyer_orders": 0,
+    "tb_cancellations": 0,
+    "tb_carts": 0,
+    "tb_logs": 25413,
+    "tb_payment_methods": 0,
+    "tb_payment_transactions": 0,
+    "tb_payments": 0,
+    "tb_people": 2,
+    "tb_products": 15005,
+    "tb_refunds": 0,
+    "tb_returns": 0,
+    "tb_shipments": 0,
+    "tb_user_addresses": 0,
+    "tb_users": 11,
+    "tbc_categories": 101,
+    "tbc_payment_methods_types": 0,
+    "tbd_address_components": 0,
+    "tbd_cancellation_items": 0,
+    "tbd_carts_items": 0,
+    "tbd_order_items": 0,
+    "tbd_products_categories": 10279,
+    "tbd_products_users_providers": 0,
+    "tbd_return_items": 0,
+    "tbd_user_payment_methods": 0,
+    "tbd_users_wishlist_products": 0
+  },
+  "sql_executed": false,
+  "source_modified": false,
+  "interpretation_pending": true,
+  "pending_interpretation": "Meaning of business states, units/currency, identifiers without FK and inferred table purposes requires application requirements or owner confirmation.",
+  "tables_detail": [
+    {
+      "name": "tb_buyer_orders",
+      "column_count": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_seller_orders_seller",
+          "columns": [
+            "seller_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "fk_seller_orders_seller_idx",
+          "kind": "INDEX",
+          "columns": [
+            "seller_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tb_buyer_orders_chk_1` CHECK ((`subtotal` >= 0))",
+        "CONSTRAINT `tb_buyer_orders_chk_2` CHECK ((`shipping_cost` >= 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_cancellations",
+      "column_count": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cancellations_order",
+          "columns": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_cancellations_user",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_order",
+          "kind": "INDEX",
+          "columns": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_user",
+          "kind": "INDEX",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_carts",
+      "column_count": 5,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tb_carts_ibfk_1",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_cart_user",
+          "kind": "UNIQUE",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_logs",
+      "column_count": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 25413
+    },
+    {
+      "name": "tb_payment_methods",
+      "column_count": 13,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_payment_methods_type",
+          "columns": [
+            "payment_method_type_ID"
+          ],
+          "table": "tbc_payment_methods_types",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_payment_methods_user",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_order",
+          "kind": "INDEX",
+          "columns": [
+            "order_ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_user",
+          "kind": "INDEX",
+          "columns": [
+            "user_ID"
+          ]
+        },
+        {
+          "name": "idx_payment_methods_type",
+          "kind": "INDEX",
+          "columns": [
+            "payment_method_type_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_payment_methods_amount` CHECK ((`amount` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_payment_transactions",
+      "column_count": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_transactions_payments",
+          "columns": [
+            "payment_ID"
+          ],
+          "table": "tb_payments",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "fk_transactions_payments",
+          "kind": "INDEX",
+          "columns": [
+            "payment_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_transaction_amount` CHECK ((`amount` >= 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_payments",
+      "column_count": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_payments_buyer_orders",
+          "columns": [
+            "order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_payment_reference",
+          "kind": "UNIQUE",
+          "columns": [
+            "provider",
+            "provider_reference"
+          ]
+        },
+        {
+          "name": "fk_payments_buyer_orders",
+          "kind": "INDEX",
+          "columns": [
+            "order_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_payment_amount` CHECK ((`amount` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_people",
+      "column_count": 12,
+      "primary_key": [
+        "person_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_persons_user",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "person_ID"
+          ]
+        },
+        {
+          "name": "uk_persons_user",
+          "kind": "UNIQUE",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 2
+    },
+    {
+      "name": "tb_products",
+      "column_count": 9,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "SKU",
+          "kind": "UNIQUE",
+          "columns": [
+            "SKU"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 15005
+    },
+    {
+      "name": "tb_refunds",
+      "column_count": 15,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_refunds_cancellation",
+          "columns": [
+            "cancellation_ID"
+          ],
+          "table": "tb_cancellations",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_refunds_payment",
+          "columns": [
+            "payment_ID"
+          ],
+          "table": "tb_payments",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_refunds_return",
+          "columns": [
+            "return_ID"
+          ],
+          "table": "tb_returns",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_refund_payment",
+          "kind": "INDEX",
+          "columns": [
+            "payment_ID"
+          ]
+        },
+        {
+          "name": "idx_refund_cancellation",
+          "kind": "INDEX",
+          "columns": [
+            "cancellation_ID"
+          ]
+        },
+        {
+          "name": "idx_refund_return",
+          "kind": "INDEX",
+          "columns": [
+            "return_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_refund_amount` CHECK ((`amount` > 0))",
+        "CONSTRAINT `chk_refund_origin` CHECK (((`cancellation_ID` is not null) or (`return_ID` is not null)))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_returns",
+      "column_count": 14,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_returns_item",
+          "columns": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_returns_order",
+          "columns": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_returns_user",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_return_order",
+          "kind": "INDEX",
+          "columns": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_return_item",
+          "kind": "INDEX",
+          "columns": [
+            "order_item_ID"
+          ]
+        },
+        {
+          "name": "idx_return_user",
+          "kind": "INDEX",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_return_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_shipments",
+      "column_count": 13,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_shipments_address",
+          "columns": [
+            "address_ID"
+          ],
+          "table": "tb_user_addresses",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_shipments_order",
+          "columns": [
+            "buyer_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_shipment_tracking",
+          "kind": "UNIQUE",
+          "columns": [
+            "carrier",
+            "tracking_number"
+          ]
+        },
+        {
+          "name": "idx_shipment_order",
+          "kind": "INDEX",
+          "columns": [
+            "buyer_order_ID"
+          ]
+        },
+        {
+          "name": "idx_shipment_address",
+          "kind": "INDEX",
+          "columns": [
+            "address_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_shipment_cost` CHECK ((`shipping_cost` >= 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_user_addresses",
+      "column_count": 12,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_addresses_user",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_user_addresses",
+          "kind": "INDEX",
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_coordinates` CHECK ((((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null))))",
+        "CONSTRAINT `chk_latitude` CHECK ((`latitude` between -(90) and 90))",
+        "CONSTRAINT `chk_longitude` CHECK ((`longitude` between -(180) and 180))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tb_users",
+      "column_count": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "email",
+          "kind": "UNIQUE",
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "nickname",
+          "kind": "UNIQUE",
+          "columns": [
+            "nick"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 11
+    },
+    {
+      "name": "tbc_categories",
+      "column_count": 7,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_superior_category",
+          "columns": [
+            "sup_id_category"
+          ],
+          "table": "tbc_categories",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "name",
+          "kind": "UNIQUE",
+          "columns": [
+            "name"
+          ]
+        },
+        {
+          "name": "fk_superior_category",
+          "kind": "INDEX",
+          "columns": [
+            "sup_id_category"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 101
+    },
+    {
+      "name": "tbc_payment_methods_types",
+      "column_count": 6,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "code_UNIQUE",
+          "kind": "UNIQUE",
+          "columns": [
+            "code"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_address_components",
+      "column_count": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_component_address",
+          "columns": [
+            "address_ID"
+          ],
+          "table": "tb_user_addresses",
+          "references": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": null
+        },
+        {
+          "name": "fk_component_parent",
+          "columns": [
+            "address_ID",
+            "address_sup_ID"
+          ],
+          "table": "tbd_address_components",
+          "references": [
+            "address_ID",
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_address_component",
+          "kind": "UNIQUE",
+          "columns": [
+            "address_ID",
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_address_parent",
+          "kind": "INDEX",
+          "columns": [
+            "address_ID",
+            "address_sup_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_cancellation_items",
+      "column_count": 9,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cancellation_items_cancellation",
+          "columns": [
+            "cancellation_ID"
+          ],
+          "table": "tb_cancellations",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_cancellation_items_order_item",
+          "columns": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_items_cancellation",
+          "kind": "INDEX",
+          "columns": [
+            "cancellation_ID"
+          ]
+        },
+        {
+          "name": "idx_cancellation_items_order_item",
+          "kind": "INDEX",
+          "columns": [
+            "order_item_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_cancellation_items_amount` CHECK ((`unit_amount` >= 0))",
+        "CONSTRAINT `chk_cancellation_items_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_carts_items",
+      "column_count": 5,
+      "primary_key": [
+        "cart_ID",
+        "provider_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_cart_items_cart",
+          "columns": [
+            "cart_ID"
+          ],
+          "table": "tb_carts",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_cart_items_product",
+          "columns": [
+            "product_ID"
+          ],
+          "table": "tbd_products_users_providers",
+          "references": [
+            "product_ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_cart_items_provider",
+          "columns": [
+            "provider_ID"
+          ],
+          "table": "tbd_products_users_providers",
+          "references": [
+            "user_ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "tbd_carts_items_ibfk_1",
+          "columns": [
+            "cart_ID"
+          ],
+          "table": "tb_carts",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "cart_ID",
+            "provider_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_cart_items_provider",
+          "kind": "INDEX",
+          "columns": [
+            "provider_ID"
+          ]
+        },
+        {
+          "name": "fk_cart_items_product",
+          "kind": "INDEX",
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_cart_quantity` CHECK ((`quantity` > 0))",
+        "CONSTRAINT `chk_cart_quantity_positive` CHECK ((`quantity` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_order_items",
+      "column_count": 8,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tbd_order_items_ibfk_1",
+          "columns": [
+            "seller_order_ID"
+          ],
+          "table": "tb_buyer_orders",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "seller_order_ID",
+          "kind": "INDEX",
+          "columns": [
+            "seller_order_ID"
+          ]
+        },
+        {
+          "name": "product_offer_ID",
+          "kind": "INDEX",
+          "columns": [
+            "product_offer_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `tbd_order_items_chk_1` CHECK ((`quantity` > 0))",
+        "CONSTRAINT `tbd_order_items_chk_2` CHECK ((`unit_price` >= 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_products_categories",
+      "column_count": 5,
+      "primary_key": [
+        "category_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_category",
+          "columns": [
+            "category_ID"
+          ],
+          "table": "tbc_categories",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_product",
+          "columns": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "category_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_product",
+          "kind": "INDEX",
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 10279
+    },
+    {
+      "name": "tbd_products_users_providers",
+      "column_count": 7,
+      "primary_key": [
+        "user_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_products2",
+          "columns": [
+            "product_ID"
+          ],
+          "table": "tb_products",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_user1",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "user_ID",
+            "product_ID"
+          ]
+        },
+        {
+          "name": "fk_products2",
+          "kind": "INDEX",
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_return_items",
+      "column_count": 10,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "fk_return_items_order_item",
+          "columns": [
+            "order_item_ID"
+          ],
+          "table": "tbd_order_items",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "fk_return_items_return",
+          "columns": [
+            "return_ID"
+          ],
+          "table": "tb_returns",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "idx_return_items_return",
+          "kind": "INDEX",
+          "columns": [
+            "return_ID"
+          ]
+        },
+        {
+          "name": "idx_return_items_order_item",
+          "kind": "INDEX",
+          "columns": [
+            "order_item_ID"
+          ]
+        }
+      ],
+      "checks": [
+        "CONSTRAINT `chk_return_items_amount` CHECK ((`unit_amount` >= 0))",
+        "CONSTRAINT `chk_return_items_quantity` CHECK ((`quantity` > 0))"
+      ],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_user_payment_methods",
+      "column_count": 11,
+      "primary_key": [
+        "ID"
+      ],
+      "foreign_keys": [
+        {
+          "name": "tbd_user_payment_methods_ibfk_1",
+          "columns": [
+            "user_ID"
+          ],
+          "table": "tb_users",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        },
+        {
+          "name": "tbd_user_payment_methods_ibfk_2",
+          "columns": [
+            "payment_method_type_ID"
+          ],
+          "table": "tbc_payment_methods_types",
+          "references": [
+            "ID"
+          ],
+          "onDelete": null,
+          "onUpdate": null
+        }
+      ],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "ID"
+          ]
+        },
+        {
+          "name": "uk_provider_method",
+          "kind": "UNIQUE",
+          "columns": [
+            "provider",
+            "provider_method_ref"
+          ]
+        },
+        {
+          "name": "user_ID",
+          "kind": "INDEX",
+          "columns": [
+            "user_ID"
+          ]
+        },
+        {
+          "name": "payment_method_type_ID",
+          "kind": "INDEX",
+          "columns": [
+            "payment_method_type_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    },
+    {
+      "name": "tbd_users_wishlist_products",
+      "column_count": 5,
+      "primary_key": [
+        "user_ID",
+        "product_ID"
+      ],
+      "foreign_keys": [],
+      "indexes": [
+        {
+          "name": "PRIMARY",
+          "kind": "PRIMARY",
+          "columns": [
+            "user_ID",
+            "product_ID"
+          ]
+        }
+      ],
+      "checks": [],
+      "row_count_in_dump": 0
+    }
+  ],
+  "columns_detail": [
+    {
+      "table": "tb_buyer_orders",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_seller_orders_seller",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 4,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; DEFAULT '0.00'; CHECK: CONSTRAINT `tb_buyer_orders_chk_1` CHECK ((`subtotal` >= 0))"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 5,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; DEFAULT '0.00'; CHECK: CONSTRAINT `tb_buyer_orders_chk_2` CHECK ((`shipping_cost` >= 0))"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 6,
+      "type": "ENUM('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Pending'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned'); NOT NULL; DEFAULT 'Pending'"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_buyer_orders",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cancellations_order",
+          "table": "tb_buyer_orders",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cancellations_user",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 4,
+      "type": "VARCHAR(500)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 5,
+      "type": "ENUM('Requested','Approved','Rejected','Completed')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Requested'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Requested','Approved','Rejected','Completed'); NOT NULL; DEFAULT 'Requested'"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 8,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 9,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_cancellations",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_carts",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_carts",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "tb_carts_ibfk_1",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; participa en UNIQUE uk_cart_user (columna única)"
+    },
+    {
+      "table": "tb_carts",
+      "position": 3,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_carts",
+      "position": 4,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_carts",
+      "position": 5,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NULL permitido; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_logs",
+      "position": 1,
+      "type": "INT",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT; rango -2147483648 a 2147483647; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_logs",
+      "position": 2,
+      "type": "VARCHAR(100)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(100); longitud máxima 100; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_logs",
+      "position": 3,
+      "type": "ENUM('Create','Read','Update','Delete')",
+      "description": "Dato operation; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Create','Read','Update','Delete'); NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_logs",
+      "position": 4,
+      "type": "VARCHAR(80)",
+      "description": "Dato db users; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(80); longitud máxima 80; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_logs",
+      "position": 5,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_logs",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_logs",
+      "position": 7,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NULL permitido; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_payment_methods_user",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_payment_methods_type",
+          "table": "tbc_payment_methods_types",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 5,
+      "type": "VARCHAR(150)",
+      "description": "Dato payment reference; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 6,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `chk_payment_methods_amount` CHECK ((`amount` > 0))"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 7,
+      "type": "CHAR(3)",
+      "description": "Dato currency; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'MXN'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "CHAR(3); longitud máxima 3; NOT NULL; DEFAULT 'MXN'"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 8,
+      "type": "ENUM('Pending','Authorized','Paid','Failed','Cancelled','Refunded')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Pending'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Pending','Authorized','Paid','Failed','Cancelled','Refunded'); NOT NULL; DEFAULT 'Pending'"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 10,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 11,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 12,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_payment_methods",
+      "position": 13,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_transactions_payments",
+          "table": "tb_payments",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 3,
+      "type": "ENUM('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded')",
+      "description": "Dato event type; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded'); NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 4,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `chk_transaction_amount` CHECK ((`amount` >= 0))"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 5,
+      "type": "VARCHAR(150)",
+      "description": "Dato event reference; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 6,
+      "type": "TEXT",
+      "description": "Dato remarks; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payment_transactions",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_payments",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_payments",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_payments_buyer_orders",
+          "table": "tb_buyer_orders",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payments",
+      "position": 3,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `chk_payment_amount` CHECK ((`amount` > 0))"
+    },
+    {
+      "table": "tb_payments",
+      "position": 4,
+      "type": "CHAR(3)",
+      "description": "Dato currency; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'MXN'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "CHAR(3); longitud máxima 3; NOT NULL; DEFAULT 'MXN'"
+    },
+    {
+      "table": "tb_payments",
+      "position": 5,
+      "type": "ENUM('Card','SPEI','Transfer','Cash')",
+      "description": "Dato payment method; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Card','SPEI','Transfer','Cash'); NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_payments",
+      "position": 6,
+      "type": "VARCHAR(50)",
+      "description": "Dato provider; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(50); longitud máxima 50; NULL permitido; DEFAULT NULL; participa en UNIQUE uk_payment_reference (compuesto)"
+    },
+    {
+      "table": "tb_payments",
+      "position": 7,
+      "type": "VARCHAR(150)",
+      "description": "Dato provider reference; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL; participa en UNIQUE uk_payment_reference (compuesto)"
+    },
+    {
+      "table": "tb_payments",
+      "position": 8,
+      "type": "ENUM('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Pending'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded'); NOT NULL; DEFAULT 'Pending'"
+    },
+    {
+      "table": "tb_payments",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_payments",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_payments",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_people",
+      "position": 1,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_people",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_persons_user",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; participa en UNIQUE uk_persons_user (columna única)"
+    },
+    {
+      "table": "tb_people",
+      "position": 3,
+      "type": "VARCHAR(50)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(50); longitud máxima 50; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 4,
+      "type": "VARCHAR(150)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_people",
+      "position": 5,
+      "type": "VARCHAR(150)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 6,
+      "type": "DATE",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATE; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATE; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 7,
+      "type": "TINYINT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TINYINT UNSIGNED; rango 0 a 255; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 8,
+      "type": "CHAR(2)",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "CHAR(2); longitud máxima 2; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 9,
+      "type": "VARCHAR(25)",
+      "description": "Dato phone; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(25); longitud máxima 25; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_people",
+      "position": 10,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_people",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_people",
+      "position": 12,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_products",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_products",
+      "position": 2,
+      "type": "VARCHAR(50)",
+      "description": "Dato sku; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(50); longitud máxima 50; NOT NULL; sin DEFAULT declarado; participa en UNIQUE SKU (columna única)"
+    },
+    {
+      "table": "tb_products",
+      "position": 3,
+      "type": "VARCHAR(250)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(250); longitud máxima 250; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_products",
+      "position": 4,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_products",
+      "position": 5,
+      "type": "DECIMAL(10,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(10,2); precisión 10, escala 2, rango -99999999.99 a 99999999.99; NOT NULL; DEFAULT '0.00'"
+    },
+    {
+      "table": "tb_products",
+      "position": 6,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'0'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; DEFAULT '0'"
+    },
+    {
+      "table": "tb_products",
+      "position": 7,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NULL permitido; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_products",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_products",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_refunds_payment",
+          "table": "tb_payments",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_refunds_cancellation",
+          "table": "tb_cancellations",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NULL permitido; DEFAULT NULL; CHECK: CONSTRAINT `chk_refund_origin` CHECK (((`cancellation_ID` is not null) or (`return_ID` is not null)))"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_refunds_return",
+          "table": "tb_returns",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NULL permitido; DEFAULT NULL; CHECK: CONSTRAINT `chk_refund_origin` CHECK (((`cancellation_ID` is not null) or (`return_ID` is not null)))"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 5,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `chk_refund_amount` CHECK ((`amount` > 0))"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 6,
+      "type": "CHAR(3)",
+      "description": "Dato currency; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'MXN'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "CHAR(3); longitud máxima 3; NOT NULL; DEFAULT 'MXN'"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 7,
+      "type": "VARCHAR(500)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 8,
+      "type": "ENUM('Requested','Approved','Processing','Completed','Rejected','Failed')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Requested'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Requested','Approved','Processing','Completed','Rejected','Failed'); NOT NULL; DEFAULT 'Requested'"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 9,
+      "type": "VARCHAR(150)",
+      "description": "Dato provider reference; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 12,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 13,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 14,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_refunds",
+      "position": 15,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_returns",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_returns",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_returns_order",
+          "table": "tb_buyer_orders",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_returns",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_returns_item",
+          "table": "tbd_order_items",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_returns",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_returns_user",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_returns",
+      "position": 5,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; DEFAULT '1'; CHECK: CONSTRAINT `chk_return_quantity` CHECK ((`quantity` > 0))"
+    },
+    {
+      "table": "tb_returns",
+      "position": 6,
+      "type": "VARCHAR(500)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_returns",
+      "position": 7,
+      "type": "ENUM('Requested','Authorized','Rejected','InTransit','Received','Inspected','Completed')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Requested'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Requested','Authorized','Rejected','InTransit','Received','Inspected','Completed'); NOT NULL; DEFAULT 'Requested'"
+    },
+    {
+      "table": "tb_returns",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_returns",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_returns",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_returns",
+      "position": 11,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_returns",
+      "position": 12,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_returns",
+      "position": 13,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_returns",
+      "position": 14,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_shipments_order",
+          "table": "tb_buyer_orders",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 3,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_shipments_address",
+          "table": "tb_user_addresses",
+          "column": "ID"
+        }
+      ],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 4,
+      "type": "VARCHAR(100)",
+      "description": "Dato carrier; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(100); longitud máxima 100; NULL permitido; DEFAULT NULL; participa en UNIQUE uk_shipment_tracking (compuesto)"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 5,
+      "type": "VARCHAR(150)",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL; participa en UNIQUE uk_shipment_tracking (compuesto)"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 6,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; DEFAULT '0.00'; CHECK: CONSTRAINT `chk_shipment_cost` CHECK ((`shipping_cost` >= 0))"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 7,
+      "type": "ENUM('Pending','Preparing','Shipped','InTransit','Delivered','Failed','Returned')",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Pending'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Pending','Preparing','Shipped','InTransit','Delivered','Failed','Returned'); NOT NULL; DEFAULT 'Pending'"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 11,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 12,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_shipments",
+      "position": 13,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 1,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_addresses_user",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 3,
+      "type": "VARCHAR(100)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(100); longitud máxima 100; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 4,
+      "type": "VARCHAR(150)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(150); longitud máxima 150; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 5,
+      "type": "VARCHAR(25)",
+      "description": "Dato recipient phone; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(25); longitud máxima 25; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 6,
+      "type": "VARCHAR(500)",
+      "description": "Dato delivery instructions; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 7,
+      "type": "DECIMAL(10,7)",
+      "description": "Dato latitude; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 7; incremento mínimo 0.0000001. Dominio decimal finito, no continuo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(10,7); precisión 10, escala 7, rango -999.9999999 a 999.9999999; NULL permitido; DEFAULT NULL; CHECK: CONSTRAINT `chk_coordinates` CHECK ((((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null)))); CHECK: CONSTRAINT `chk_latitude` CHECK ((`latitude` between -(90) and 90))"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 8,
+      "type": "DECIMAL(10,7)",
+      "description": "Dato longitude; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 7; incremento mínimo 0.0000001. Dominio decimal finito, no continuo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(10,7); precisión 10, escala 7, rango -999.9999999 a 999.9999999; NULL permitido; DEFAULT NULL; CHECK: CONSTRAINT `chk_coordinates` CHECK ((((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null)))); CHECK: CONSTRAINT `chk_longitude` CHECK ((`longitude` between -(180) and 180))"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 9,
+      "type": "TINYINT(1)",
+      "description": "Dato is default; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'0'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TINYINT(1); NOT NULL; DEFAULT '0'"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 10,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_user_addresses",
+      "position": 12,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_users",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tb_users",
+      "position": 2,
+      "type": "VARCHAR(80)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(80); longitud máxima 80; NOT NULL; sin DEFAULT declarado; participa en UNIQUE email (columna única)"
+    },
+    {
+      "table": "tb_users",
+      "position": 3,
+      "type": "VARCHAR(100)",
+      "description": "Dato nick; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(100); longitud máxima 100; NOT NULL; sin DEFAULT declarado; participa en UNIQUE nickname (columna única)"
+    },
+    {
+      "table": "tb_users",
+      "position": 4,
+      "type": "VARCHAR(255)",
+      "description": "Dato password; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(255); longitud máxima 255; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tb_users",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_users",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT CURRENT_TIMESTAMP; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tb_users",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Dato last login; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tb_users",
+      "position": 8,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 2,
+      "type": "VARCHAR(120)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(120); longitud máxima 120; NOT NULL; sin DEFAULT declarado; participa en UNIQUE name (columna única)"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 3,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Dato sup id category; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_superior_category",
+          "table": "tbc_categories",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 5,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbc_categories",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 2,
+      "type": "VARCHAR(30)",
+      "description": "Dato code; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(30); longitud máxima 30; NOT NULL; sin DEFAULT declarado; participa en UNIQUE code_UNIQUE (columna única)"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 3,
+      "type": "TEXT",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TEXT; máximo 65,535 bytes; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 4,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbc_payment_methods_types",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 1,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT; participa en UNIQUE uk_address_component (compuesto)"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 2,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_component_address",
+          "table": "tb_user_addresses",
+          "column": "ID"
+        },
+        {
+          "constraint": "fk_component_parent",
+          "table": "tbd_address_components",
+          "column": "address_ID"
+        }
+      ],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado; participa en UNIQUE uk_address_component (compuesto)"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 3,
+      "type": "VARCHAR(255)",
+      "description": "Dato value; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(255); longitud máxima 255; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 4,
+      "type": "VARCHAR(50)",
+      "description": "Dato component type; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(50); longitud máxima 50; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 5,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 6,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_component_parent",
+          "table": "tbd_address_components",
+          "column": "ID"
+        }
+      ],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_address_components",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cancellation_items_cancellation",
+          "table": "tb_cancellations",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cancellation_items_order_item",
+          "table": "tbd_order_items",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; DEFAULT '1'; CHECK: CONSTRAINT `chk_cancellation_items_quantity` CHECK ((`quantity` > 0))"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 5,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; DEFAULT '0.00'; CHECK: CONSTRAINT `chk_cancellation_items_amount` CHECK ((`unit_amount` >= 0))"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 6,
+      "type": "VARCHAR(500)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 7,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_cancellation_items",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_carts_items",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cart_items_cart",
+          "table": "tb_carts",
+          "column": "ID"
+        },
+        {
+          "constraint": "tbd_carts_items_ibfk_1",
+          "table": "tb_carts",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_carts_items",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cart_items_provider",
+          "table": "tbd_products_users_providers",
+          "column": "user_ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_carts_items",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_cart_items_product",
+          "table": "tbd_products_users_providers",
+          "column": "product_ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_carts_items",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; DEFAULT '1'; CHECK: CONSTRAINT `chk_cart_quantity` CHECK ((`quantity` > 0)); CHECK: CONSTRAINT `chk_cart_quantity_positive` CHECK ((`quantity` > 0))"
+    },
+    {
+      "table": "tbd_carts_items",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "tbd_order_items_ibfk_1",
+          "table": "tb_buyer_orders",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 4,
+      "type": "VARCHAR(255)",
+      "description": "Valor identificativo o descriptivo indicado por el nombre de la columna; interpretación funcional inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(255); longitud máxima 255; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 5,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `tbd_order_items_chk_1` CHECK ((`quantity` > 0))"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 6,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; sin DEFAULT declarado; CHECK: CONSTRAINT `tbd_order_items_chk_2` CHECK ((`unit_price` >= 0))"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 7,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": true,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NULL permitido; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_order_items",
+      "position": 8,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_products_categories",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_category",
+          "table": "tbc_categories",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_products_categories",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_product",
+          "table": "tb_products",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_products_categories",
+      "position": 3,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_products_categories",
+      "position": 4,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_products_categories",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_user1",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [
+        {
+          "constraint": "fk_products2",
+          "table": "tb_products",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 3,
+      "type": "ENUM('Owner','Reseller','Distributor')",
+      "description": "Dato type ownership; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Owner','Reseller','Distributor'); NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 4,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 6,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_products_users_providers",
+      "position": 7,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_return_items_return",
+          "table": "tb_returns",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "fk_return_items_order_item",
+          "table": "tbd_order_items",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 4,
+      "type": "INT UNSIGNED",
+      "description": "Cantidad o contador asociado al concepto nombrado; unidad/regla de conteo pendiente si no está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; DEFAULT '1'; CHECK: CONSTRAINT `chk_return_items_quantity` CHECK ((`quantity` > 0))"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 5,
+      "type": "DECIMAL(12,2)",
+      "description": "Importe o magnitud del concepto indicado por el nombre; moneda y reglas de cálculo no declaradas en esta columna.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta a escala 2; incremento mínimo 0.01. Dominio decimal finito, no continuo.",
+      "nullable": false,
+      "default": "'0.00'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DECIMAL(12,2); precisión 12, escala 2, rango -9999999999.99 a 9999999999.99; NOT NULL; DEFAULT '0.00'; CHECK: CONSTRAINT `chk_return_items_amount` CHECK ((`unit_amount` >= 0))"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 6,
+      "type": "VARCHAR(500)",
+      "description": "Contenido descriptivo relativo al concepto indicado; significado específico inferido por nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(500); longitud máxima 500; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 7,
+      "type": "ENUM('Unknown','New','Opened','Damaged')",
+      "description": "Dato item condition; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "'Unknown'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "ENUM('Unknown','New','Opened','Damaged'); NOT NULL; DEFAULT 'Unknown'"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 8,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 9,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_return_items",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 1,
+      "type": "BIGINT UNSIGNED",
+      "description": "Identificador técnico del registro. La función de identidad se respalda por PK si está declarada.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "BIGINT UNSIGNED; rango 0 a 18446744073709551615; NOT NULL; sin DEFAULT declarado; AUTO_INCREMENT"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "tbd_user_payment_methods_ibfk_1",
+          "table": "tb_users",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 3,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; FK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [
+        {
+          "constraint": "tbd_user_payment_methods_ibfk_2",
+          "table": "tbc_payment_methods_types",
+          "column": "ID"
+        }
+      ],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 4,
+      "type": "VARCHAR(60)",
+      "description": "Dato provider; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(60); longitud máxima 60; NOT NULL; sin DEFAULT declarado; participa en UNIQUE uk_provider_method (compuesto)"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 5,
+      "type": "VARCHAR(255)",
+      "description": "Dato provider method ref; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; UNIQUE; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(255); longitud máxima 255; NOT NULL; sin DEFAULT declarado; participa en UNIQUE uk_provider_method (compuesto)"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 6,
+      "type": "VARCHAR(100)",
+      "description": "Dato label; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "VARCHAR(100); longitud máxima 100; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 7,
+      "type": "CHAR(4)",
+      "description": "Dato last four; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "CHAR(4); longitud máxima 4; NULL permitido; DEFAULT NULL"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 8,
+      "type": "TINYINT",
+      "description": "Dato is default; interpretación basada en el nombre y pendiente de validación con reglas de aplicación.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cuantitativa discreta si cuenta unidades; si codifica estado/clave, cualitativa nominal. Semántica indicada por nombre y pendiente de validar.",
+      "nullable": false,
+      "default": "'0'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "TINYINT; rango -128 a 127; NOT NULL; DEFAULT '0'"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 9,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 10,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_user_payment_methods",
+      "position": 11,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Opcional; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": true,
+      "default": "NULL",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NULL permitido; DEFAULT NULL; ON UPDATE CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_users_wishlist_products",
+      "position": 1,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_users_wishlist_products",
+      "position": 2,
+      "type": "INT UNSIGNED",
+      "description": "Identificador de la entidad indicada por el prefijo. Referencia declarada: ver PK/FK; si no hay FK, la relación semántica es inferida.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; PK; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal: identificador, no magnitud, aunque el tipo sea entero.",
+      "nullable": false,
+      "default": null,
+      "primary_key": true,
+      "foreign_keys": [],
+      "domain": "INT UNSIGNED; rango 0 a 4294967295; NOT NULL; sin DEFAULT declarado"
+    },
+    {
+      "table": "tbd_users_wishlist_products",
+      "position": 3,
+      "type": "BIT(1)",
+      "description": "Estado o indicador del registro. Los valores quedan limitados únicamente por el tipo o CHECK declarado; significado funcional pendiente si no hay comentario SQL.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Cualitativa nominal; el SQL no declara jerarquía. Interpretación de negocio pendiente.",
+      "nullable": false,
+      "default": "b'1'",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "BIT(1); NOT NULL; DEFAULT b'1'"
+    },
+    {
+      "table": "tbd_users_wishlist_products",
+      "position": 4,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": "CURRENT_TIMESTAMP",
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    },
+    {
+      "table": "tbd_users_wishlist_products",
+      "position": 5,
+      "type": "DATETIME",
+      "description": "Fecha u hora asociada al evento nombrado; el evento exacto se infiere del nombre.",
+      "classification": "Monovalorado por fila; Almacenado; Obligatorio; No clave; Multivaluación conceptual: pendiente de validar",
+      "nature": "Temporal: DATETIME; expresa fecha/hora con la precisión inherente al tipo.",
+      "nullable": false,
+      "default": null,
+      "primary_key": false,
+      "foreign_keys": [],
+      "domain": "DATETIME; NOT NULL; sin DEFAULT declarado; ON UPDATE CURRENT_TIMESTAMP"
+    }
+  ]
+}

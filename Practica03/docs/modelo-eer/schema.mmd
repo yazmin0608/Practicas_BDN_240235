@@ -1,0 +1,340 @@
+erDiagram
+    %% Conteos de filas INSERT del respaldo (no una base de datos en vivo).
+    %% Todas las relaciones reflejan claves FOREIGN KEY del DDL.
+    %% tb_buyer_orders: 0 filas INSERT ? PK (ID)
+    tb_buyer_orders {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned order_ID  "NOT NULL"
+        int_unsigned seller_ID FK "NOT NULL"
+        decimal(12_2) subtotal  "NOT NULL; DEFAULT '0.00'"
+        decimal(12_2) shipping_cost  "NOT NULL; DEFAULT '0.00'"
+        enum(_Pending___Accepted___Preparing___Sent___Delivered___Canceled___Returned_) fulfillment_status  "NOT NULL; DEFAULT 'Pending'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_cancellations: 0 filas INSERT ? PK (ID)
+    tb_cancellations {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned buyer_order_ID FK "NOT NULL"
+        int_unsigned user_ID FK "NOT NULL"
+        varchar(500) cancellation_reason  "NOT NULL"
+        enum(_Requested___Approved___Rejected___Completed_) cancellation_status  "NOT NULL; DEFAULT 'Requested'"
+        datetime requested_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime resolved_date  "NULL; DEFAULT NULL"
+        text resolution_notes  "NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_carts: 0 filas INSERT ? PK (ID)
+    tb_carts {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned user_ID FK UK "NOT NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+        bit(1) status  "NULL; DEFAULT b'1'"
+    }
+    %% tb_logs: 25413 filas INSERT ? PK (ID)
+    tb_logs {
+        int ID PK "NOT NULL"
+        varchar(100) table_name  "NOT NULL"
+        enum(_Create___Read___Update___Delete_) operation  "NOT NULL"
+        varchar(80) db_users  "NOT NULL"
+        text description  "NOT NULL"
+        datetime operation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        bit(1) operation_status  "NULL; DEFAULT b'1'"
+    }
+    %% tb_payment_methods: 0 filas INSERT ? PK (ID)
+    tb_payment_methods {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned order_ID  "NOT NULL"
+        int_unsigned user_ID FK "NOT NULL"
+        int_unsigned payment_method_type_ID FK "NOT NULL"
+        varchar(150) payment_reference  "NULL; DEFAULT NULL"
+        decimal(12_2) amount  "NOT NULL"
+        char(3) currency  "NOT NULL; DEFAULT 'MXN'"
+        enum(_Pending___Authorized___Paid___Failed___Cancelled___Refunded_) payment_status  "NOT NULL; DEFAULT 'Pending'"
+        datetime payment_date  "NULL; DEFAULT NULL"
+        text notes  "NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_payment_transactions: 0 filas INSERT ? PK (ID)
+    tb_payment_transactions {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned payment_ID FK "NOT NULL"
+        enum(_Created___Authorized___Captured___Failed___Refunded___PartiallyRefunded_) event_type  "NOT NULL"
+        decimal(12_2) amount  "NOT NULL"
+        varchar(150) event_reference  "NULL; DEFAULT NULL"
+        text remarks  "NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    }
+    %% tb_payments: 0 filas INSERT ? PK (ID)
+    tb_payments {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned order_ID FK "NOT NULL"
+        decimal(12_2) amount  "NOT NULL"
+        char(3) currency  "NOT NULL; DEFAULT 'MXN'"
+        enum(_Card___SPEI___Transfer___Cash_) payment_method  "NOT NULL"
+        varchar(50) provider  "NULL; DEFAULT NULL"
+        varchar(150) provider_reference  "NULL; DEFAULT NULL"
+        enum(_Pending___Authorized___Paid___Failed___Refunded___PartiallyRefunded_) payment_status  "NOT NULL; DEFAULT 'Pending'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime paid_date  "NULL; DEFAULT NULL"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_people: 2 filas INSERT ? PK (person_ID)
+    tb_people {
+        bigint_unsigned person_ID PK "NOT NULL"
+        int_unsigned user_ID FK UK "NOT NULL"
+        varchar(50) courtesy_title  "NULL; DEFAULT NULL"
+        varchar(150) given_names  "NOT NULL"
+        varchar(150) family_names  "NULL; DEFAULT NULL"
+        date birth_date  "NULL; DEFAULT NULL"
+        tinyint_unsigned gender_ID  "NULL; DEFAULT NULL"
+        char(2) country_code  "NULL; DEFAULT NULL"
+        varchar(25) phone  "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    }
+    %% tb_products: 15005 filas INSERT ? PK (ID)
+    tb_products {
+        int_unsigned ID PK "NOT NULL"
+        varchar(50) SKU UK "NOT NULL"
+        varchar(250) name  "NOT NULL"
+        text description  "NULL"
+        decimal(10_2) current_price  "NOT NULL; DEFAULT '0.00'"
+        int_unsigned current_stock  "NOT NULL; DEFAULT '0'"
+        bit(1) status  "NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL"
+    }
+    %% tb_refunds: 0 filas INSERT ? PK (ID)
+    tb_refunds {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned payment_ID FK "NOT NULL"
+        int_unsigned cancellation_ID FK "NULL; DEFAULT NULL"
+        int_unsigned return_ID FK "NULL; DEFAULT NULL"
+        decimal(12_2) amount  "NOT NULL"
+        char(3) currency  "NOT NULL; DEFAULT 'MXN'"
+        varchar(500) refund_reason  "NOT NULL"
+        enum(_Requested___Approved___Processing___Completed___Rejected___Failed_) refund_status  "NOT NULL; DEFAULT 'Requested'"
+        varchar(150) provider_reference  "NULL; DEFAULT NULL"
+        datetime requested_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime processed_date  "NULL; DEFAULT NULL"
+        text resolution_notes  "NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_returns: 0 filas INSERT ? PK (ID)
+    tb_returns {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned buyer_order_ID FK "NOT NULL"
+        int_unsigned order_item_ID FK "NOT NULL"
+        int_unsigned user_ID FK "NOT NULL"
+        int_unsigned quantity  "NOT NULL; DEFAULT '1'"
+        varchar(500) return_reason  "NOT NULL"
+        enum(_Requested___Authorized___Rejected___InTransit___Received___Inspected___Completed_) return_status  "NOT NULL; DEFAULT 'Requested'"
+        datetime requested_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime received_date  "NULL; DEFAULT NULL"
+        datetime resolved_date  "NULL; DEFAULT NULL"
+        text resolution_notes  "NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_shipments: 0 filas INSERT ? PK (ID)
+    tb_shipments {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned buyer_order_ID FK "NOT NULL"
+        bigint_unsigned address_ID FK "NOT NULL"
+        varchar(100) carrier  "NULL; DEFAULT NULL"
+        varchar(150) tracking_number  "NULL; DEFAULT NULL"
+        decimal(12_2) shipping_cost  "NOT NULL; DEFAULT '0.00'"
+        enum(_Pending___Preparing___Shipped___InTransit___Delivered___Failed___Returned_) shipment_status  "NOT NULL; DEFAULT 'Pending'"
+        datetime shipped_date  "NULL; DEFAULT NULL"
+        datetime estimated_delivery_date  "NULL; DEFAULT NULL"
+        datetime delivered_date  "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_user_addresses: 0 filas INSERT ? PK (ID)
+    tb_user_addresses {
+        bigint_unsigned ID PK "NOT NULL"
+        int_unsigned user_ID FK "NOT NULL"
+        varchar(100) address_label  "NOT NULL"
+        varchar(150) recipient_name  "NULL; DEFAULT NULL"
+        varchar(25) recipient_phone  "NULL; DEFAULT NULL"
+        varchar(500) delivery_instructions  "NULL; DEFAULT NULL"
+        decimal(10_7) latitude  "NULL; DEFAULT NULL"
+        decimal(10_7) longitude  "NULL; DEFAULT NULL"
+        tinyint(1) is_default  "NOT NULL; DEFAULT '0'"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tb_users: 11 filas INSERT ? PK (ID)
+    tb_users {
+        int_unsigned ID PK "NOT NULL"
+        varchar(80) email UK "NOT NULL"
+        varchar(100) nick UK "NOT NULL"
+        varchar(255) password  "NOT NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_login  "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+    }
+    %% tbc_categories: 101 filas INSERT ? PK (ID)
+    tbc_categories {
+        int_unsigned ID PK "NOT NULL"
+        varchar(120) name UK "NOT NULL"
+        text description  "NULL"
+        int_unsigned sup_id_category FK "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL"
+    }
+    %% tbc_payment_methods_types: 0 filas INSERT ? PK (ID)
+    tbc_payment_methods_types {
+        int_unsigned ID PK "NOT NULL"
+        varchar(30) code UK "NOT NULL"
+        text description  "NOT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tbd_address_components: 0 filas INSERT ? PK (ID)
+    tbd_address_components {
+        bigint_unsigned ID PK "NOT NULL"
+        bigint_unsigned address_ID FK "NOT NULL"
+        varchar(255) value  "NOT NULL"
+        varchar(50) component_type  "NOT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        bigint_unsigned address_sup_ID FK "NULL; DEFAULT NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tbd_cancellation_items: 0 filas INSERT ? PK (ID)
+    tbd_cancellation_items {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned cancellation_ID FK "NOT NULL"
+        int_unsigned order_item_ID FK "NOT NULL"
+        int_unsigned quantity  "NOT NULL; DEFAULT '1'"
+        decimal(12_2) unit_amount  "NOT NULL; DEFAULT '0.00'"
+        varchar(500) item_reason  "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tbd_carts_items: 0 filas INSERT ? PK (cart_ID, provider_ID, product_ID)
+    tbd_carts_items {
+        int_unsigned cart_ID PK FK "NOT NULL"
+        int_unsigned provider_ID PK FK "NOT NULL"
+        int_unsigned product_ID PK FK "NOT NULL"
+        int_unsigned quantity  "NOT NULL; DEFAULT '1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    }
+    %% tbd_order_items: 0 filas INSERT ? PK (ID)
+    tbd_order_items {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned seller_order_ID FK "NOT NULL"
+        int_unsigned product_offer_ID  "NOT NULL"
+        varchar(255) product_name  "NOT NULL"
+        int_unsigned quantity  "NOT NULL"
+        decimal(12_2) unit_price  "NOT NULL"
+        decimal(12_2) subtotal  "NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+    }
+    %% tbd_products_categories: 10279 filas INSERT ? PK (category_ID, product_ID)
+    tbd_products_categories {
+        int_unsigned category_ID PK FK "NOT NULL"
+        int_unsigned product_ID PK FK "NOT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL"
+    }
+    %% tbd_products_users_providers: 0 filas INSERT ? PK (user_ID, product_ID)
+    tbd_products_users_providers {
+        int_unsigned user_ID PK FK "NOT NULL"
+        int_unsigned product_ID PK FK "NOT NULL"
+        enum(_Owner___Reseller___Distributor_) type_ownership  "NULL; DEFAULT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime avalaible_date  "NOT NULL"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL"
+    }
+    %% tbd_return_items: 0 filas INSERT ? PK (ID)
+    tbd_return_items {
+        int_unsigned ID PK "NOT NULL"
+        int_unsigned return_ID FK "NOT NULL"
+        int_unsigned order_item_ID FK "NOT NULL"
+        int_unsigned quantity  "NOT NULL; DEFAULT '1'"
+        decimal(12_2) unit_amount  "NOT NULL; DEFAULT '0.00'"
+        varchar(500) item_reason  "NULL; DEFAULT NULL"
+        enum(_Unknown___New___Opened___Damaged_) item_condition  "NOT NULL; DEFAULT 'Unknown'"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tbd_user_payment_methods: 0 filas INSERT ? PK (ID)
+    tbd_user_payment_methods {
+        bigint_unsigned ID PK "NOT NULL"
+        int_unsigned user_ID FK "NOT NULL"
+        int_unsigned payment_method_type_ID FK "NOT NULL"
+        varchar(60) provider  "NOT NULL"
+        varchar(255) provider_method_ref  "NOT NULL"
+        varchar(100) label  "NULL; DEFAULT NULL"
+        char(4) last_four  "NULL; DEFAULT NULL"
+        tinyint is_default  "NOT NULL; DEFAULT '0'"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NULL; DEFAULT NULL"
+    }
+    %% tbd_users_wishlist_products: 0 filas INSERT ? PK (user_ID, product_ID)
+    tbd_users_wishlist_products {
+        int_unsigned user_ID PK "NOT NULL"
+        int_unsigned product_ID PK "NOT NULL"
+        bit(1) status  "NOT NULL; DEFAULT b'1'"
+        datetime creation_date  "NOT NULL; DEFAULT CURRENT_TIMESTAMP"
+        datetime last_update  "NOT NULL"
+    }
+    tb_users ||--o{ tb_buyer_orders : "fk_seller_orders_seller ? seller_ID ? ID"
+    tb_buyer_orders ||--o{ tb_cancellations : "fk_cancellations_order ? buyer_order_ID ? ID"
+    tb_users ||--o{ tb_cancellations : "fk_cancellations_user ? user_ID ? ID"
+    tb_users ||--|| tb_carts : "tb_carts_ibfk_1 ? user_ID ? ID"
+    tbc_payment_methods_types ||--o{ tb_payment_methods : "fk_payment_methods_type ? payment_method_type_ID ? ID"
+    tb_users ||--o{ tb_payment_methods : "fk_payment_methods_user ? user_ID ? ID"
+    tb_payments ||--o{ tb_payment_transactions : "fk_transactions_payments ? payment_ID ? ID"
+    tb_buyer_orders ||--o{ tb_payments : "fk_payments_buyer_orders ? order_ID ? ID"
+    tb_users ||--|| tb_people : "fk_persons_user ? user_ID ? ID"
+    tb_cancellations ||--o{ tb_refunds : "fk_refunds_cancellation ? cancellation_ID ? ID"
+    tb_payments ||--o{ tb_refunds : "fk_refunds_payment ? payment_ID ? ID"
+    tb_returns ||--o{ tb_refunds : "fk_refunds_return ? return_ID ? ID"
+    tbd_order_items ||--o{ tb_returns : "fk_returns_item ? order_item_ID ? ID"
+    tb_buyer_orders ||--o{ tb_returns : "fk_returns_order ? buyer_order_ID ? ID"
+    tb_users ||--o{ tb_returns : "fk_returns_user ? user_ID ? ID"
+    tb_user_addresses ||--o{ tb_shipments : "fk_shipments_address ? address_ID ? ID"
+    tb_buyer_orders ||--o{ tb_shipments : "fk_shipments_order ? buyer_order_ID ? ID"
+    tb_users ||--o{ tb_user_addresses : "fk_addresses_user ? user_ID ? ID"
+    tbc_categories ||--o{ tbc_categories : "fk_superior_category ? sup_id_category ? ID"
+    tb_user_addresses ||--o{ tbd_address_components : "fk_component_address ? address_ID ? ID"
+    tbd_address_components ||--o{ tbd_address_components : "fk_component_parent ? address_ID, address_sup_ID ? address_ID, ID"
+    tb_cancellations ||--o{ tbd_cancellation_items : "fk_cancellation_items_cancellation ? cancellation_ID ? ID"
+    tbd_order_items ||--o{ tbd_cancellation_items : "fk_cancellation_items_order_item ? order_item_ID ? ID"
+    tb_carts ||--o{ tbd_carts_items : "fk_cart_items_cart ? cart_ID ? ID"
+    tbd_products_users_providers ||--o{ tbd_carts_items : "fk_cart_items_product ? product_ID ? product_ID"
+    tbd_products_users_providers ||--o{ tbd_carts_items : "fk_cart_items_provider ? provider_ID ? user_ID"
+    tb_carts ||--o{ tbd_carts_items : "tbd_carts_items_ibfk_1 ? cart_ID ? ID"
+    tb_buyer_orders ||--o{ tbd_order_items : "tbd_order_items_ibfk_1 ? seller_order_ID ? ID"
+    tbc_categories ||--o{ tbd_products_categories : "fk_category ? category_ID ? ID"
+    tb_products ||--o{ tbd_products_categories : "fk_product ? product_ID ? ID"
+    tb_products ||--o{ tbd_products_users_providers : "fk_products2 ? product_ID ? ID"
+    tb_users ||--o{ tbd_products_users_providers : "fk_user1 ? user_ID ? ID"
+    tbd_order_items ||--o{ tbd_return_items : "fk_return_items_order_item ? order_item_ID ? ID"
+    tb_returns ||--o{ tbd_return_items : "fk_return_items_return ? return_ID ? ID"
+    tb_users ||--o{ tbd_user_payment_methods : "tbd_user_payment_methods_ibfk_1 ? user_ID ? ID"
+    tbc_payment_methods_types ||--o{ tbd_user_payment_methods : "tbd_user_payment_methods_ibfk_2 ? payment_method_type_ID ? ID"

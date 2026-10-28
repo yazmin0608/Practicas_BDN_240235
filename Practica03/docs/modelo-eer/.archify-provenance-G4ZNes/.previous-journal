@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "command": "deliver",
+  "status": "pending",
+  "receiptId": "2bbc0d8f-3a52-4ba1-9c6c-43955d9864e6",
+  "input": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\candidate.json",
+  "output": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.html"
+}

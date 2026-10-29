@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "592508a6-51cc-4971-9c94-a4ad0da50baf",
+  "status": "current",
+  "command": "deliver",
+  "type": "erd",
+  "input": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\.archify\\erd-db-test-20261014-164000\\candidate.json",
+  "output": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\Practica03\\diagrama\\modelo-eer.html",
+  "specification": {
+    "sha256": "65b97cfda0c7eb43ac506bcdbeacc9a1e67109562ad78d11a31809b4d0007bf7",
+    "bytes": 18083
+  },
+  "artifact": {
+    "sha256": "253b74923d8f6af5f2522c3a4e7386b5d7e4eaa445b835caa9b20c11b46f2edb",
+    "bytes": 891068
+  }
+}

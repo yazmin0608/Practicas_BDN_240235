@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "erd",
+  "quality": "standard",
+  "specification": {
+    "path": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\.archify\\erd-db-test-20261014-164000\\candidate.json",
+    "sha256": "65b97cfda0c7eb43ac506bcdbeacc9a1e67109562ad78d11a31809b4d0007bf7",
+    "bytes": 18083
+  },
+  "artifact": {
+    "path": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\Practica03\\diagrama\\modelo-eer.html",
+    "sha256": "253b74923d8f6af5f2522c3a4e7386b5d7e4eaa445b835caa9b20c11b46f2edb",
+    "bytes": 891068
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\Practica03\\diagrama\\modelo-eer.finalize.json",
+    "summaryReceipt": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\Practica03\\diagrama\\modelo-eer.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\ti_la\\Documents\\7-IDGDS\\Practicas_BDN_240235\\Practica03\\diagrama\\modelo-eer.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.1.0",
+    "availableVersion": "3.1.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-14T23:57:57.193Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 5957,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "routesOverSuggestedBends": 2,
+      "routesOverSuggestedStretch": 2
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [],
+      "detours": [
+        {
+          "relationship": {
+            "id": "tb_carts_fk_1",
+            "from": "tb_carts",
+            "to": "tb_users",
+            "label": "tb_carts_ibfk_1: user_ID → ID",
+            "collectionIndex": 0,
+            "artifactIndex": 1
+          },
+          "bends": 4,
+          "stretch": 2.081,
+          "directCorridorBlockers": [
+            {
+              "id": "tb_payment_transactions",
+              "label": "tb_payment_transactions",
+              "box": [
+                32,
+                264,
+                683,
+                176
+              ]
+            },
+            {
+              "id": "tb_products",
+              "label": "tb_products",
+              "box": [
+                233.5,
+                568,
+                280,
+                216
+              ]
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "id": "tbd_cart_items_fk_1",
+            "from": "tbd_cart_items",
+            "to": "tb_carts",
+            "label": "tbd_cart_items_ibfk_1: cart_ID → ID",
+            "collectionIndex": 6,
+            "artifactIndex": 7
+          },
+          "bends": 8,
+          "stretch": 2.646
+        }
+      ],
+      "truncated": false
+    },
+    "repair": "Advisory only: this mode places or routes these relationships itself. Report them; do not remove relationships or meaning to reduce crossings."
+  }
+}

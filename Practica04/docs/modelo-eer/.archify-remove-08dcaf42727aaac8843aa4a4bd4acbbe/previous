@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "erd",
+  "quality": "standard",
+  "startedAt": "2026-10-28T16:50:59.841Z",
+  "specification": {
+    "path": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\candidate.json",
+    "sha256": "b9d8c849a2d5d3e54bb94bfe1ab54f1e5c9d4cf29812520fca49066a7aec48be",
+    "bytes": 418
+  },
+  "artifact": {
+    "path": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\Yazmin Ariana\\.agents\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "erd",
+        "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\candidate.json",
+        "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.html",
+        "--quality",
+        "standard",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "2bbc0d8f-3a52-4ba1-9c6c-43955d9864e6",
+        "stage": "render",
+        "type": "erd",
+        "input": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\candidate.json",
+        "output": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.html",
+        "error": "erd schema validation failed:\n  /entities must NOT have fewer than 1 items {\"limit\":1}",
+        "diagnostics": [
+          {
+            "code": "schema/minItems",
+            "severity": "error",
+            "message": "/entities must NOT have fewer than 1 items",
+            "subject": {
+              "diagramType": "erd",
+              "path": "/entities"
+            },
+            "evidence": {
+              "keyword": "minItems",
+              "limit": 1
+            },
+            "supportedFixes": [
+              "provide at least 1 item(s)"
+            ]
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "schema/minItems",
+      "severity": "error",
+      "message": "/entities must NOT have fewer than 1 items",
+      "subject": {
+        "diagramType": "erd",
+        "path": "/entities"
+      },
+      "evidence": {
+        "keyword": "minItems",
+        "limit": 1
+      },
+      "supportedFixes": [
+        "provide at least 1 item(s)"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.finalize.json",
+    "summaryReceipt": "C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\modelo-eer\\erd-archify.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-28T16:51:01.209Z",
+  "durationMs": 1368,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-28T16:51:00.543Z",
+    "source": "network",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

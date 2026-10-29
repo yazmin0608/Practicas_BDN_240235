@@ -1,0 +1,780 @@
+{
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "meta": {
+    "title": "Modelo entidad-relación · db_test",
+    "subtitle": "MySQL 8.0.36 · extraído de Respaldo_1410.sql",
+    "locale": "es",
+    "output": ".archify/erd-db-test-20261014-164000/modelo-eer.html",
+    "quality_profile": "standard",
+    "legend": {
+      "mode": "all"
+    }
+  },
+  "layout": {
+    "mode": "grid",
+    "gapX": 100,
+    "gapY": 50
+  },
+  "entities": [
+    {
+      "id": "tb_carts",
+      "label": "tb_carts",
+      "row": 0,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk",
+            "uk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime default"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        }
+      ]
+    },
+    {
+      "id": "tb_logs",
+      "label": "tb_logs",
+      "row": 0,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int not",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "table_name",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "operation",
+          "type": "enum('Create','Read','Update','Delete')"
+        },
+        {
+          "name": "db_users",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "description",
+          "type": "text not"
+        },
+        {
+          "name": "operation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "operation_status",
+          "type": "bit(1)"
+        }
+      ]
+    },
+    {
+      "id": "tb_payment_transactions",
+      "label": "tb_payment_transactions",
+      "row": 0,
+      "col": 2,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "payment_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk"
+          ],
+          "references": "tb_payments.ID"
+        },
+        {
+          "name": "event_type",
+          "type": "enum('Created','Authorized','Captured','Failed','Refunded','PartiallyRefunded')"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "event_reference",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "remarks",
+          "type": "text"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tb_payments",
+      "label": "tb_payments",
+      "row": 0,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk"
+          ],
+          "references": "tbb_orders.ID"
+        },
+        {
+          "name": "payment_method_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "currency",
+          "type": "char(3)"
+        },
+        {
+          "name": "provider",
+          "type": "varchar(50)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "provider_reference",
+          "type": "varchar(150)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "payment_status",
+          "type": "enum('Pending','Authorized','Paid','Failed','Refunded','PartiallyRefunded')"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "paid_date",
+          "type": "datetime default"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime default"
+        }
+      ]
+    },
+    {
+      "id": "tb_products",
+      "label": "tb_products",
+      "row": 1,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "SKU",
+          "type": "varchar(50)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "varchar(250)"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "current_price",
+          "type": "decimal(10,2)"
+        },
+        {
+          "name": "current_stock",
+          "type": "int unsigned"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tb_seller_orders",
+      "label": "tb_seller_orders",
+      "row": 1,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "order_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk",
+            "uk"
+          ],
+          "references": "tbb_orders.ID"
+        },
+        {
+          "name": "seller_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk",
+            "uk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "shipping_cost",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "fulfillment_status",
+          "type": "enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime default"
+        }
+      ]
+    },
+    {
+      "id": "tb_users",
+      "label": "tb_users",
+      "row": 1,
+      "col": 2,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "email",
+          "type": "varchar(80)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "nick",
+          "type": "varchar(100)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "password",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime default"
+        },
+        {
+          "name": "last_login",
+          "type": "datetime default"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        }
+      ]
+    },
+    {
+      "id": "tbb_orders",
+      "label": "tbb_orders",
+      "row": 1,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "User_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "order_key",
+          "type": "varchar(40)"
+        },
+        {
+          "name": "total_products",
+          "type": "int not"
+        },
+        {
+          "name": "total_cost",
+          "type": "decimal(10,3)"
+        },
+        {
+          "name": "status_string",
+          "type": "enum('Registered','Wishlist','Paid','Canceled','Delivered','Devolved','Attended','Sent')"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime default"
+        }
+      ]
+    },
+    {
+      "id": "tbc_categories",
+      "label": "tbc_categories",
+      "row": 2,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "varchar(120)",
+          "key": [
+            "uk"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "sup_id_category",
+          "type": "int unsigned",
+          "key": [
+            "fk"
+          ],
+          "references": "tbc_categories.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tbd_cart_items",
+      "label": "tbd_cart_items",
+      "row": 2,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "cart_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_carts.ID"
+        },
+        {
+          "name": "product_offer_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tbd_order_items",
+      "label": "tbd_order_items",
+      "row": 2,
+      "col": 2,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "seller_order_ID",
+          "type": "int unsigned",
+          "key": [
+            "fk"
+          ],
+          "references": "tb_seller_orders.ID"
+        },
+        {
+          "name": "product_offer_ID",
+          "type": "int unsigned"
+        },
+        {
+          "name": "product_name",
+          "type": "varchar(255)"
+        },
+        {
+          "name": "quantity",
+          "type": "int unsigned"
+        },
+        {
+          "name": "unit_price",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "subtotal",
+          "type": "decimal(12,2)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_categories",
+      "label": "tbd_products_categories",
+      "row": 2,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "category_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tbc_categories.ID"
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_products.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_users_providers",
+      "label": "tbd_products_users_providers",
+      "row": 3,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_products.ID"
+        },
+        {
+          "name": "type_ownership",
+          "type": "enum('Owner','Reseller','Distributor')"
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "avalaible_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime not"
+        }
+      ]
+    },
+    {
+      "id": "tbd_users_wishlist_products",
+      "label": "tbd_users_wishlist_products",
+      "row": 3,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned",
+          "key": [
+            "pk"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "bit(1)"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime not"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime not"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "tb_carts_fk_1",
+      "from": "tb_carts",
+      "to": "tb_users",
+      "label": "tb_carts_ibfk_1: user_ID → ID",
+      "fromCardinality": "one",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tb_payment_transactions_fk_1",
+      "from": "tb_payment_transactions",
+      "to": "tb_payments",
+      "label": "tb_payment_transactions_ibfk_1: payment_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tb_payments_fk_1",
+      "from": "tb_payments",
+      "to": "tbb_orders",
+      "label": "tb_payments_ibfk_1: order_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tb_seller_orders_fk_1",
+      "from": "tb_seller_orders",
+      "to": "tbb_orders",
+      "label": "tb_seller_orders_ibfk_1: order_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tb_seller_orders_fk_2",
+      "from": "tb_seller_orders",
+      "to": "tb_users",
+      "label": "tb_seller_orders_ibfk_2: seller_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbb_orders_fk_1",
+      "from": "tbb_orders",
+      "to": "tb_users",
+      "label": "fk_user_2: User_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbc_categories_fk_1",
+      "from": "tbc_categories",
+      "to": "tbc_categories",
+      "label": "fk_superior_category: sup_id_category → ID",
+      "fromCardinality": "many",
+      "fromOptional": true,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_cart_items_fk_1",
+      "from": "tbd_cart_items",
+      "to": "tb_carts",
+      "label": "tbd_cart_items_ibfk_1: cart_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_order_items_fk_1",
+      "from": "tbd_order_items",
+      "to": "tb_seller_orders",
+      "label": "tbd_order_items_ibfk_1: seller_order_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_products_categories_fk_1",
+      "from": "tbd_products_categories",
+      "to": "tbc_categories",
+      "label": "fk_category: category_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_products_categories_fk_2",
+      "from": "tbd_products_categories",
+      "to": "tb_products",
+      "label": "fk_product: product_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_products_users_providers_fk_1",
+      "from": "tbd_products_users_providers",
+      "to": "tb_products",
+      "label": "fk_products2: product_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    },
+    {
+      "id": "tbd_products_users_providers_fk_2",
+      "from": "tbd_products_users_providers",
+      "to": "tb_users",
+      "label": "fk_user1: user_ID → ID",
+      "fromCardinality": "many",
+      "fromOptional": false,
+      "toCardinality": "one"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Fuente y conteos",
+      "items": [
+        "Estructura extraída de Practica03/backups/Respaldo_1410.sql.",
+        "Los conteos corresponden a filas insertadas en este respaldo; no son conteos de una instancia conectada.",
+        "Las entidades puente se reconocen por claves primarias compuestas y claves foráneas declaradas."
+      ]
+    }
+  ]
+}

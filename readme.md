@@ -57,4 +57,3 @@ Para garantizar la integridad y trazabilidad de las acciones colaborativas, se i
 1. **`trg_users_after_insert`**: Registra automáticamente en `tb_logs` cada vez que se crea un nuevo usuario.
 2. **`trg_users_after_update`**: Detecta cambios específicos en campos como `email` o `nickname` y guarda los valores anteriores y nuevos en el log.
 3. **`trg_users_after_delete`**: Almacena un registro de auditoría cuando un usuario es eliminado del sistema.
->>>>>>> practica02

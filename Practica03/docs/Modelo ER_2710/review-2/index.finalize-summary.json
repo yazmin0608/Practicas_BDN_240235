@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "erd",
+  "quality": "standard",
+  "specification": {
+    "path": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER\\modelo_eer.json",
+    "sha256": "0678db947b3c6006a765c3bffa742cc6dde26ceaf47961b0f61fc3f5aced6943",
+    "bytes": 49353
+  },
+  "artifact": {
+    "path": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER\\index.html",
+    "sha256": "55696a868ad5f6b903c9bfff2c4f71f67f4a89f61558915aca7cee5139bc5528",
+    "bytes": 1026880
+  },
+  "gates": {
+    "validate": "fail",
+    "deliver": "not-run",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "validate",
+  "diagnostics": [
+    {
+      "code": "schema/maxItems",
+      "severity": "error",
+      "message": "/meta/views must NOT have more than 5 items",
+      "subject": {
+        "diagramType": "erd",
+        "path": "/meta/views"
+      },
+      "evidence": {
+        "keyword": "maxItems",
+        "limit": 5
+      },
+      "supportedFixes": [
+        "provide at most 5 item(s)"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER\\review-2\\index.finalize.json",
+    "summaryReceipt": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER\\review-2\\index.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-11-05T00:31:05.095Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 523,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "nextAction": {
+    "action": "edit-in-place",
+    "candidate": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER\\modelo_eer.json",
+    "constraint": "Preserve unaffected semantics and geometry; apply each diagnostic's supportedFixes, or the fix its message names, and do not replace the whole candidate.",
+    "then": "finalize-once"
+  }
+}

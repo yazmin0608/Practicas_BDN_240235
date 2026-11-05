@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "703e8102-9bc4-43ce-ac0c-7ebb8d303814",
+  "status": "current",
+  "command": "deliver",
+  "type": "erd",
+  "input": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER_2810\\modelo_eer.json",
+  "output": "C:\\Users\\ti_la\\Documents\\7A-IDGDS\\Practicas_BDN_240235\\Practica03\\docs\\Modelo ER_2810\\index.html",
+  "specification": {
+    "sha256": "404f13a28b457840f15ee5332cff70a8774ad9114ac680ac44e5561fb076ad5b",
+    "bytes": 48629
+  },
+  "artifact": {
+    "sha256": "b8442a1f19f70ae39c71ba53b852706dff8e6200918aaa094c13086623b21da1",
+    "bytes": 1027113
+  }
+}

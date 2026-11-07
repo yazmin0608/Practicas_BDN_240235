@@ -26,7 +26,7 @@ El diccionario de datos se encuentra publicado en GitHub Pages para su consulta.
 
 ### 🔗 Enlace al Diccionario de Datos y Modelo Entidad-Relación Extendido (EER)
 
-**[📖 Consultar Diccionario de Datos Actualizado y Modelo Entidad-Relación Extendido (EER)]( https://nataliamtz123.github.io/Practicas_BDN_240537/)**
+**[📖 Consultar Diccionario de Datos Actualizado y Modelo Entidad-Relación Extendido (EER)](  https://yazmin0608.github.io/Practicas_BDN_240235/)**
 
 # Promt de la creación del diccionario junto con la creación de la entidad relación
 # PROMPT MAESTRO PROFESIONAL PARA ARCHIFY

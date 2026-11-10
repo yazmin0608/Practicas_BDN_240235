@@ -9,12 +9,11 @@ Periodo: Septiembre - Diciembre 2026
 # URL del Diccionario
 
 ---
-
-|ID|Numero de Práctica|Nombre de la Práctica|Potenciador|Estatus|
+|ID|Numero de Práctica|Nombre de la Práctica|Potenciador|Estatus
 |---|---|---|---|---|
-|1.|Práctica 02|Conexión Remota en MYSQL|42|💚Concluida|
-|2.|Conexiones Remotas para Bases de Datos SQL 1|Crear y administrar usuarios y privilegios para conexiones desde internet o redes locales|60|💚Concluida|
-|3.|Práctica 03|Manipulación de datos en conexiones remotas|50|💚Concluida|
+|1.|Metodologia de evaluacion de la materia|Transcribir en libreta y comprender la metodologia y fechas de evaluacion de la asignatura|42|💚Concluida|
+|2.|Conexiones remotas para bases de datos SQL| Crear y administrar usuarios y privilegios para conexiones desde internet o redes locales |60|💚Concluida|
+|3.|Manipulación de Datos en Conexiones Remotas a Bases de Datos Relacionales|Crear Procedimientos Almacenados, Funciones, Tablas Derivada, Importación de Datos en el Contexto de E-Commerce|100|💚Concluida|
 
 ---
 
@@ -27,6 +26,297 @@ El diccionario de datos se encuentra publicado en GitHub Pages para su consulta.
 ### 🔗 Enlace al Diccionario de Datos y Modelo Entidad-Relación Extendido (EER)
 
 **[📖 Consultar Diccionario de Datos Actualizado y Modelo Entidad-Relación Extendido (EER)](  https://yazmin0608.github.io/Practicas_BDN_240235/)**
+
+---
+
+# 🗄️ Base de Datos db_test
+
+## 📌 Descripción del proyecto
+
+El presente proyecto consiste en el diseño, desarrollo, implementación y administración de una base de datos relacional denominada **db_test**, desarrollada en MySQL 8.0.
+
+La base de datos está diseñada para gestionar la información de una plataforma de comercio electrónico, permitiendo administrar usuarios, personas, productos, categorías, proveedores, pedidos, carritos de compra, métodos de pago, transacciones, envíos, cancelaciones, devoluciones y reembolsos.
+
+Durante su desarrollo se implementaron diferentes mecanismos de seguridad, integridad, automatización y trazabilidad, con el propósito de garantizar una administración organizada de la información y mantener un registro de las operaciones realizadas por los usuarios y las aplicaciones que interactúan con la base de datos.
+
+Asimismo, se desarrollaron procedimientos almacenados, funciones reutilizables, triggers y vistas que permiten automatizar procesos, controlar operaciones y consultar el historial de cambios.
+
+---
+
+## 🎯 Objetivo general
+
+Diseñar e implementar una base de datos relacional que permita gestionar de manera eficiente la información y los procesos de una plataforma de comercio electrónico, incorporando mecanismos de seguridad, control de acceso, integridad referencial, automatización y trazabilidad de las operaciones.
+
+## 🛠️ Tecnologías utilizadas
+
+- **MySQL 8.0.36:** Sistema de gestión de bases de datos.
+- **SQL:** Lenguaje para la definición y manipulación de datos.
+- **Visual Studio Code:** Entorno de trabajo para la elaboración y administración de scripts SQL.
+- **Git y GitHub:** Control de versiones y almacenamiento del proyecto.
+- **Archify:** Herramienta utilizada para la elaboración y documentación del modelo entidad-relación.
+
+---
+
+## 📋 Actividades realizadas
+
+### 1. Diseño y estructuración de la base de datos
+
+- Creación de la base de datos `db_test`.
+- Diseño de la estructura relacional.
+- Creación de tablas para almacenar información de usuarios, personas, productos y operaciones comerciales.
+- Definición de claves primarias (PRIMARY KEY).
+- Implementación de claves foráneas (FOREIGN KEY).
+- Establecimiento de restricciones de integridad.
+- Configuración de campos obligatorios, valores predeterminados y fechas automáticas.
+- Implementación de relaciones entre las diferentes entidades.
+
+### 2. Administración de usuarios y roles
+
+Se trabajó con la administración de usuarios de base de datos y la asignación de roles para controlar los permisos de acceso.
+
+Roles considerados en el proyecto:
+
+- `superadmin`
+- `admin`
+- `seller`
+- `buyer`
+- `user_not_registered`
+- `support`
+
+También se contempló la utilización de cuentas de conexión para las aplicaciones web y móvil, permitiendo establecer diferentes niveles de acceso y responsabilidades.
+
+### 3. Gestión de información
+
+Se desarrollaron estructuras para administrar los siguientes módulos:
+
+- Registro y administración de usuarios.
+- Información personal de los usuarios.
+- Direcciones y componentes de domicilio.
+- Catálogo de productos.
+- Clasificación de productos mediante categorías y subcategorías.
+- Relación de productos con proveedores.
+- Listas de deseos.
+- Carritos de compra y sus respectivos artículos.
+- Pedidos y artículos de pedidos.
+- Órdenes de compra de los vendedores.
+- Métodos de pago y métodos de pago asociados a usuarios.
+- Pagos y transacciones.
+- Envíos.
+- Cancelaciones.
+- Devoluciones.
+- Reembolsos.
+
+### 4. Procedimientos almacenados
+
+Se implementaron procedimientos almacenados para automatizar operaciones y centralizar determinadas reglas de negocio.
+
+Procedimientos desarrollados:
+
+| Procedimiento | Descripción |
+|---|---|
+| `sp_register_user` | Registra un usuario y sus datos personales dentro de una transacción. |
+| `sp_soft_delete_user` | Realiza la desactivación lógica de un usuario, verificando permisos y condiciones. |
+| `sp_generar_usuarios_masivos` | Genera usuarios de prueba de manera automatizada mediante parámetros configurables. |
+
+### 5. Funciones reutilizables
+
+Se desarrollaron cuatro funciones para apoyar la generación masiva de usuarios:
+
+- `fn_nombre_prueba`: Genera nombres de prueba.
+- `fn_apellido_prueba`: Genera apellidos de prueba.
+- `fn_fecha_nacimiento_prueba`: Calcula fechas de nacimiento de acuerdo con un rango de edades.
+- `fn_estado_prueba`: Determina el estado activo o inactivo de los usuarios de acuerdo con un porcentaje establecido.
+
+Estas funciones permiten reutilizar lógica y mantener una mejor organización del código SQL.
+
+### 6. Generación masiva de usuarios
+
+Se desarrolló un procedimiento para realizar pruebas de generación masiva de registros.
+
+Se contemplaron los siguientes escenarios:
+
+| Prueba | Cantidad | Condición |
+|---|---:|---|
+| Prueba 1 | 1,000 | Generación de usuarios estadounidenses. |
+| Prueba 2 | 2,000 | Generación de usuarios con edades entre 18 y 30 años. |
+| Prueba 3 | 7,222 | Generación de usuarios con 85% de estado activo y 15% inactivo. |
+
+El procedimiento utiliza transacciones y validaciones de parámetros para controlar el proceso de inserción de información.
+
+### 7. Implementación de triggers
+
+Se implementaron triggers para automatizar el registro de operaciones en diferentes tablas.
+
+Se contemplaron los siguientes eventos:
+
+- **INSERT:** Registro de nuevos datos.
+- **UPDATE:** Registro de modificaciones.
+- **DELETE:** Registro de eliminaciones.
+
+Los triggers permiten registrar información relacionada con las operaciones realizadas, incluyendo el usuario de conexión, los datos involucrados y la fecha de ejecución.
+
+En total, el respaldo contiene **72 triggers** asociados a las diferentes estructuras de la base de datos.
+
+### 8. Sistema de trazabilidad y auditoría
+
+Se implementó un mecanismo de auditoría mediante la tabla `tb_logs`, cuya finalidad es almacenar información de las operaciones realizadas dentro de la base de datos.
+
+Entre los datos registrados se encuentran:
+
+- Nombre de la tabla afectada.
+- Tipo de operación.
+- Usuario de base de datos que realizó la acción.
+- Descripción de la operación.
+- Fecha y hora.
+- Estado del registro de auditoría.
+
+También se desarrollaron vistas individuales de trazabilidad para facilitar la consulta del historial de operaciones de las diferentes tablas.
+
+Se cuenta con **27 vistas de trazabilidad** y una vista adicional para consultar los totales de productos por categoría.
+
+### 9. Vistas de consulta
+
+Se desarrollaron vistas para facilitar la consulta y el análisis de información sin necesidad de repetir consultas complejas.
+
+Entre ellas se encuentra:
+
+- `vw_trazabilidad_general`
+- `vw_trazabilidad_usuarios`
+- `vw_trazabilidad_people`
+- `vw_trazabilidad_productos`
+- `vw_trazabilidad_orders`
+- `vw_trazabilidad_payments`
+- `vw_trazabilidad_carts`
+- `vw_trazabilidad_returns`
+- `vw_trazabilidad_shipments`
+- `vw_total_products_by_category`
+
+La vista `vw_total_products_by_category` permite consultar la jerarquía de categorías y los totales de productos activos, inactivos y sin categoría.
+
+### 10. Integridad y validación de información
+
+Se incorporaron mecanismos para proteger la consistencia de los datos:
+
+- Restricciones de claves primarias y foráneas.
+- Validación de valores permitidos.
+- Restricciones CHECK.
+- Campos únicos.
+- Control de valores nulos.
+- Manejo de errores en procedimientos almacenados.
+- Uso de transacciones para operaciones relacionadas.
+- Desactivación lógica de usuarios.
+
+---
+
+## 📊 Resumen de los elementos desarrollados
+
+| Elemento | Cantidad |
+|---|---:|
+| Tablas | 25 |
+| Triggers | 72 |
+| Procedimientos almacenados | 3 |
+| Funciones reutilizables | 4 |
+| Vistas de trazabilidad | 27 |
+| Vistas adicionales | 1 |
+
+**Total de objetos principales:** 132.
+
+---
+
+## 📁 Estructura del proyecto
+
+```text
+db_test/
+│
+├── README.md
+│
+├── backups/
+│   └── Respaldo_2810.sql
+│
+├── scripts/
+│   ├── database.sql
+│   ├── tables.sql
+│   ├── procedures.sql
+│   ├── functions.sql
+│   ├── triggers.sql
+│   ├── views.sql
+│   └── security.sql
+│
+└── documentation/
+    ├── modelo_entidad_relacion/
+    └── diccionario_de_datos/
+```
+
+*Nota: La estructura anterior es una organización sugerida para el repositorio.*
+
+---
+
+## ⚙️ Instalación y ejecución
+
+Para implementar la base de datos:
+
+1. Instalar MySQL Server 8.0 o una versión compatible.
+2. Abrir MySQL Workbench o un entorno de ejecución SQL.
+3. Importar el archivo de respaldo de la base de datos.
+4. Ejecutar el script SQL.
+5. Verificar la creación de las tablas, procedimientos, funciones, triggers y vistas.
+6. Comprobar las relaciones y los permisos de acceso.
+
+Para seleccionar la base de datos:
+
+```sql
+USE db_test;
+```
+
+Para consultar las tablas:
+
+```sql
+SHOW TABLES;
+```
+
+Para consultar los procedimientos almacenados:
+
+```sql
+SHOW PROCEDURE STATUS
+WHERE Db = 'db_test';
+```
+
+Para consultar las funciones:
+
+```sql
+SHOW FUNCTION STATUS
+WHERE Db = 'db_test';
+```
+
+---
+
+## 🔍 Resultados y alcance del proyecto
+
+Como resultado del desarrollo se obtuvo una base de datos relacional que integra diferentes módulos de una plataforma de comercio electrónico.
+
+Se incorporaron mecanismos de control de acceso, automatización de operaciones, generación de información de prueba, validación de datos y registro de actividades.
+
+La implementación de triggers y vistas de trazabilidad permite mantener un historial de operaciones y facilitar la supervisión de los cambios realizados.
+
+Los procedimientos almacenados y las funciones reutilizables contribuyen a centralizar procesos y reducir la duplicación de código.
+
+---
+
+## 👩‍💻 Autora
+
+**Proyecto académico:** Administración y desarrollo de bases de datos.
+
+**Base de datos:** `db_test`
+
+**Gestor de base de datos:** MySQL 8.0.36
+
+---
+
+## 📄 Licencia
+
+Proyecto desarrollado con fines académicos y de aprendizaje, enfocado en el diseño, administración, seguridad y trazabilidad de bases de datos relacionales.
+
+---
 
 # Promt de la creación del diccionario junto con la creación de la entidad relación
 # PROMPT MAESTRO PROFESIONAL PARA ARCHIFY

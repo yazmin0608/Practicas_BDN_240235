@@ -1,0 +1,27 @@
+// Reconocimiento rápido del respaldo SQL (solo lectura)
+const fs = require('fs');
+const p = 'C:\\Users\\Yazmin Ariana\\OneDrive\\Documentos\\CUATRIMESTRE 7\\Optativa I. Bases De Datos En La Nube\\7A-IDGDS\\Practicas_BDN_240235\\Practica04\\backups\\Respaldo_2111.sql';
+const s = fs.readFileSync(p, 'utf8');
+const count = (re) => (s.match(re) || []).length;
+console.log('chars', s.length, 'lines', s.split('\n').length);
+console.log('CREATE TABLE', count(/\bCREATE\s+TABLE\b/gi));
+console.log('CREATE TRIGGER', count(/\bTRIGGER\s+`/gi));
+console.log('CREATE VIEW', count(/\bVIEW\s+`/gi));
+console.log('CREATE PROCEDURE', count(/\bCREATE\s+PROCEDURE\b/gi));
+console.log('CREATE FUNCTION', count(/\bCREATE\s+FUNCTION\b/gi));
+console.log('INSERT INTO', count(/\bINSERT\s+INTO\b/gi));
+console.log('REPLACE INTO', count(/\bREPLACE\s+INTO\b/gi));
+console.log('DELETE FROM', count(/\bDELETE\s+FROM\b/gi));
+console.log('ALTER TABLE', count(/\bALTER\s+TABLE\b/gi));
+console.log('CREATE INDEX', count(/\bCREATE\s+(UNIQUE\s+)?INDEX\b/gi));
+console.log('DELIMITER lines', count(/^DELIMITER\s/gmi));
+console.log('CHECK constraints', count(/\bCHECK\s*\(/gi));
+console.log('FOREIGN KEY', count(/\bFOREIGN\s+KEY\b/gi));
+console.log('CONSTRAINT', count(/\bCONSTRAINT\b/gi));
+const views = [...s.matchAll(/CREATE[^;]*?VIEW\s+`([^`]+)`/gi)].map(m => m[1]);
+console.log('VIEWS:', views.length, views.slice(0, 40).join(', '));
+const tables = [...s.matchAll(/CREATE\s+TABLE\s+`([^`]+)`/gi)].map(m => m[1]);
+console.log('TABLES:', tables.length, '\n' + tables.join('\n'));
+console.log('------- sample view -------');
+const vi = s.search(/CREATE[^;]*?VIEW\s+`/i);
+console.log(s.slice(vi, vi + 1800));

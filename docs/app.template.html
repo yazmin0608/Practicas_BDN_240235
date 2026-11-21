@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Atlas interactivo de ingeniería inversa de la base de datos db_test (MySQL 8.0) a partir de Respaldo_2111.sql">
+<title>Atlas de la Base de Datos · db_test</title>
+<style>
+:root{
+  --navy:#062f2a; --navy-2:#0b4a42; --blue:#0f766e; --blue-2:#34d399; --violet:#7c3aed;
+  --bg:#f4f7fb; --surface:#ffffff; --surface-2:#f8fafc; --surface-3:#eef3fa;
+  --text:#16233a; --muted:#5f6f87; --border:#dce4ef; --border-strong:#c4d1e2;
+  --shadow:0 4px 18px rgba(15,42,80,.07); --shadow-lg:0 18px 48px rgba(10,31,68,.16);
+  --ok:#059669; --warn:#c77d09; --danger:#d63b4a; --info:#0f766e;
+  --radius:14px; --radius-sm:9px; --font:'Segoe UI',Inter,system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  --mono:'Cascadia Code','SFMono-Regular',Consolas,'Liberation Mono',monospace;
+}
+[data-theme="dark"]{
+  --bg:#071713; --surface:#10241f; --surface-2:#16322c; --surface-3:#1d4038;
+  --text:#e8f5f0; --muted:#9abcb2; --border:#21483f; --border-strong:#31695d;
+  --shadow:0 4px 18px rgba(0,0,0,.28); --shadow-lg:0 18px 48px rgba(0,0,0,.5);
+  --ok:#34d399; --warn:#fbbf24; --danger:#fb7185; --info:#34d399;
+  --navy:#051a17; --navy-2:#0a312b; --blue:#34d399; --blue-2:#5eead4; --violet:#2dd4bf;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--blue-2);outline-offset:2px}
+.app{display:grid;grid-template-columns:264px 1fr;grid-template-rows:66px 1fr;min-height:100vh;transition:grid-template-columns .25s ease}
+.app.collapsed{grid-template-columns:74px 1fr}
+/* ---------- Sidebar ---------- */
+.sidebar{grid-row:1/3;background:linear-gradient(180deg,var(--navy),var(--navy-2));color:#dce8fb;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden;z-index:30}
+.brand{display:flex;align-items:center;gap:12px;padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.1);min-height:66px}
+.brand-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue-2),var(--violet));display:grid;place-items:center;flex:0 0 auto;box-shadow:0 6px 16px rgba(52,211,153,.35)}
+.brand-mark svg{width:21px;height:21px;color:#fff}
+.brand-text strong{display:block;font-size:14px;letter-spacing:.02em;color:#fff}
+.brand-text span{font-size:11px;color:#8fb4e6}
+.nav{flex:1;overflow-y:auto;padding:12px 10px 20px}
+.nav::-webkit-scrollbar{width:6px}.nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:6px}
+.nav-group{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6f95c9;margin:14px 10px 8px;font-weight:700;white-space:nowrap}
+.nav-item{display:flex;align-items:center;gap:11px;width:100%;border:0;background:transparent;color:#c9d9f1;padding:9px 11px;border-radius:10px;text-align:left;margin:2px 0;transition:background .18s,color .18s,transform .18s}
+.nav-item:hover{background:rgba(255,255,255,.08);color:#fff;transform:translateX(2px)}
+.nav-item.active{background:linear-gradient(90deg,rgba(15,118,110,.85),rgba(124,58,237,.6));color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.nav-num{font-size:10px;font-weight:800;color:#7fa8dd;min-width:20px;font-variant-numeric:tabular-nums}
+.nav-item.active .nav-num{color:#d1fae5}
+.nav-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.nav-icon{width:17px;height:17px;flex:0 0 auto;opacity:.9}
+.sidebar-foot{padding:12px 16px 18px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:#8fb4e6}
+.app.collapsed .brand-text,.app.collapsed .nav-label,.app.collapsed .nav-group,.app.collapsed .sidebar-foot{display:none}
+.app.collapsed .nav-item{justify-content:center;padding:10px}
+.app.collapsed .nav-num{display:none}
+/* ---------- Topbar ---------- */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 22px;position:sticky;top:0;z-index:25;box-shadow:0 1px 8px rgba(10,30,70,.04)}
+.icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center;flex:0 0 auto;transition:.18s}
+.icon-btn:hover{background:var(--surface-3);border-color:var(--border-strong);transform:translateY(-1px)}
+.icon-btn svg{width:17px;height:17px}
+.crumb{font-size:12px;color:var(--muted);min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crumb b{color:var(--text)}
+.search-wrap{position:relative;margin-left:auto;width:min(400px,38vw)}
+.search-wrap input{width:100%;height:38px;border:1px solid var(--border);background:var(--surface-2);border-radius:10px;padding:0 38px 0 38px;outline:none}
+.search-wrap input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(15,118,110,.12)}
+.search-wrap .search-ic{position:absolute;left:12px;top:10px;width:17px;height:17px;color:var(--muted)}
+.search-results{position:absolute;top:44px;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);max-height:440px;overflow:auto;z-index:60;display:none}
+.search-results.show{display:block}
+.search-group{padding:8px 10px 2px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800}
+.search-hit{display:flex;gap:10px;align-items:center;width:100%;border:0;background:transparent;padding:8px 12px;text-align:left;border-radius:8px}
+.search-hit:hover{background:var(--surface-3)}
+.search-hit .hit-kind{font-size:9px;padding:2px 6px;border-radius:5px;background:rgba(15,118,110,.12);color:var(--blue);font-weight:800;text-transform:uppercase}
+.search-hit small{display:block;color:var(--muted);font-size:11px}
+/* ---------- Main / sections ---------- */
+main{padding:26px 30px 70px;min-width:0;max-width:1600px;width:100%}
+.section{display:none;animation:fade .28s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.sec-head h1{font-size:26px;line-height:1.2;margin:0 0 4px;letter-spacing:-.02em}
+.sec-head p{margin:0;color:var(--muted);max-width:800px;font-size:13px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--blue);border-radius:2px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.pad{padding:18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:1200px){.g5{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:820px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}.app{grid-template-columns:1fr}.app .sidebar{position:fixed;left:-280px;transition:left .25s;box-shadow:var(--shadow-lg)}.app.mobile-open .sidebar{left:0}.app.collapsed{grid-template-columns:1fr}.app.collapsed .nav-label,.app.collapsed .brand-text,.app.collapsed .nav-group{display:block}.app.collapsed .nav-item{justify-content:flex-start}.app.collapsed .nav-num{display:block}.search-wrap{width:100%;margin-left:0}.topbar{flex-wrap:wrap;padding:10px 14px;height:auto}.mobile-only{display:block!important}main{padding:18px 14px 60px}}
+.mobile-only{display:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);padding:8px 13px;border-radius:9px;font-weight:600;font-size:12.5px;transition:.18s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow);border-color:var(--blue)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(15,118,110,.25)}
+[data-theme="dark"] .btn.primary{background:linear-gradient(135deg,#0f766e,#7c3aed);color:#fff}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+.btn.sm{padding:5px 9px;font-size:11px}
+.btn svg{width:15px;height:15px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--surface-3);color:var(--muted);border:1px solid var(--border)}
+.chip.pk{background:rgba(245,158,11,.14);color:#b47006;border-color:rgba(245,158,11,.3)}
+.chip.fk{background:rgba(15,118,110,.13);color:var(--info);border-color:rgba(15,118,110,.28)}
+.chip.uq{background:rgba(124,58,237,.13);color:var(--violet);border-color:rgba(124,58,237,.28)}
+.chip.nn{background:rgba(214,59,74,.1);color:var(--danger);border-color:rgba(214,59,74,.22)}
+.chip.ok{background:rgba(5,150,105,.12);color:var(--ok);border-color:rgba(5,150,105,.28)}
+.chip.warn{background:rgba(199,125,9,.12);color:var(--warn);border-color:rgba(199,125,9,.28)}
+.chip.bad{background:rgba(214,59,74,.11);color:var(--danger);border-color:rgba(214,59,74,.25)}
+.chip.neutral{background:var(--surface-3);color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:11.5px}
+.tiny{font-size:10.5px}
+.mono{font-family:var(--mono)}
+.nowrap{white-space:nowrap}
+.right{text-align:right}
+.center{text-align:center}
+.divider{height:1px;background:var(--border);margin:16px 0}
+/* ---------- Cover ---------- */
+.hero{background:linear-gradient(135deg,#062f2a 0%,#0b4a42 52%,#0f766e 100%);color:#fff;border-radius:20px;padding:42px 46px;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero::before{content:'';position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.28),transparent 68%);top:-230px;right:-120px}
+.hero::after{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.24),transparent 70%);bottom:-260px;left:18%}
+.hero>*{position:relative;z-index:1}
+.hero .inst{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#a9cdf7;border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06)}
+.hero h1{font-size:clamp(34px,5.2vw,62px);line-height:1.05;margin:22px 0 4px;font-weight:800;letter-spacing:-.035em}
+.hero .dbname{font-size:clamp(24px,3.4vw,40px);font-weight:700;color:#7dd3fc;letter-spacing:-.02em;margin:0 0 16px}
+.hero .subtitle{font-size:15px;color:#d7e8ff;margin:0 0 28px;max-width:680px}
+.hero-rule{height:1px;background:linear-gradient(90deg,rgba(255,255,255,.5),transparent);margin:26px 0}
+.acad-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 26px}
+@media(max-width:900px){.acad-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:28px 22px}}
+.acad-grid dt{font-size:9.5px;text-transform:uppercase;letter-spacing:.14em;color:#8fb9e9;font-weight:800;margin-bottom:3px}
+.acad-grid dd{margin:0;font-size:13px;font-weight:600;color:#fff;line-height:1.4}
+.hero-actions{display:flex;gap:11px;margin-top:30px;flex-wrap:wrap}
+.hero-actions .btn{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff}
+.hero-actions .btn.primary{background:#fff;color:#0b4a42;border-color:#fff;box-shadow:none}
+.hero-actions .btn:hover{background:rgba(255,255,255,.22)}
+.hero-actions .btn.primary:hover{background:#d1fae5}
+/* ---------- Stats & charts ---------- */
+.stat{cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;overflow:hidden}
+.stat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+.stat::after{content:'';position:absolute;right:-22px;top:-22px;width:74px;height:74px;border-radius:50%;background:rgba(15,118,110,.08)}
+.stat .label{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+.stat .value{font-size:31px;font-weight:800;letter-spacing:-.03em;line-height:1.15;margin:7px 0 2px;font-variant-numeric:tabular-nums}
+.stat .foot{font-size:11px;color:var(--muted)}
+.stat .sicon{width:32px;height:32px;border-radius:9px;background:rgba(15,118,110,.1);color:var(--blue);display:grid;place-items:center;float:right}
+.stat .sicon svg{width:17px;height:17px}
+.chart-card{padding:16px 18px;min-height:270px}
+.chart-card h3{font-size:13px;margin:0 0 3px}
+.chart-card .hint{font-size:10.5px;color:var(--muted);margin:0 0 12px}
+.chart-svg{width:100%;height:auto;max-height:210px;overflow:visible}
+.integrity{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.integrity .ring{width:76px;height:76px;flex:0 0 auto}
+.progress{height:8px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.progress>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--ok))}
+/* ---------- Tables / lists ---------- */
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.field{height:36px;border:1px solid var(--border);background:var(--surface);border-radius:9px;padding:0 11px;min-width:130px;outline:none}
+.field:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(15,118,110,.1)}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;padding:8px 12px;font-size:11.5px;font-weight:700;color:var(--muted)}
+.seg button.active{background:var(--blue);color:#fff}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface-2);position:sticky;top:0;z-index:1}
+.data-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.data-table tbody tr:hover{background:var(--surface-2)}
+.table-scroll{max-height:620px;overflow:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.entity-card{cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+.entity-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+.entity-card .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.entity-card h3{margin:0;font-size:14px;font-family:var(--mono);word-break:break-all}
+.entity-card p{margin:9px 0 12px;color:var(--muted);font-size:12px;min-height:52px}
+.tag-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.empty{padding:38px 20px;text-align:center;color:var(--muted);border:1px dashed var(--border-strong);border-radius:var(--radius);background:var(--surface-2)}
+.empty svg{width:30px;height:30px;opacity:.5;margin-bottom:8px}
+/* ---------- Code viewer ---------- */
+.code-block{background:#0d1b30;color:#d7e5fb;border-radius:10px;overflow:hidden;border:1px solid #1e3354}
+.code-head{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#122541;border-bottom:1px solid #1e3354;font-size:11px;color:#93b4e0}
+.code-head .sp{flex:1}
+.code-head button{border:1px solid #34527d;background:#162c4d;color:#cfe2ff;border-radius:6px;padding:3px 8px;font-size:10.5px}
+.code-body{max-height:340px;overflow:auto;font-family:var(--mono);font-size:11.5px;line-height:1.65;padding:10px 0;white-space:pre}
+.code-block.collapsed .code-body{display:none}
+.code-line{display:flex;min-width:max-content}
+.code-line .ln{width:44px;flex:0 0 44px;text-align:right;padding-right:12px;color:#5f7da8;user-select:none;border-right:1px solid #1e3354;margin-right:14px}
+.code-line .lc{padding-right:20px}
+.kw{color:#7dd3fc;font-weight:700}.str{color:#a7f3d0}.num{color:#fcd34d}.cm{color:#7f9bc4;font-style:italic}.fn{color:#c4b5fd}.id{color:#e2e8f0}
+mark{background:rgba(250,204,21,.35);color:inherit;border-radius:3px;padding:0 1px}
+/* ---------- Dictionary ---------- */
+.dict-layout{display:grid;grid-template-columns:250px 1fr;gap:16px;align-items:start}
+@media(max-width:1000px){.dict-layout{grid-template-columns:1fr}}
+.table-picker{max-height:70vh;overflow:auto;padding:8px}
+.table-picker button{display:flex;justify-content:space-between;gap:8px;width:100%;border:0;background:transparent;padding:8px 10px;border-radius:8px;text-align:left;font-size:11.5px}
+.table-picker button:hover{background:var(--surface-3)}
+.table-picker button.active{background:rgba(15,118,110,.12);color:var(--blue);font-weight:700}
+.col-card{border:1px solid var(--border);border-radius:10px;background:var(--surface);margin-bottom:9px;overflow:hidden}
+.col-head{display:flex;align-items:center;gap:9px;padding:11px 13px;cursor:pointer;flex-wrap:wrap}
+.col-head:hover{background:var(--surface-2)}
+.col-head .cname{font-family:var(--mono);font-weight:700;font-size:12.5px}
+.col-head .ctype{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.col-head .chev{margin-left:auto;transition:transform .2s}
+.col-card.open .chev{transform:rotate(90deg)}
+.col-body{display:none;border-top:1px solid var(--border);padding:14px;background:var(--surface-2)}
+.col-card.open .col-body{display:block}
+.ficha{display:grid;grid-template-columns:132px 1fr;gap:4px 14px;font-size:11.5px;margin-bottom:12px}
+.ficha dt{font-weight:800;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.07em;padding-top:2px}
+.ficha dd{margin:0;word-break:break-word}
+.formula{font-family:var(--mono);font-size:11.5px;background:#0d1b30;color:#bfe3ff;border-radius:8px;padding:11px 13px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px}
+.legend-item{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface-2)}
+.legend-sym{font-family:var(--mono);font-weight:800;font-size:15px;color:var(--blue);min-width:28px;text-align:center}
+.note{border-left:3px solid var(--blue);background:rgba(15,118,110,.07);padding:10px 13px;border-radius:0 8px 8px 0;font-size:11.5px}
+.note.warn{border-color:var(--warn);background:rgba(199,125,9,.09)}
+.note.ok{border-color:var(--ok);background:rgba(5,150,105,.08)}
+/* ---------- EER ---------- */
+.eer-shell{position:relative;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden;height:760px;box-shadow:var(--shadow)}
+.eer-shell:fullscreen{height:100vh;border-radius:0}
+.eer-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--border);background:var(--surface-2)}
+.eer-canvas{position:absolute;inset:52px 0 0;overflow:hidden;cursor:grab;background-image:radial-gradient(circle,var(--border) 1px,transparent 1px);background-size:24px 24px}
+.eer-canvas.grabbing{cursor:grabbing}
+.eer-world{position:absolute;left:0;top:0;transform-origin:0 0;backface-visibility:hidden;text-rendering:geometricPrecision}
+.eer-edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;shape-rendering:geometricPrecision}
+.eer-edges path.edge{pointer-events:stroke;cursor:pointer;fill:none;stroke:var(--border-strong);stroke-width:2.1;shape-rendering:geometricPrecision}
+.eer-edges path.edge.hl{stroke:var(--blue);stroke-width:3.4;filter:drop-shadow(0 0 5px rgba(15,118,110,.55))}
+.eer-edges path.edge.dim{opacity:.14}
+.eer-node{position:absolute;background:var(--surface);border:1px solid var(--border-strong);border-radius:9px;box-shadow:var(--shadow);width:200px;overflow:hidden;cursor:pointer;font-size:11px;transition:box-shadow .2s,border-color .2s,opacity .2s}
+.eer-node:hover{border-color:var(--blue);box-shadow:0 10px 26px rgba(15,118,110,.24)}
+.eer-node.selected{border-color:var(--violet);box-shadow:0 0 0 2px rgba(124,58,237,.32),0 12px 30px rgba(124,58,237,.22)}
+.eer-node.dim{opacity:.24}
+.eer-node .nh{padding:8px 9px;background:linear-gradient(90deg,var(--navy-2),#0f766e);color:#fff;font-family:var(--mono);font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:6px;letter-spacing:.01em}
+.eer-node .nh>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.eer-node .nq{display:flex;gap:6px;padding:5px 8px;background:var(--surface-2);border-bottom:1px solid var(--border);font-size:9.8px;color:var(--muted);line-height:1.25}
+.eer-node .nq span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eer-node .nq b{color:var(--text);font-family:var(--mono);font-size:10.5px}
+.eer-node .nb{padding:6px 8px 8px;font-size:11px}
+.eer-attr{display:flex;align-items:center;gap:5px;padding:2.5px 0;border-bottom:1px dashed var(--border);white-space:nowrap}
+.eer-attr:last-child{border-bottom:0}
+.eer-attr .k{font-family:var(--mono);font-size:10px;width:15px;text-align:center;font-weight:800}
+.eer-attr .k.pk{color:var(--warn)}.eer-attr .k.fk{color:var(--blue)}.eer-attr .k.uq{color:var(--violet)}
+.eer-attr .nm{font-family:var(--mono);font-size:10.5px;overflow:hidden;text-overflow:ellipsis}
+.eer-attr .ty{margin-left:auto;color:var(--muted);font-size:9.5px}
+.eer-mini{padding:7px 9px;color:var(--muted);font-size:10.5px}
+.eer-legend{position:absolute;bottom:12px;left:12px;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:9px 11px;font-size:10px;box-shadow:var(--shadow);max-width:330px}
+.eer-legend b{display:block;margin-bottom:4px;font-size:10px}
+.eer-hint{position:absolute;bottom:12px;right:12px;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:7px 10px;font-size:10px;color:var(--muted);box-shadow:var(--shadow)}
+.zoom-label{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:48px;text-align:center}
+/* ---------- Drawer ---------- */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(6,18,38,.45);opacity:0;pointer-events:none;transition:.22s;z-index:70}
+.drawer-backdrop.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(480px,94vw);background:var(--surface);border-left:1px solid var(--border);box-shadow:var(--shadow-lg);transform:translateX(103%);transition:transform .26s ease;z-index:80;overflow-y:auto;padding:20px 22px 50px}
+.drawer.show{transform:none}
+.drawer-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.drawer h2{font-size:18px;margin:0;word-break:break-word}
+.drawer .obj-kind{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);font-weight:800}
+.drawer-section{margin-top:18px}
+.drawer-section h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:0 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:6px 10px;font-size:11.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;word-break:break-word}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:10.5px}
+.flow span{border:1px solid var(--border);border-radius:7px;padding:5px 8px;background:var(--surface-2)}
+.flow i{color:var(--blue);font-style:normal;font-weight:800}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:10px 16px;border-radius:9px;box-shadow:var(--shadow-lg);z-index:100;opacity:0;pointer-events:none;transition:.25s;font-size:12px}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.help-list{margin:0;padding-left:18px;font-size:12px;line-height:1.9}
+/* ---------- Print ---------- */
+.print-only,.print-front{display:none}
+@media print{
+  @page{size:A4;margin:16mm}
+  html,body{background:#fff!important;color:#111!important}
+  body{font-size:10pt}
+  .sidebar,.topbar,.drawer,.drawer-backdrop,.toast,.no-print,.hero-actions,.code-head button{display:none!important}
+  main{padding:0!important;max-width:none!important}
+  .section{display:none!important;animation:none!important}
+  .section.active{display:block!important}
+  body.printing-all .section{display:block!important;page-break-before:always;break-before:page}
+  body.print-scope-dictionary .section[data-print="dictionary"],body.print-scope-triggers .section[data-print="triggers"],body.print-scope-views .section[data-print="views"]{display:block!important}
+  .card,.entity-card,.col-card{box-shadow:none!important;break-inside:avoid;page-break-inside:avoid}
+  .hero{background:#062f2a!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:10px}
+  .hero h1{font-size:30pt}.hero .dbname{font-size:20pt}
+  .table-scroll{max-height:none!important;overflow:visible!important}
+  .code-body{max-height:none!important;overflow:visible!important;background:#f4f6fa!important;color:#111!important}
+  .code-line .ln{color:#555;border-color:#ccc}
+  .kw,.str,.num,.cm,.fn,.id{color:#111!important}
+  .print-only{display:none!important}
+  body.printing-all .print-front{display:block!important}
+  .print-cover{min-height:250mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always;break-after:page;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-cover .pf-inst{font-size:15pt;font-weight:800;letter-spacing:.04em;color:#062f2a}
+  .print-cover .pf-kicker{margin-top:10mm;font-size:9pt;text-transform:uppercase;letter-spacing:.22em;color:#64748b}
+  .print-cover h1{margin:8mm 0 2mm;font-size:32pt;line-height:1.15;color:#062f2a}
+  .print-cover .pf-db{font-size:20pt;font-weight:800;color:#0f766e;font-family:var(--mono)}
+  .print-cover .pf-practice{margin-top:5mm;font-size:12pt;color:#334155;max-width:150mm}
+  .print-cover .pf-rule{width:70mm;height:1.2mm;background:#0f766e;margin:10mm 0}
+  .print-cover .pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:4mm 10mm;width:170mm;margin:0;text-align:left}
+  .print-cover .pf-grid div{border-bottom:1px solid #dce4ef;padding-bottom:2mm}
+  .print-cover .pf-grid dt{font-size:7.5pt;text-transform:uppercase;letter-spacing:.12em;color:#64748b;font-weight:800}
+  .print-cover .pf-grid dd{margin:1mm 0 0;font-size:10pt;font-weight:600;color:#16233a}
+  .print-cover .pf-foot{margin-top:14mm;font-size:8.5pt;color:#64748b}
+  .print-index{padding-top:6mm;break-inside:avoid;page-break-inside:avoid}
+  .print-index .pf-inst{font-size:8pt;text-transform:uppercase;letter-spacing:.18em;color:#0f766e;font-weight:800}
+  .print-index h2{font-size:20pt;margin:3mm 0 7mm;color:#062f2a}
+  .pf-toc{width:100%;border-collapse:collapse;font-size:9.5pt}
+  .pf-toc td{padding:2.4mm 2mm;border-bottom:1px solid #dce4ef}
+  .pf-toc .pf-num{width:12mm;font-family:var(--mono);font-weight:800;color:#0f766e}
+  .pf-toc .pf-page{width:18mm;text-align:right;color:#64748b;font-family:var(--mono)}
+  .print-index .pf-note{margin-top:8mm;font-size:8.5pt;color:#64748b;border-left:2px solid #0f766e;padding-left:4mm}
+  h1,h2,h3{break-after:avoid}
+  .chart-svg{max-height:150px}
+  .formula{background:#f4f6fa!important;color:#111!important;border:1px solid #ddd}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sidebar" aria-label="Navegación principal">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg></div>
+      <div class="brand-text"><strong>Atlas de la BD</strong><span id="brandDb">db_test · MySQL 8.0</span></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidebar-foot">Fuente: <b>Respaldo_2111.sql</b><br>Generado desde análisis estático</div>
+  </aside>
+  <header class="topbar">
+    <button class="icon-btn mobile-only" id="mobileMenu" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    <button class="icon-btn" id="collapseBtn" aria-label="Colapsar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg></button>
+    <div class="crumb" id="crumb"></div>
+    <div class="search-wrap">
+      <svg class="search-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="globalSearch" type="search" placeholder="Buscar tablas, columnas, triggers, vistas…" aria-label="Buscador global" autocomplete="off">
+      <div class="search-results" id="searchResults" role="listbox"></div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="Cambiar tema" aria-label="Cambiar tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></button>
+    <button class="icon-btn" id="helpBtn" title="Ayuda" aria-label="Ayuda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4 2c-.9.7-1.5 1.2-1.5 2.5M12 17h.01"/></svg></button>
+  </header>
+  <main id="main">
+    <div id="printFront" class="print-only print-front" aria-hidden="true"></div>
+    <section class="section active" id="sec-inicio" data-title="Inicio y presentación" data-print="cover"></section>
+    <section class="section" id="sec-dashboard" data-title="Dashboard general" data-print="dashboard"></section>
+    <section class="section" id="sec-tablas" data-title="Explorador de tablas" data-print="tables"></section>
+    <section class="section" id="sec-diccionario" data-title="Diccionario de datos" data-print="dictionary"></section>
+    <section class="section" id="sec-clasificacion" data-title="Clasificación de atributos" data-print="classification"></section>
+    <section class="section" id="sec-dominios" data-title="Dominios y notación formal" data-print="domains"></section>
+    <section class="section" id="sec-eer" data-title="Modelo EER interactivo" data-print="eer"></section>
+    <section class="section" id="sec-relaciones" data-title="Explorador de relaciones" data-print="relations"></section>
+    <section class="section" id="sec-triggers" data-title="Documentación de triggers" data-print="triggers"></section>
+    <section class="section" id="sec-vistas" data-title="Documentación de vistas" data-print="views"></section>
+    <section class="section" id="sec-indices" data-title="Índices y restricciones" data-print="indexes"></section>
+    <section class="section" id="sec-registros" data-title="Registros y estadísticas" data-print="records"></section>
+    <section class="section" id="sec-dependencias" data-title="Dependencias y trazabilidad" data-print="deps"></section>
+    <section class="section" id="sec-conclusiones" data-title="Conclusiones técnicas" data-print="conclusions"></section>
+    <section class="section" id="sec-exportacion" data-title="Exportación de documentación" data-print="export"></section>
+  </main>
+</div>
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-label="Panel de detalles"></aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script id="dataset" type="application/json">__DATASET_JSON__</script>
+<script>
+"use strict";
+/* ============================================================
+   ATLAS DE LA BASE DE DATOS — SPA autocontenida
+   Capa de datos: DATA (embebido del respaldo analizado)
+   ============================================================ */
+const DATA = JSON.parse(document.getElementById('dataset').textContent);
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => (n ?? 0).toLocaleString('es-MX');
+const icon = (p, cls='') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const ICONS = {
+  home:'<path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-7h6v7"/>',
+  dash:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',
+  table:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/>',
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  tag:'<path d="M20.6 13.4 12 22l-9-9V3h10z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+  code:'<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
+  graph:'<circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="m8.5 7.5 2.3 8M15.5 7.5l-2.3 8M9 6h6"/>',
+  link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+  bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',
+  key:'<circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8-8M17 5l2 2M14 8l2 2"/>',
+  bars:'<path d="M3 21h18M6 21V10M11 21V4M16 21v-8M21 21v-13"/>',
+  route:'<circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M8.2 16.2C12 15 9 10 14 8"/>',
+  check:'<path d="m5 12 5 5L20 7"/>',
+  export:'<path d="M12 3v12M7 8l5-5 5 5"/><path d="M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>'
+};
+const SECTIONS = [
+  ['inicio','Inicio y presentación','home'],
+  ['dashboard','Dashboard general','dash'],
+  ['tablas','Explorador de tablas','table'],
+  ['diccionario','Diccionario de datos','book'],
+  ['clasificacion','Clasificación de atributos','tag'],
+  ['dominios','Dominios y notación formal','code'],
+  ['eer','Modelo EER interactivo','graph'],
+  ['relaciones','Explorador de relaciones','link'],
+  ['triggers','Documentación de triggers','bolt'],
+  ['vistas','Documentación de vistas','eye'],
+  ['indices','Índices y restricciones','key'],
+  ['registros','Registros y estadísticas','bars'],
+  ['dependencias','Dependencias y trazabilidad','route'],
+  ['conclusiones','Conclusiones técnicas','check'],
+  ['exportacion','Exportación de documentación','export']
+];
+const T = DATA.tables, TR = DATA.triggers, V = DATA.views, R = DATA.relationships, S = DATA.stats;
+const tableMap = Object.fromEntries(T.map(t => [t.name, t]));
+const relMap = Object.fromEntries(R.map(r => [r.id, r]));
+const viewMap = Object.fromEntries(V.map(v => [v.name, v]));
+const trigMap = Object.fromEntries(TR.map(t => [t.name, t]));
+
+/* ---------- Utilidades ---------- */
+function toast(msg){ const el=$('#toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(()=>el.classList.remove('show'),2600); }
+async function copyText(text, label='Texto'){
+  try{ await navigator.clipboard.writeText(text); toast((label||'Texto')+' copiado'); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast((label||'Texto')+' copiado'); }
+}
+function download(name, content, mime='text/plain;charset=utf-8'){
+  const blob = new Blob([content],{type:mime}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function catOf(t){
+  const n=t.name;
+  if(n==='tb_logs') return 'Auditoría';
+  if(n.startsWith('tbd_')) return 'Detalle y ejecución';
+  if(n.startsWith('tbc_')) return 'Catálogos';
+  if(/users|people|user_addresses/.test(n)) return 'Identidad y personas';
+  if(/buyer_orders|carts|payments|payment_transactions|cancellations|returns|refunds|shipments/.test(n)) return 'Transacciones';
+  return 'Productos y catálogos';
+}
+const CAT_COLORS = {'Auditoría':'#d63b4a','Detalle y ejecución':'#7c3aed','Catálogos':'#0f9d72','Identidad y personas':'#0f766e','Transacciones':'#c77d09','Productos y catálogos':'#0891b2'};
+function entityLabel(t){ return ({tb_buyer_orders:'pedido de compra',tb_cancellations:'cancelación',tb_carts:'carrito de compras',tb_logs:'bitácora de operaciones',tb_payment_methods:'método de pago aplicado a un pedido',tb_payment_transactions:'transacción de pago',tb_payments:'pago de pedido',tb_people:'datos personales del usuario',tb_products:'producto del catálogo',tb_refunds:'reembolso',tb_returns:'devolución',tb_shipments:'envío',tb_user_addresses:'dirección de entrega',tb_users:'cuenta de usuario',tbc_categories:'categoría de productos',tbc_payment_methods_types:'tipo de método de pago',tbd_address_components:'componente de dirección',tbd_cancellation_items:'Ítem cancelado',tbd_carts_items:'Ítem de carrito por proveedor',tbd_order_items:'Ítem de pedido',tbd_products_categories:'asignación de producto a categoría',tbd_products_users_providers:'oferta de producto por proveedor',tbd_return_items:'Ítem devuelto',tbd_user_payment_methods:'método de pago guardado por usuario',tbd_users_wishlist_products:'producto en lista de deseos'})[t.name] || t.name.replace(/^tb[cd]?_/,'').replace(/_/g,' '); }
+const TABLE_DESC = {
+ tb_buyer_orders:'Registra los pedidos realizados por compradores a un vendedor. Controla el subtotal, el costo de envío y el estado de cumplimiento desde Pending hasta Delivered, Canceled o Returned.',
+ tb_cancellations:'Gestiona las solicitudes de cancelación de pedidos: motivo, estado de resolución, notas y trazabilidad de fechas.',
+ tb_carts:'Representa el carrito activo de cada usuario y conserva sus fechas de creación y actualización.',
+ tb_logs:'Bitácora central de auditoría. Cada trigger registra aquí la operación CRUD, el usuario de base de datos, una descripción del cambio y su estado.',
+ tb_payment_methods:'Asocia un intento de pago de un pedido con un tipo de método de pago y su referencia externa.',
+ tb_payment_transactions:'Historial de eventos de una transacción de pago (creación, autorización, captura, fallo o reembolso).',
+ tb_payments:'Registra el pago aplicado a un pedido, incluyendo moneda, proveedor, referencia y estado.',
+ tb_people:'Almacena la información personal complementaria de una cuenta de usuario: nombre, fecha de nacimiento, género, país y teléfono.',
+ tb_products:'Catálogo maestro de productos con SKU, descripción, precio actual, inventario disponible y estatus.',
+ tb_refunds:'Controla reembolsos derivados de pagos, cancelaciones o devoluciones, con montos, motivos y estados de procesamiento.',
+ tb_returns:'Gestiona devoluciones de pedidos, cantidades, motivos, estado logístico y resolución.',
+ tb_shipments:'Controla el envío físico de pedidos: transportista, número de rastreo, costos, fechas estimadas y reales.',
+ tb_user_addresses:'Direcciones de entrega de los usuarios con etiqueta, destinatario, teléfono, coordenadas e instrucciones.',
+ tb_users:'Cuentas de acceso al sistema: correo, apodo, credencial, auditoría de ingreso y estatus.',
+ tbc_categories:'Catálogo jerárquico de categorías de productos mediante sup_id_category (autorreferencia).',
+ tbc_payment_methods_types:'Catálogo de tipos de método de pago (código y descripción).',
+ tbd_address_components:'Detalle Normalizado de una dirección: componentes como calle, número, colonia, ciudad o código postal.',
+ tbd_cancellation_items:'Detalle de los ítems afectados por una cancelación, con cantidad y monto unitario.',
+ tbd_carts_items:'Detalle del carrito por proveedor y producto; su clave es compuesta (cart_ID, provider_ID, product_ID).',
+ tbd_order_items:'Detalle de los productos vendidos en un pedido, con nombre congelado al momento de la venta, cantidad y precio unitario.',
+ tbd_products_categories:'Tabla de unión muchos a muchos entre productos y categorías.',
+ tbd_products_users_providers:'Tabla de unión con rol: relaciona usuarios/proveedores con productos e indica tipo de propiedad o distribución.',
+ tbd_return_items:'Detalle de los ítems devueltos, cantidad, monto, motivo y condición física.',
+ tbd_user_payment_methods:'Métodos de pago guardados por usuario (token de proveedor, últimos cuatro dígitos, etiqueta y predicado).',
+ tbd_users_wishlist_products:'Lista de deseos: relación muchos a muchos entre usuarios y productos.'
+};
+/* ============================================================
+   MOTOR SEMÁNTICO: descripción, dominio, naturaleza, clasificación y DFD
+   Las descripciones son interpretación técnica inferida (no texto literal del DDL).
+   ============================================================ */
+const COL_SEM = {
+ ID:c=>`Identificador entero autogenerado que distingue de forma única cada registro.${c.autoIncrement?' MySQL lo produce automáticamente (AUTO_INCREMENT).':''}`,
+ order_ID:()=>'Clave foránea que apunta al pedido de compra al que pertenece el registro.',
+ buyer_order_ID:()=>'Clave foránea hacia el pedido de compra (tb_buyer_orders) que origina el proceso.',
+ seller_order_ID:()=>'Clave foránea hacia el pedido del vendedor (tb_buyer_orders) sobre el que se factura el ítem.',
+ user_ID:()=>'Clave foránea hacia la cuenta de usuario responsable o beneficiaria del registro.',
+ payment_ID:()=>'Clave foránea hacia el pago al que pertenece el evento, transacción o reembolso.',
+ payment_method_type_ID:()=>'Clave foránea al catálogo de tipos de método de pago; determina la modalidad permitida.',
+ cancellation_ID:()=>'Clave foránea hacia la cancelación que motiva el reembolso o el Ítem cancelado.',
+ return_ID:()=>'Clave foránea hacia la devolución a la que pertenece el Ítem devuelto.',
+ order_item_ID:()=>'Clave foránea hacia el Ítem de pedido afectado por una devolución o cancelación.',
+ address_ID:()=>'Clave foránea hacia la dirección de entrega asociada al envío o componente.',
+ address_sup_ID:()=>'Autorreferencia opcional para representar jerarquía entre componentes de dirección.',
+ sup_id_category:()=>'Autorreferencia opcional que permite construir un árbol de categorías (categoría padre).',
+ product_ID:()=>'Clave foránea hacia el producto del catálogo.',
+ product_offer_ID:()=>'Clave foránea hacia la oferta producto-proveedor de la que se tomó el Ítem vendido.',
+ provider_ID:()=>'Clave foránea que identifica al proveedor del Ítem en el carrito.',
+ cart_ID:()=>'Clave foránea hacia el carrito de compras al que pertenece el Ítem.',
+ return_item_ID:()=>'Identificador del Ítem devuelto dentro de una devolución.',
+ subtotal:()=>'Suma de cantidad por precio unitario antes de impuestos o envío.',
+ shipping_cost:()=>'Monto cobrado por el envío; el DDL exige un CHECK de no negatividad en pedidos.',
+ amount:()=>'Monto monetario de la operación (pago, transacción o reembolso).',
+ unit_amount:()=>'Valor monetario de una unidad del Ítem cancelado o devuelto.',
+ current_price:()=>'Precio vigente del producto en el catálogo.',
+ current_stock:()=>'Existencias disponibles actuales del producto.',
+ unit_price:()=>'Precio unitario congelado al momento de la venta.',
+ quantity:()=>'Cantidad de unidades del producto en el Ítem, carrito, devolución o cancelación.',
+ latitude:()=>'Coordenada geográfica de latitud de la dirección (grados decimales).',
+ longitude:()=>'Coordenada geográfica de longitud de la dirección (grados decimales).',
+ currency:()=>'Código ISO 4217 de la moneda (tres caracteres) en que se expresa el monto.',
+ country_code:()=>'Código ISO 3166-1 alfa-2 del país de la persona.',
+ SKU:()=>'Stock Keeping Unit: código único de identificación comercial del producto.',
+ name:()=>'Nombre descriptivo legible de la entidad de catálogo.',
+ code:()=>'Código corto y estable usado para identificar el tipo de método de pago.',
+ email:()=>'Correo electrónico de la cuenta; dato de identificación y contacto. Sus valores no se publican en este atlas.',
+ nick:()=>'Apodo o nombre de usuario visible dentro de la aplicación.',
+ password:()=>'Credencial de acceso almacenada por MySQL. El DDL sólo confirma VARCHAR(255) NOT NULL; el algoritmo o formato interno no es determinable desde el respaldo y ningún valor se incluye aquí.',
+ last_four:()=>'Últimos cuatro dígitos del instrumento de pago, usados como referencia visible sin exponer el número completo.',
+ provider_method_ref:()=>'Referencia opaquizada asignada por el proveedor de pagos al método guardado.',
+ provider_reference:()=>'Identificador de la operación en el sistema externo del proveedor.',
+ tracking_number:()=>'Número de guía asignado por el transportista para seguir el envío.',
+ carrier:()=>'Nombre de la empresa transportista.',
+ db_users:()=>'Cuenta de MySQL que ejecutó la operación, obtenida con USER() en los triggers.',
+ table_name:()=>'Nombre de la tabla afectada por la operación auditada.',
+ operation:()=>'Tipo de operación registrada: Create, Read, Update o Delete.',
+ description:()=>'Texto libre con el detalle del evento, el cambio realizado o la descripción de la entidad.',
+ operation_status:()=>'Bandera de estado de la operación auditada (1 = correcta, 0 = no correcta, según el uso en las vistas).',
+ status:()=>'Bandera booleana de vigencia/actividad del registro dentro del sistema.',
+ is_default:()=>'Indica si la dirección o método de pago es el predeterminado del usuario.',
+ operation_date:()=>'Fecha y hora en que ocurrió la operación auditada.',
+ creation_date:()=>'Fecha y hora de creación del registro; por defecto CURRENT_TIMESTAMP cuando está declarado.',
+ last_update:()=>'Fecha y hora de la última modificación; ON UPDATE CURRENT_TIMESTAMP la actualiza automáticamente cuando aplica.',
+ last_login:()=>'Fecha y hora del último acceso registrado de la cuenta.',
+ requested_date:()=>'Fecha y hora en que se solicitó la cancelación, devolución o reembolso.',
+ resolved_date:()=>'Fecha y hora en que se resolvió la solicitud.',
+ processed_date:()=>'Fecha y hora en que se procesó el reembolso.',
+ shipped_date:()=>'Fecha y hora real en que el envío salió del almacén.',
+ delivered_date:()=>'Fecha y hora real de entrega al destinatario.',
+ estimated_delivery_date:()=>'Fecha estimada de entrega calculada por el negocio.',
+ payment_date:()=>'Fecha y hora en que se realizó el pago.',
+ paid_date:()=>'Fecha y hora en que el pago quedó efectivamente pagado.',
+ birth_date:()=>'Fecha de nacimiento de la persona.',
+ avalaible_date:()=>'Fecha a partir de la cual la oferta del producto está disponible (nombre original conservado).',
+ fulfillment_status:()=>'Estado de cumplimiento del pedido: Pending, Accepted, Preparing, Sent, Delivered, Canceled o Returned.',
+ cancellation_status:()=>'Estado del trámite de cancelación: Requested, Approved, Rejected o Completed.',
+ payment_status:()=>'Estado del pago: Pending, Authorized, Paid, Failed, Cancelled, Refunded o PartiallyRefunded.',
+ refund_status:()=>'Estado del reembolso: Requested, Approved, Processing, Completed, Rejected o Failed.',
+ return_status:()=>'Estado logístico de la devolución: Requested, Authorized, Rejected, InTransit, Received, Inspected o Completed.',
+ shipment_status:()=>'Estado del envío: Pending, Preparing, Shipped, InTransit, Delivered, Failed o Returned.',
+ event_type:()=>'Tipo de evento de la transacción: Created, Authorized, Captured, Failed, Refunded o PartiallyRefunded.',
+ type_ownership:()=>'Rol del usuario sobre el producto: Owner, Reseller o Distributor.',
+ item_condition:()=>'Condición física del Ítem devuelto: Unknown, New, Opened o Damaged.',
+ payment_method:()=>'Modalidad de pago empleada: Card, SPEI, Transfer o Cash.',
+ gender_ID:()=>'Código numérico de género; el dominio exacto no está declarado en el DDL.',
+ given_names:()=>'Nombres de pila de la persona.',
+ family_names:()=>'Apellidos de la persona.',
+ courtesy_title:()=>'Tratamiento o título de cortesía de la persona.',
+ phone:()=>'Número telefónico de contacto.',
+ recipient_name:()=>'Nombre de quien recibe físicamente el envío.',
+ recipient_phone:()=>'Teléfono de contacto del destinatario.',
+ address_label:()=>'Etiqueta legible que el usuario asigna a la dirección (casa, oficina…).',
+ delivery_instructions:()=>'Instrucciones libres para la entrega en esa dirección.',
+ component_type:()=>'Tipo de componente de dirección (calle, número, colonia, ciudad, código postal…).',
+ value:()=>'Valor textual del componente de dirección.',
+ label:()=>'Etiqueta descriptiva asignada por el usuario al método de pago guardado.',
+ provider:()=>'Nombre del proveedor del servicio de pago o transporte.',
+ remarks:()=>'Observaciones libres sobre el evento de transacción.',
+ notes:()=>'Observaciones libres sobre el método de pago.',
+ resolution_notes:()=>'Notas que documentan la resolución de la cancelación, devolución o reembolso.',
+ item_reason:()=>'Motivo específico por el que se cancela o devuelve ese Ítem.',
+ return_reason:()=>'Motivo declarado para la devolución del pedido.',
+ cancellation_reason:()=>'Motivo declarado para la cancelación del pedido.',
+ refund_reason:()=>'Motivo declarado para el reembolso.',
+ product_name:()=>'Nombre del producto congelado en el Ítem al momento de la venta.',
+ person_ID:()=>'Identificador del registro de datos personales (BIGINT).',
+ payment_reference:()=>'Referencia del método de pago aplicado al pedido.',
+ event_reference:()=>'Referencia externa del evento de transacción.'
+};
+const TYPE_RANGE = {TINYINT:'0 .. 255 (UNSIGNED) / -128 .. 127 (SIGNED)',SMALLINT:'0 .. 65,535 / -32,768 .. 32,767',MEDIUMINT:'0 .. 16,777,215 / -8,388,608 .. 8,388,607',INT:'0 .. 4,294,967,295 (UNSIGNED) / -2,147,483,648 .. 2,147,483,647 (SIGNED)',BIGINT:'0 .. 18,446,744,073,709,551,615 / -9,223,372,036,854,775,808 .. 9,223,372,036,854,775,807'};
+function colDescription(t,c){
+  if(COL_SEM[c.name]) return COL_SEM[c.name](c);
+  if(c.isPK && c.name==='ID') return COL_SEM.ID(c);
+  if(c.name.endsWith('_ID')) return `Clave foránea que referencia ${c.name.replace(/_ID$/,'')} y vincula este registro con esa entidad.`;
+  return `Atributo ${c.name.replace(/_/g,' ')} de ${entityLabel(t)}; representa ${c.name.includes('date')?'una fecha o momento':'un valor de negocio'} registrado en el proceso.`;
+}
+function domainOf(c,t){
+  const ty=c.sqlType, bits=[];
+  bits.push(`Tipo SQL: ${c.fullType}`);
+  if(ty==='ENUM'||ty==='SET') bits.push(`${ty==='ENUM'?'Selección única':'Selección múltiple'} de: ${c.enumValues.map(v=>`[${v}]`).join(' · ')}`);
+  else if(TYPE_RANGE[ty]) bits.push(`Rango por tipo: ${TYPE_RANGE[ty]}`);
+  else if(ty==='DECIMAL'||ty==='NUMERIC') bits.push(`Precisión ${c.precision}, escala ${c.scale}; magnitud máxima ±(10^${c.precision-c.scale} − 10^-${c.scale}). almacenamiento exacto.`);
+  else if(ty==='VARCHAR') bits.push(`Longitud declarada 0..${c.length} caracteres (sin mínimo declarado; MySQL no impone uno).`);
+  else if(ty==='CHAR') bits.push(`Longitud fija ${c.length} caracteres.`);
+  else if(ty==='TEXT') bits.push('Texto variable de hasta 65,535 bytes; sin mínimo declarado.');
+  else if(ty==='DATETIME') bits.push('Formato YYYY-MM-DD HH:MM:SS, rango 1000-01-01 a 9999-12-31.');
+  else if(ty==='DATE') bits.push('Formato YYYY-MM-DD, rango 1000-01-01 a 9999-12-31.');
+  else if(ty==='BIT') bits.push('Un bit: [0 | 1], interpretable como falso/verdadero.');
+  if(c.defaultValue!==null) bits.push(`Default declarado: ${c.defaultValue}.`);
+  if(c.onUpdate) bits.push('ON UPDATE CURRENT_TIMESTAMP: valor derivado en cada actualización.');
+  if(c.autoIncrement) bits.push('Generación automática por AUTO_INCREMENT.');
+  bits.push(`Nulabilidad: ${c.nullable?'NULL permitido':'NOT NULL'}.`);
+  if(c.isFK){
+    const fk=t.fks.find(f=>f.columns.includes(c.name));
+    if(fk) bits.push(`Dominio referenciado: ${fk.table}.${fk.refColumns[fk.columns.indexOf(c.name)]} (FK confirmada).`);
+  }
+  const ck=t.checks.find(k=>new RegExp('`?'+c.name+'`?','i').test(k.expression));
+  if(ck) bits.push(`CHECK confirmado: ${ck.expression}.`);
+  return bits.join(' ');
+}
+function natureOf(c){
+  const n=c.name.toLowerCase(), ty=c.sqlType;
+  if(c.isPK || /(_id$|^id$|person_id)/.test(n)) return {value:'Cualitativa nominal (identificador)',why:'Un identificador numérico etiqueta entidades; no es una magnitud medible, aunque use INT.'};
+  if(ty==='BIT') return {value:'Cualitativa nominal (booleana)',why:'Dos categorías sin orden cuantitativo; 1/0 codifican estado.'};
+  if(ty==='ENUM') return {value:'Cualitativa nominal',why:'Alternativas categóricas declaradas; el DDL no define una regla de orden entre ellas.'};
+  if(ty==='DATETIME'||ty==='DATE'||n.includes('date')) return {value:'Cuantitativa continua (tiempo)',why:'El tiempo se mide en una escala continua, con precisión de fecha/hora según el tipo.'};
+  if(/latitude|longitude/.test(n)) return {value:'Cuantitativa continua (coordenada)',why:' representa una magnitud geográfica susceptible de valores intermedios.'};
+  if(/amount|price|cost|subtotal|money/.test(n)&&ty==='DECIMAL') return {value:'Cuantitativa discreta (magnitud monetaria)',why:'Cantidad de dinero con precisión decimal fija declarada; se modela como magnitud con escala.'};
+  if(ty==='INT'||ty==='BIGINT'||ty==='TINYINT'||ty==='SMALLINT') return {value:'Cuantitativa discreta',why:'Valores enteros contables (conteo o cantidad) cuando no actúan como identificador.'};
+  if(ty==='DECIMAL') return {value:'Cuantitativa continua (precisión decimal)',why:'Valor numérico con precisión y escala declaradas.'};
+  return {value:'Cualitativa nominal',why:'Texto descriptivo sin orden natural declarado en el esquema.'};
+}
+function classifyOf(c){
+  const dims=[];
+  dims.push(['Extensión', c.sqlType==='SET'?'Compuesto (SET permite varios valores)':'Simple (un solo valor atómico en el modelo físico)']);
+  dims.push(['Cardinalidad', c.sqlType==='SET'?'Multivaluado':'Monovaluado']);
+  dims.push(['Origen', c.autoIncrement||c.onUpdate?'Derivado/generado por MySQL':'Almacenado']);
+  dims.push(['Obligatoriedad', c.nullable?'Opcional (NULL permitido)':'Obligatorio (NOT NULL)']);
+  dims.push(['Rol', c.isPK||(c.name==='ID'&&!c.isPK)?'Identificador':'No identificador']);
+  return dims;
+}
+function dfdColumn(c,t){
+  const ty=c.sqlType;
+  let expr;
+  if(ty==='ENUM'||ty==='SET') expr=`${c.name} = ${ty==='ENUM'?'[':'{'}${c.enumValues.join(' | ')}${ty==='ENUM'?']':'}'}`;
+  else if(TYPE_RANGE[ty]) expr=`${c.name} = {digito} * ${c.unsigned?'UNSIGNED':'SIGNED'}; ${TYPE_RANGE[ty]} *`;
+  else if(ty==='DECIMAL') expr=`${c.name} = {digito} * DECIMAL(${c.precision},${c.scale}); ${c.scale} decimales *`;
+  else if(ty==='VARCHAR') expr=`${c.name} = 0{caracter}${c.length} * VARCHAR(${c.length}); sin mínimo declarado *`;
+  else if(ty==='CHAR') expr=`${c.name} = ${c.length}{caracter}${c.length} * CHAR(${c.length}) *`;
+  else if(ty==='TEXT') expr=`${c.name} = 0{caracter}65535 * TEXT; hasta 65,535 bytes *`;
+  else if(ty==='DATETIME') expr=`${c.name} = fecha_hora * YYYY-MM-DD HH:MM:SS *`;
+  else if(ty==='DATE') expr=`${c.name} = fecha * YYYY-MM-DD *`;
+  else if(ty==='BIT') expr=`${c.name} = [0 | 1]`;
+  else expr=`${c.name} = {valor} * ${c.fullType} *`;
+  const tags=[];
+  if(c.isPK) tags.push('PK');
+  if(c.isFK) tags.push('FK');
+  if(c.isUnique) tags.push('UNIQUE');
+  if(!c.nullable) tags.push('NOT NULL');
+  if(c.autoIncrement) tags.push('AUTO_INCREMENT');
+  if(c.defaultValue!==null) tags.push('DEFAULT '+c.defaultValue);
+  if(c.onUpdate) tags.push('ON UPDATE CURRENT_TIMESTAMP');
+  return expr+`\n  * ${tags.join(' · ')||'sin restricciones adicionales'} *`;
+}
+function dfdTable(t){
+  const lines=t.columns.map(c=>{
+    const key=c.isPK?'@':'';
+    const tags=[];
+    if(c.isPK) tags.push('PK'+(t.pk.length>1?' compuesta':''));
+    if(c.isFK){const fk=t.fks.find(f=>f.columns.includes(c.name)); tags.push('FK → '+fk.table+'.'+fk.refColumns[fk.columns.indexOf(c.name)]);}
+    if(c.isUnique) tags.push('UNIQUE');
+    return `  ${key}${c.name}${c.nullable&&!c.isPK?' (opcional)':''}${tags.length?' * '+tags.join(' · ')+' *':''}`;
+  });
+  return `${t.name} = {\n${lines.join(' +\n')}\n}`;
+}
+function evidenceOf(c,t){
+  const ev=['DDL confirmado: tipo, nulabilidad'+(c.defaultValue!==null?', valor predeterminado':'')+(c.isPK?', clave primaria':'')+(c.isFK?', clave foránea':'')+(c.isUnique?', unicidad':'')+(c.autoIncrement?', AUTO_INCREMENT':'')+(c.onUpdate?', ON UPDATE CURRENT_TIMESTAMP':''),'Inferido: descripción funcional y naturaleza semántica (basada en nombre, tipo y relaciones).'];
+  if(/password|hash|token|secret/i.test(c.name)) ev.push('No determinable: algoritmo, longitud real del valor almacenado y contenido. Los valores quedan excluidos del atlas.');
+  else if(c.sqlType==='VARCHAR') ev.push('No determinable: contenido mínimo y formato interno no declarados en el DDL.');
+  else ev.push('No determinable: reglas de negocio no expresadas en DDL, CHECK ni trigger.');
+  return ev.join('. ')+'.';
+}
+const enrich = c => ({desc:colDescription, domain:domainOf, nature:natureOf, classify:classifyOf, dfd:dfdColumn});
+/* ============================================================
+   GRÁFICAS SVG (sin dependencias externas)
+   ============================================================ */
+const PALETTE=['#0f766e','#34d399','#7c3aed','#0f9d72','#c77d09','#d63b4a','#0891b2','#9333ea','#65a30d','#e11d48'];
+function barChart(rows,{color='#0f766e',max=10,unit='',labelWidth=118}={}){
+  const data=rows.slice(0,max); if(!data.length) return '<div class="empty small">Sin datos para esta gráfica.</div>';
+  const w=460,rowH=25,h=data.length*rowH+18,lw=labelWidth;
+  const mx=Math.max(...data.map(d=>d.v),1);
+  const bars=data.map((d,i)=>{
+    const y=i*rowH+4, bw=Math.max(2,(w-lw-70)*d.v/mx);
+    return `<g><title>${esc(d.k)}: ${fmt(d.v)}${unit}</title><text x="${lw-8}" y="${y+12}" text-anchor="end" font-size="9.5" fill="var(--muted)">${esc(String(d.k).slice(0,24))}</text><rect x="${lw}" y="${y+3}" width="${bw}" height="12" rx="3" fill="${d.c||color}" opacity=".88"/><text x="${lw+bw+6}" y="${y+13}" font-size="9.5" fill="var(--text)">${fmt(d.v)}</text></g>`;
+  }).join('');
+  return `<svg class="chart-svg" viewBox="0 0 ${w} ${h}" role="img">${bars}</svg>`;
+}
+function donutChart(rows,{title=''}={}){
+  const data=rows.filter(d=>d.v>0); if(!data.length) return '<div class="empty small">Sin datos.</div>';
+  const total=data.reduce((a,b)=>a+b.v,0), cx=90,cy=90,r=62,ir=38;
+  let acc=0; const arcs=data.map((d,i)=>{
+    const a0=acc/total*Math.PI*2-Math.PI/2; acc+=d.v; const a1=acc/total*Math.PI*2-Math.PI/2;
+    const large=(a1-a0)>Math.PI?1:0;
+    const p=(rad,a)=>`${(cx+rad*Math.cos(a)).toFixed(2)},${(cy+rad*Math.sin(a)).toFixed(2)}`;
+    return `<path d="M ${p(r,a0)} A ${r},${r} 0 ${large} 1 ${p(r,a1)} L ${p(ir,a1)} A ${ir},${ir} 0 ${large} 0 ${p(ir,a0)} Z" fill="${d.c||PALETTE[i%PALETTE.length]}"><title>${esc(d.k)}: ${fmt(d.v)} (${(d.v/total*100).toFixed(1)}%)</title></path>`;
+  }).join('');
+  const legend=data.map((d,i)=>`<div style="display:flex;gap:6px;align-items:center;font-size:10.5px;margin:3px 0"><span style="width:9px;height:9px;border-radius:2px;background:${d.c||PALETTE[i%PALETTE.length]}"></span><span style="flex:1">${esc(d.k)}</span><b>${fmt(d.v)}</b></div>`).join('');
+  return `<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 180 180" style="width:150px;flex:0 0 150px" role="img">${arcs}<text x="90" y="86" text-anchor="middle" font-size="19" font-weight="800" fill="var(--text)">${fmt(total)}</text><text x="90" y="102" text-anchor="middle" font-size="9" fill="var(--muted)">${esc(title)}</text></svg><div style="flex:1;min-width:150px">${legend}</div></div>`;
+}
+function secHead(n,title,desc,actions=''){
+  const e=SECTIONS[n-1];
+  return `<div class="sec-head"><div><span class="eyebrow">${String(n).padStart(2,'0')} · Atlas db_test</span><h1>${esc(title)}</h1><p>${desc}</p></div><div class="no-print">${actions}</div></div>`;
+}
+/* ============================================================
+   NAVEGACIÓN, DRAWER Y BUSCADOR GLOBAL
+   ============================================================ */
+let current='inicio';
+function buildNav(){
+  $('#nav').innerHTML=`<div class="nav-group">Exploración</div>`+SECTIONS.map((s,i)=>
+    `<button class="nav-item" data-sec="${s[0]}" title="${s[1]}"><span class="nav-num">${String(i+1).padStart(2,'0')}</span>${icon(ICONS[s[2]],'nav-icon')}<span class="nav-label">${s[1]}</span></button>`
+  ).join('');
+  $$('#nav .nav-item').forEach(b=>b.onclick=()=>navigate(b.dataset.sec));
+}
+function navigate(sec,opts={}){
+  if(!SECTIONS.some(s=>s[0]===sec)) sec='inicio';
+  if(opts.filter && typeof trState!=='undefined' && sec==='triggers') trState.table=opts.filter;
+  if(opts.filter && typeof vwState!=='undefined' && sec==='vistas') vwState.table=opts.filter;
+  current=sec;
+  $$('.section').forEach(s=>s.classList.toggle('active',s.id==='sec-'+sec));
+  $$('#nav .nav-item').forEach(b=>b.classList.toggle('active',b.dataset.sec===sec));
+  const meta=$(`#sec-${sec}`).dataset;
+  $('#crumb').innerHTML=`<b>Atlas / db_test</b> &nbsp;›&nbsp; ${esc(meta.title)}`+(opts.crumb?` &nbsp;›&nbsp; ${esc(opts.crumb)}`:'');
+  if(RENDER[sec]) RENDER[sec]();
+  if(location.hash.slice(1).split('/')[0]!==sec) history.replaceState(null,'','#'+sec);
+  $('#app').classList.remove('mobile-open');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function openDrawer(html){ $('#drawer').innerHTML=html; $('#drawer').classList.add('show'); $('#drawerBackdrop').classList.add('show'); }
+function closeDrawer(){ $('#drawer').classList.remove('show'); $('#drawerBackdrop').classList.remove('show'); }
+function drawerHead(kind,title,sub=''){
+  return `<div class="drawer-head"><div><div class="obj-kind">${esc(kind)}</div><h2>${esc(title)}</h2>${sub?`<div class="small muted" style="margin-top:4px">${sub}</div>`:''}</div><button class="icon-btn no-print" onclick="closeDrawer()" aria-label="Cerrar">${icon('<path d="M18 6 6 18M6 6l12 12"/>')}</button></div>`;
+}
+function openTable(tname){
+  const t=tableMap[tname]; if(!t) return;
+  const rows=t.fks.map(f=>`<tr><td class="mono">${esc(f.name)}</td><td class="mono">(${f.columns.join(', ')})</td><td class="mono">→ ${esc(f.table)} (${f.refColumns.join(', ')})</td><td class="small">${esc(f.onDelete)} / ${esc(f.onUpdate)}</td></tr>`).join('');
+  openDrawer(drawerHead('Tabla física',t.name,`<span class="chip neutral">${esc(catOf(t))}</span>`)+
+  `<div class="note">${esc(TABLE_DESC[t.name]||colDescription(t,t.columns[0]))}</div>
+   <div class="drawer-section"><h4>Resumen</h4><dl class="kv">
+   <dt>Columnas</dt><dd>${t.columns.length}</dd><dt>Registros en el respaldo</dt><dd>${fmt(t.rowCount)} (${t.insertStatements} INSERT)</dd>
+   <dt>Clave primaria</dt><dd class="mono">${t.pk.length?esc(t.pk.join(', ')):'(sin PK declarada)'}</dd>
+   <dt>Índices</dt><dd>${t.indexes.length}${t.indexes.some(i=>i.unique)?' (incluye únicos)':''}</dd>
+   <dt>CHECK</dt><dd>${t.checks.length}</dd><dt>Motor</dt><dd>${esc(t.engine)}</dd>
+   <dt>Triggers</dt><dd>${t.triggerNames.length}</dd><dt>Vistas que la usan</dt><dd>${t.viewNames.length}</dd>
+   </dl></div>
+   <div class="drawer-section"><h4>Relaciones salientes (FK)</h4>${rows?`<div class="table-scroll" style="max-height:220px"><table class="data-table"><thead><tr><th>Restricción</th><th>Columnas</th><th>Referencia</th><th>ON DELETE / UPDATE</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<div class="empty small">Sin claves foráneas declaradas.</div>'}</div>
+   <div class="drawer-section no-print"><h4>Navegación contextual</h4><div style="display:flex;gap:7px;flex-wrap:wrap">
+   <button class="btn sm primary" onclick="openDictionary('${t.name}')">Abrir diccionario</button>
+   <button class="btn sm" onclick="closeDrawer();navigate('eer',{crumb:'${t.name}'});focusEERNode('${t.name}')">Ver en EER</button>
+   <button class="btn sm" onclick="closeDrawer();navigate('triggers',{filter:'${t.name}'})">Triggers (${t.triggerNames.length})</button>
+   <button class="btn sm" onclick="closeDrawer();navigate('relaciones',{filter:'${t.name}'})">Relaciones</button>
+   <button class="btn sm" onclick="closeDrawer();navigate('vistas',{filter:'${t.name}'})">Vistas</button></div></div>`);
+}
+function openColumn(tname,cname){
+  const t=tableMap[tname], c=t?.columns.find(x=>x.name===cname); if(!c) return;
+  const nat=natureOf(c), cls=classifyOf(c);
+  openDrawer(drawerHead('Atributo',`${t.name}.${c.name}`,`Posición ${c.position} · ${c.fullType}`)+
+  `<div class="drawer-section"><h4>Descripción</h4><div class="small">${esc(colDescription(t,c))}</div></div>
+   <div class="drawer-section"><h4>Notación SQL original</h4><div class="formula">${esc(c.raw)}</div></div>
+   <div class="drawer-section"><h4>Notación DFD</h4><div class="formula">${esc(dfdColumn(c,t))}</div></div>
+   <div class="drawer-section"><h4>Dominio</h4><div class="small">${esc(domainOf(c,t))}</div></div>
+   <div class="drawer-section"><h4>Naturaleza</h4><div class="small"><b>${esc(nat.value)}.</b> ${esc(nat.why)}</div></div>
+   <div class="drawer-section"><h4>Clasificación</h4><dl class="kv">${cls.map(d=>`<dt>${esc(d[0])}</dt><dd>${esc(d[1])}</dd>`).join('')}</dl></div>
+   <div class="drawer-section"><h4>Evidencia</h4><div class="small">${esc(evidenceOf(c,t))}</div></div>
+   <div class="drawer-section no-print"><h4>Acciones</h4><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="btn sm" onclick="copyText(${JSON.stringify(c.name)},'Nombre')">Copiar nombre</button><button class="btn sm" onclick="copyText(${JSON.stringify(c.raw)},'Definición SQL')">Copiar definición SQL</button><button class="btn sm primary" onclick="openDictionary('${t.name}','${c.name}')">Ver ficha completa</button></div></div>`);
+}
+function openTrigger(name){
+  const tr=trigMap[name]; if(!tr) return;
+  const t=tableMap[tr.table];
+  const flow=`<div class="flow"><span>EVENTO<br><b>${tr.event}</b></span><i>→</i><span>TRIGGER<br><b>${tr.name}</b></span><i>→</i><span>OPERACIÓN<br><b>${(tr.operations||[]).slice(0,3).join(', ')||'INSERT'}</b></span><i>→</i><span>AFECTADA<br><b>${(tr.affectedTables||[]).slice(0,2).join(', ')||tr.table}</b></span></div>`;
+  openDrawer(drawerHead('Trigger',tr.name,`${tr.timing} ${tr.event} · ${tr.table}`)+
+  `<div class="note">${esc(triggerDesc(tr))}</div>
+   <div class="drawer-section"><h4>Ficha técnica</h4><dl class="kv"><dt>Tabla</dt><dd class="mono">${esc(tr.table)}</dd><dt>Evento</dt><dd>${tr.event}</dd><dt>Momento</dt><dd>${tr.timing}</dd><dt>Granularidad</dt><dd>${tr.level}</dd><dt>Definidor</dt><dd class="mono">${esc(tr.definer||'—')}</dd><dt>Operaciones</dt><dd>${(tr.operations||[]).join(', ')||'—'}</dd><dt>Tablas afectadas</dt><dd class="mono">${(tr.affectedTables||[]).join(', ')||'—'}</dd></dl></div>
+   <div class="drawer-section"><h4>Flujo documentado</h4>${flow}</div>
+   <div class="drawer-section"><h4>Código SQL original</h4>${codeBlock(tr.sql,tr.name)}</div>
+   <div class="drawer-section no-print"><h4>Navegación</h4><button class="btn sm primary" onclick="closeDrawer();${t?`navigate('tablas',{crumb:'${tr.table}'});openTable('${tr.table}')`:``}">Ir a la tabla ${esc(tr.table)}</button></div>`);
+}
+function openView(name){
+  const v=viewMap[name]; if(!v) return;
+  openDrawer(drawerHead('Vista SQL',v.name,'Definición final (no placeholder)')+
+  `<div class="note">${esc(viewDesc(v))}</div>
+   <div class="drawer-section"><h4>Dependencias</h4><dl class="kv"><dt>Tablas propias</dt><dd class="mono">${v.tables.join(', ')||'—'}</dd><dt>Vistas</dt><dd class="mono">${v.views.join(', ')||'—'}</dd><dt>Externas</dt><dd class="mono">${v.external.join(', ')||'—'}</dd><dt>Funciones</dt><dd class="mono">${v.functions.join(', ')||'—'}</dd><dt>Columnas resultado</dt><dd>${v.resultColumns.length}</dd></dl></div>
+   ${v.filters?`<div class="drawer-section"><h4>Filtro WHERE</h4><div class="formula">${esc(v.filters)}</div></div>`:''}
+   <div class="drawer-section"><h4>Código SQL original</h4>${codeBlock(v.sql,v.name)}</div>
+   <div class="drawer-section no-print"><h4>Navegación</h4><div style="display:flex;gap:7px;flex-wrap:wrap">${v.tables.map(x=>`<button class="btn sm" onclick="closeDrawer();navigate('tablas',{crumb:'${x}'});openTable('${x}')">${esc(x)}</button>`).join('')}</div></div>`);
+}
+function openRelationship(id){
+  const r=relMap[id]; if(!r) return;
+  openDrawer(drawerHead('Relación',`${r.fromTable} → ${r.toTable}`,r.name)+
+  `<div class="note ${r.type==='explicit'?'ok':'warn'}"><b>${r.type==='explicit'?'Relación explícita confirmada':'Relación inferida'}.</b> ${esc(r.evidence)}</div>
+   <dl class="kv"><dt>Origen</dt><dd class="mono">${esc(r.fromTable)} (${r.fromColumns.join(', ')})</dd><dt>Destino</dt><dd class="mono">${esc(r.toTable)} (${r.toColumns.join(', ')})</dd><dt>Cardinalidad</dt><dd>${esc(r.cardinality)}</dd><dt>Opcionalidad</dt><dd>${esc(r.optionality)}</dd><dt>ON DELETE</dt><dd>${esc(r.onDelete)}</dd><dt>ON UPDATE</dt><dd>${esc(r.onUpdate)}</dd><dt>Tipos locales</dt><dd class="mono">${r.localTypes.join(', ')}</dd><dt>Tipos referenciados</dt><dd class="mono">${r.remoteTypes.join(', ')}</dd></dl>
+   <div class="drawer-section no-print"><button class="btn primary sm" onclick="closeDrawer();navigate('eer',{crumb:'${r.name}'});highlightEEREdge('${id}')">Ver en el EER</button></div>`);
+}
+/* ---------- Buscador global ---------- */
+let SEARCH_INDEX=[];
+function buildSearchIndex(){
+  const add=(kind,name,sub,sec,fn)=>SEARCH_INDEX.push({kind,name,sub,sec,fn});
+  T.forEach(t=>add('Tabla',t.name,`${t.columns.length} columnas · ${fmt(t.rowCount)} registros`,'tablas',`openTable('${t.name}')`));
+  T.forEach(t=>t.columns.forEach(c=>add('Columna',`${t.name}.${c.name}`,c.fullType,'diccionario',`openColumn('${t.name}','${c.name}')`)));
+  TR.forEach(t=>add('Trigger',t.name,`${t.timing} ${t.event} · ${t.table}`,'triggers',`openTrigger('${t.name}')`));
+  V.forEach(v=>add('Vista',v.name,`${v.tables.length} tablas · ${v.resultColumns.length} columnas`,'vistas',`openView('${v.name}')`));
+  R.forEach(r=>add('Relación',r.name,`${r.fromTable} → ${r.toTable}`,'relaciones',`openRelationship('${r.id}')`));
+  T.forEach(t=>t.indexes.forEach(i=>add('Índice',`${t.name}.${i.name}`,`${i.columns.join(', ')} · ${i.unique?'UNIQUE':'BTREE'}`,'indices',`scrollToIndex('${t.name}','${i.name}')`)));
+  T.forEach(t=>t.checks.forEach(c=>add('CHECK',`${t.name}.${c.name}`,c.expression.slice(0,70),'indices',`scrollToIndex('${t.name}','${c.name}')`)));
+  DATA.procedures.forEach(p=>add('Procedimiento',p.name,'','exportacion',''));
+  DATA.functions.forEach(f=>add('Función',f.name,'','exportacion',''));
+}
+function runSearch(q){
+  const box=$('#searchResults'); q=q.trim().toLowerCase();
+  if(q.length<2){box.classList.remove('show');box.innerHTML='';return;}
+  const groups={};
+  SEARCH_INDEX.forEach(x=>{ if((x.name+' '+x.sub).toLowerCase().includes(q)) (groups[x.kind] ||= []).push(x); });
+  const keys=Object.keys(groups);
+  if(!keys.length){box.innerHTML='<div class="empty small">Sin coincidencias para «'+esc(q)+'».</div>';box.classList.add('show');return;}
+  box.innerHTML=keys.map(k=>`<div class="search-group">${esc(k)} · ${groups[k].length}</div>`+groups[k].slice(0,8).map(x=>`<button class="search-hit" data-fn="${esc(x.fn)}" data-sec="${x.sec}"><span class="hit-kind">${esc(k)}</span><span><b>${esc(x.name)}</b><small>${esc(x.sub)}</small></span></button>`).join('')).join('');
+  box.classList.add('show');
+  $$('.search-hit',box).forEach(b=>b.onclick=()=>{ if(b.dataset.sec){navigate(b.dataset.sec);setTimeout(()=>eval(b.dataset.fn),60);} box.classList.remove('show'); $('#globalSearch').value=''; });
+}
+/* ============================================================
+   AYUDAS DE CÓDIGO Y DESCRIPCIONES DE OBJETOS
+   ============================================================ */
+function highlightSQL(code){
+  let s=esc(code);
+  s=s.replace(/(\/\*[\s\S]*?\*\/|--[^\n]*)/g,'<span class="cm">$1</span>');
+  s=s.replace(/('(?:[^'\\]|\\.|'')*')/g,'<span class="str">$1</span>');
+  s=s.replace(/\b(CREATE|TABLE|VIEW|TRIGGER|PROCEDURE|FUNCTION|ALTER|INSERT|UPDATE|DELETE|SELECT|FROM|WHERE|AND|OR|NOT|NULL|IS|IN|AS|ON|JOIN|LEFT|RIGHT|INNER|OUTER|GROUP|BY|ORDER|HAVING|LIMIT|BEGIN|END|IF|THEN|ELSE|CASE|WHEN|SET|DECLARE|DEFAULT|PRIMARY|KEY|FOREIGN|REFERENCES|UNIQUE|CHECK|CONSTRAINT|AFTER|BEFORE|FOR|EACH|ROW|USING|DISTINCT|UNION|ALL|VALUES|INTO|CURRENT_TIMESTAMP|AUTO_INCREMENT|CASCADE|RESTRICT|BIT|INT|DECIMAL|VARCHAR|CHAR|TEXT|DATETIME|DATE|ENUM|TINYINT|BIGINT)\b/g,'<span class="kw">$1</span>');
+  s=s.replace(/\b(USER|CONCAT|SUBSTRING|SUBSTRING_INDEX|COALESCE|GROUP_CONCAT|CAST|COUNT|SUM|MAX|MIN|NOW|DATE_FORMAT|IFNULL|SIGNAL|ROW_COUNT)\b(?=\s*\()/g,'<span class="fn">$1</span>');
+  s=s.replace(/\b(\d+(?:\.\d+)?)\b/g,'<span class="num">$1</span>');
+  return s;
+}
+function codeBlock(code,id,extra=''){
+  const lines=code.replace(/\r/g,'').split('\n');
+  return `<div class="code-block" data-code-id="${esc(id)}"><div class="code-head"><span class="mono">${esc(id)}</span><span class="sp"></span>${extra}<button onclick="copyText(this.closest('.code-block').querySelector('.code-body').dataset.raw,'Código SQL')">Copiar</button></div><div class="code-body" data-raw="${esc(code)}">${lines.map((l,i)=>`<div class="code-line"><span class="ln">${i+1}</span><span class="lc">${highlightSQL(l)||'&nbsp;'}</span></div>`).join('')}</div></div>`;
+}
+function triggerDesc(tr){
+  const tgt=(tr.affectedTables||[]).filter(x=>x!==tr.table);
+  const base=`Se dispara ${tr.timing.toLowerCase()} de una operación ${tr.event.toLowerCase()} sobre ${tr.table}; para cada fila afectada, `;
+  const ops=(tr.operations||[]).map(o=>o.toLowerCase()).join(', ')||'insertar';
+  return base+(tgt.length?`${ops} y registra información en ${tgt.slice(0,3).join(', ')}.`:`${ops} información de auditoría o ajusta el estado del propio registro.`)+
+   ` El código original es la evidencia confirmada; esta redacción es una interpretación técnica inferida.`;
+}
+function viewDesc(v){
+  const ext=v.external.length?` Incluye dependencias externas (${v.external.join(', ')}), que no son tablas propias del esquema.`:'';
+  return `Vista definida sobre ${v.tables.length?v.tables.join(', '):'expresiones constantes'}${v.views.length?', además de '+v.views.join(', '):''}. Devuelve ${v.resultColumns.length} columnas${v.filters?' y aplica un filtro WHERE sobre el origen':''}.${ext} Descripción inferida del SQL.`;
+}
+/* ============================================================
+   01 · INICIO / PORTADA ACADÉMICA
+   ============================================================ */
+function renderInicio(){
+  const v=DATA.meta.validation.map(x=>`<div style="display:flex;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)">
+    <span class="chip ${x.status==='ok'?'ok':'warn'}">${x.status==='ok'?'✓':'!'}</span><b style="text-transform:capitalize">${x.object}</b>
+    <span class="muted small" style="flex:1">esperado ${x.expected} · encontrado <b>${x.found}</b></span></div>`).join('');
+  $('#sec-inicio').innerHTML=secHead(1,'Inicio y presentación','Portada académica y ficha de identidad del análisis realizado sobre el respaldo SQL.')+`
+  <div class="hero">
+    <span class="inst">Universidad Tecnológica de Xicotepec de Juárez</span>
+    <h1>Atlas de la Base de Datos</h1>
+    <p class="dbname">${esc(DATA.meta.database)}</p>
+    <p class="subtitle">Práctica 04 – Procesos de Simulación de Compra · Documentación interactiva, diccionario de datos y modelo entidad-relación extendido, derivados íntegramente de un respaldo MySQL 8.0.</p>
+    <div class="hero-rule"></div>
+    <dl class="acad-grid">
+      <div><dt>Institución</dt><dd>Universidad Tecnológica de Xicotepec de Juárez</dd></div>
+      <div><dt>Materia</dt><dd>Optativa I. Bases de Datos en la Nube</dd></div>
+      <div><dt>Alumna</dt><dd>Yazmin Ariana Esquivel Marquez</dd></div>
+      <div><dt>Matrícula</dt><dd>240235</dd></div>
+      <div><dt>Docente</dt><dd>M.T.I. Marco Antonio Ramírez Hernández</dd></div>
+      <div><dt>Gestor</dt><dd>MySQL 8.0 (${esc(DATA.meta.serverVersion)})</dd></div>
+      <div><dt>Repositorio</dt><dd>Practicas_BDN_240235</dd></div>
+      <div><dt>Fuente única</dt><dd>${esc(DATA.meta.source)}</dd></div>
+    </dl>
+    <div class="hero-actions">
+      <button class="btn primary" onclick="navigate('diccionario')">${icon(ICONS.book)} Explorar el diccionario</button>
+      <button class="btn" onclick="navigate('eer')">${icon(ICONS.graph)} Abrir el modelo EER</button>
+      <button class="btn" onclick="navigate('dashboard')">${icon(ICONS.dash)} Ver el dashboard</button>
+      <button class="btn no-print" onclick="printDoc('all')">${icon(ICONS.export)} Imprimir portada académica</button>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:20px">
+    <div class="card pad"><span class="eyebrow">Validación de conteos</span><h3 style="margin:0 0 8px">Integridad documental del respaldo</h3>${v}
+    <div class="note warn" style="margin-top:12px"><b>Discrepancia documentada:</b> se esperaban 28 vistas y el respaldo contiene <b>${DATA.meta.found.views}</b> definiciones finales válidas (más ${DATA.meta.found.views} placeholders temporales de mysqldump que no se documentan). Se muestra el valor real sin forzar el esperado.</div></div>
+    <div class="card pad"><span class="eyebrow">Trazabilidad</span><h3 style="margin:0 0 8px">Identidad del archivo analizado</h3>
+      <dl class="kv"><dt>Base de datos</dt><dd class="mono">${esc(DATA.meta.database)}</dd><dt>Archivo</dt><dd class="mono">${esc(DATA.meta.source)}</dd><dt>Servidor</dt><dd>MySQL ${esc(DATA.meta.serverVersion)}</dd><dt>Finalización del dump</dt><dd>${esc(DATA.meta.dumpCompleted||'No declarada')}</dd><dt>Sentencias analizadas</dt><dd>${fmt(DATA.meta.totalStmts)}</dd><dt>Procedimientos / funciones</dt><dd>${DATA.procedures.length} / ${DATA.functions.length}</dd></dl>
+      <div class="divider"></div><div class="note ok">${esc(DATA.sensitive.excluded)} Columnas sensibles detectadas (estructura únicamente): <span class="mono">${DATA.sensitive.sensitiveColumns.map(esc).join(', ')||'ninguna'}</span>.</div>
+    </div>
+  </div>`;
+}
+/* ============================================================
+   02 · DASHBOARD
+   ============================================================ */
+function renderDashboard(){
+  const cards=[
+    ['Tablas físicas',T.length,'Explorador de tablas','tablas',ICONS.table],
+    ['Triggers',TR.length,'Documentación de triggers','triggers',ICONS.bolt],
+    ['Vistas (definiciones finales)',V.length,'Documentación de vistas','vistas',ICONS.eye],
+    ['Columnas',S.totalColumns,'Diccionario de datos','diccionario',ICONS.book],
+    ['Claves primarias',S.totalPK,'Índices y restricciones','indices',ICONS.key],
+    ['Claves foráneas',S.totalFK,'Explorador de relaciones','relaciones',ICONS.link],
+    ['Índices',S.totalIndexes,'Índices y restricciones','indices',ICONS.key],
+    ['Relaciones',S.totalRelationships,'Explorador de relaciones','relaciones',ICONS.graph],
+    ['Registros verificables',S.totalRows,'Registros y estadísticas','registros',ICONS.bars],
+    ['Procedimientos y funciones',DATA.procedures.length+DATA.functions.length,'Dependencias y trazabilidad','dependencias',ICONS.code]
+  ];
+  const rowsByTable=T.map(t=>({k:t.name.replace(/^t[bdc]_/,''),v:t.rowCount})).sort((a,b)=>b.v-a.v);
+  const evt=Object.entries(S.triggerEvents).map(([k,v],i)=>({k,v,c:PALETTE[i%PALETTE.length]}));
+  const timing=Object.entries(S.triggerTiming).map(([k,v],i)=>({k,v,c:k==='BEFORE'?'#c77d09':'#0f766e'}));
+  const types=Object.entries(S.typeCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>({k,v}));
+  const rels=T.map(t=>({k:t.name.replace(/^t[bdc]_/,''),v:t.relationshipsOut.length+t.relationshipsIn.length})).filter(x=>x.v).sort((a,b)=>b.v-a.v);
+  const cols=T.map(t=>({k:t.name.replace(/^t[bdc]_/,''),v:t.columns.length})).sort((a,b)=>b.v-a.v);
+  const idxDist=[{k:'Índices (KEY/UNIQUE)',v:S.totalIndexes,c:'#0f766e'},{k:'CHECK',v:S.totalChecks,c:'#7c3aed'},{k:'FK',v:S.totalFK,c:'#0f9d72'},{k:'PK',v:S.totalPK,c:'#c77d09'}];
+  const ok=DATA.meta.integrity==='complete';
+  $('#sec-dashboard').innerHTML=secHead(2,'Dashboard general','Estado del esquema según el contenido y la fecha del respaldo analizado. No son cifras de un servidor activo.',`<button class="btn no-print" onclick="navigate('exportacion')">${icon(ICONS.export)} Exportar</button>`)+`
+  <div class="card pad" style="margin-bottom:18px"><div class="integrity">
+    <svg class="ring" viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" fill="none" stroke="var(--surface-3)" stroke-width="9"/><circle cx="40" cy="40" r="32" fill="none" stroke="${ok?'var(--ok)':'var(--warn)'}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${(DATA.meta.validation.filter(x=>x.status==='ok').length/DATA.meta.validation.length*201).toFixed(1)} 201" transform="rotate(-90 40 40)"/><text x="40" y="45" text-anchor="middle" font-size="16" font-weight="800" fill="var(--text)">${DATA.meta.validation.filter(x=>x.status==='ok').length}/${DATA.meta.validation.length}</text></svg>
+    <div style="flex:1;min-width:220px"><b>Indicador de integridad documental</b><div class="small muted">Conteos comparados contra los valores esperados: 25 tablas · 72 triggers · 28 vistas. Resultado: <b>${ok?'todos coinciden':'una discrepancia documentada en vistas'}</b>.</div><div class="progress" style="margin-top:8px"><i style="width:${DATA.meta.validation.filter(x=>x.status==='ok').length/DATA.meta.validation.length*100}%"></i></div></div>
+    <div class="small muted">Respaldo finalizado:<br><b>${esc(DATA.meta.dumpCompleted||'—')}</b></div>
+  </div></div>
+  <div class="grid g5" style="margin-bottom:18px">${cards.map(c=>`<button class="card stat pad" onclick="navigate('${c[3]}')"><div class="sicon">${icon(ICONS[c[4]])}</div><div class="label">${esc(c[0])}</div><div class="value">${fmt(c[1])}</div><div class="foot">${esc(c[2])} →</div></button>`).join('')}</div>
+  <div class="grid g2">
+    <div class="card chart-card"><h3>Distribución de registros por tabla</h3><p class="hint">Tuplas VALUES contabilizadas en el respaldo · clic en una barra para abrir la tabla</p>${barChart(rowsByTable,{color:'#0f766e',max:12})}</div>
+    <div class="card chart-card"><h3>Triggers por evento</h3><p class="hint">Combinación momento + evento · ${TR.length} triggers</p>${donutChart(evt,{title:'triggers'})}</div>
+    <div class="card chart-card"><h3>Triggers BEFORE / AFTER</h3><p class="hint">Momento de ejecución declarado en el DDL</p>${donutChart(timing,{title:'momento'})}</div>
+    <div class="card chart-card"><h3>Tipos de datos más utilizados</h3><p class="hint">Frecuencia real sobre ${S.totalColumns} columnas</p>${barChart(types,{color:'#7c3aed',max:10,labelWidth:100})}</div>
+    <div class="card chart-card"><h3>Tablas con más relaciones</h3><p class="hint">Foreign keys entrantes + salientes</p>${barChart(rels,{color:'#0f9d72',max:10,labelWidth:150})}</div>
+    <div class="card chart-card"><h3>Tablas con más columnas</h3><p class="hint">Orden por definición DDL</p>${barChart(cols,{color:'#34d399',max:10,labelWidth:150})}</div>
+    <div class="card chart-card"><h3>Índices y restricciones</h3><p class="hint">Objetos declarados en CREATE TABLE</p>${donutChart(idxDist,{title:'objetos'})}</div>
+  </div>`;
+  // Hacer clicables las barras de registros
+  const svg=$$('#sec-dashboard .chart-svg')[0];
+  if(svg){const names=rowsByTable.slice(0,12).map(x=>x.k);$$('g',svg).forEach((g,i)=>{g.style.cursor='pointer';g.onclick=()=>{const t=T.find(x=>x.name.replace(/^t[bdc]_/,'')===names[i]);if(t){navigate('tablas');openTable(t.name);}};});}
+}
+/* ============================================================
+   03 · EXPLORADOR DE TABLAS
+   ============================================================ */
+let tableState={q:'',cat:'Todas',sort:'name',view:'cards'};
+function renderTablas(){
+  const s=tableState;
+  const cats=['Todas',...new Set(T.map(catOf))];
+  const list=T.filter(t=>(s.cat==='Todas'||catOf(t)===s.cat)&&(t.name+' '+TABLE_DESC[t.name]).toLowerCase().includes(s.q.toLowerCase()))
+    .sort((a,b)=>s.sort==='cols'?b.columns.length-a.columns.length:s.sort==='rows'?b.rowCount-a.rowCount:a.name.localeCompare(b.name));
+  const cards=list.map(t=>`<div class="card entity-card pad" onclick="openTable('${t.name}')">
+    <div class="top"><h3>${esc(t.name)}</h3><span class="tag-dot" style="background:${CAT_COLORS[catOf(t)]}" title="${esc(catOf(t))}"></span></div>
+    <div style="margin:7px 0"><span class="chip neutral">${esc(catOf(t))}</span></div>
+    <p>${esc(TABLE_DESC[t.name]||'Tabla del esquema.')}</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">${t.columns.length} columnas</span><span class="chip">${fmt(t.rowCount)} filas</span><span class="chip pk">PK ${t.pk.length}</span><span class="chip fk">FK ${t.fks.length}</span><span class="chip">${t.triggerNames.length} tri.</span></div>
+  </div>`).join('');
+  const table=`<div class="table-scroll"><table class="data-table"><thead><tr><th>Tabla</th><th>Categoría</th><th>Columnas</th><th>Registros</th><th>PK</th><th>FK</th><th>Índices</th><th>Triggers</th><th>Vistas</th></tr></thead><tbody>${list.map(t=>`<tr style="cursor:pointer" onclick="openTable('${t.name}')"><td class="mono"><b>${esc(t.name)}</b></td><td>${esc(catOf(t))}</td><td>${t.columns.length}</td><td>${fmt(t.rowCount)}</td><td class="mono">${esc(t.pk.join(', '))}</td><td>${t.fks.length}</td><td>${t.indexes.length}</td><td>${t.triggerNames.length}</td><td>${t.viewNames.length}</td></tr>`).join('')}</tbody></table></div>`;
+  $('#sec-tablas').innerHTML=secHead(3,'Explorador de tablas','Todas las tablas físicas detectadas, con búsqueda instantánea, filtros, ordenamiento y doble presentación.')+`
+  <div class="toolbar no-print">
+    <input class="field" id="tbQ" placeholder="Buscar tabla…" value="${esc(s.q)}" style="min-width:230px">
+    <select class="field" id="tbCat">${cats.map(c=>`<option ${c===s.cat?'selected':''}>${esc(c)}</option>`).join('')}</select>
+    <select class="field" id="tbSort"><option value="name" ${s.sort==='name'?'selected':''}>Orden alfabético</option><option value="cols" ${s.sort==='cols'?'selected':''}>Por columnas</option><option value="rows" ${s.sort==='rows'?'selected':''}>Por registros</option></select>
+    <div class="seg"><button class="${s.view==='cards'?'active':''}" id="vCards">Tarjetas</button><button class="${s.view==='table'?'active':''}" id="vTable">Tabular</button></div>
+    <span class="chip">${list.length} de ${T.length} tablas</span>
+  </div><div id="tbResult">${list.length?(s.view==='cards'?`<div class="grid g3">${cards}</div>`:table):'<div class="empty">No hay tablas que coincidan con los filtros.</div>'}</div>`;
+  const bind=(id,ev,fn)=>{const el=$(id);if(el)el.oninput=el.onchange=ev===undefined?fn:(()=>fn());};
+  $('#tbQ').oninput=e=>{s.q=e.target.value;renderTablas();$('#tbQ').focus();};
+  $('#tbCat').onchange=e=>{s.cat=e.target.value;renderTablas();};
+  $('#tbSort').onchange=e=>{s.sort=e.target.value;renderTablas();};
+  $('#vCards').onclick=()=>{s.view='cards';renderTablas();};
+  $('#vTable').onclick=()=>{s.view='table';renderTablas();};
+}
+/* ============================================================
+   04 · DICCIONARIO DE DATOS
+   ============================================================ */
+let dictState={table:T[0].name,col:null,q:'',open:new Set()};
+function openDictionary(tname,col){
+  dictState.table=tname; dictState.col=col||null; if(col) dictState.open.add(col);
+  navigate('diccionario');
+}
+function renderDiccionario(){
+  const t=tableMap[dictState.table]||T[0];
+  const cols=t.columns.filter(c=>!dictState.q||(c.name+' '+colDescription(t,c)+' '+c.fullType).toLowerCase().includes(dictState.q.toLowerCase()));
+  const ficha=c=>{
+    const nat=natureOf(c),cls=classifyOf(c),open=dictState.open.has(c.name);
+    return `<div class="col-card ${open?'open':''}" data-col="${esc(c.name)}">
+      <div class="col-head" onclick="toggleCol('${esc(c.name)}')">
+        <span class="muted mono tiny" style="width:22px">${String(c.position).padStart(2,'0')}</span>
+        <span class="cname">${esc(c.name)}</span>
+        <span class="ctype">${esc(c.fullType)}</span>
+        ${c.isPK?'<span class="chip pk">PK</span>':''}${c.isFK?'<span class="chip fk">FK</span>':''}${c.isUnique?'<span class="chip uq">UNIQUE</span>':''}${!c.nullable?'<span class="chip nn">NOT NULL</span>':'<span class="chip neutral">NULL</span>'}
+        ${c.autoIncrement?'<span class="chip warn">AUTO_INCREMENT</span>':''}
+        <span class="chev">${icon('<path d="m9 18 6-6-6-6"/>')}</span>
+      </div>
+      <div class="col-body">
+        <div class="toolbar"><button class="btn sm" onclick="event.stopPropagation();copyText(${JSON.stringify(c.name)},'Nombre de columna')">Copiar nombre</button><button class="btn sm" onclick="event.stopPropagation();copyText(${JSON.stringify(c.raw)},'Definición SQL')">Copiar definición SQL</button><button class="btn sm" onclick="event.stopPropagation();openColumn('${t.name}','${c.name}')">Ficha rápida</button></div>
+        <h4 style="font-size:11px;margin:12px 0 8px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">Descripción, composición, dominio, naturaleza y clasificación</h4>
+        <dl class="ficha">
+          <dt>Descripción</dt><dd>${esc(colDescription(t,c))}</dd>
+          <dt>Composición</dt><dd>${c.sqlType==='SET'?'Compuesta: múltiples valores de un conjunto.':'Simple en el modelo físico: un valor atómico por fila. No hay evidencia de descomposición en el DDL.'} ${esc(dfdColumn(c,t).split('\n')[0])}</dd>
+          <dt>Dominio</dt><dd>${esc(domainOf(c,t))}</dd>
+          <dt>Naturaleza</dt><dd><b>${esc(nat.value)}.</b> ${esc(nat.why)}</dd>
+          <dt>Clasificación</dt><dd>${cls.map(d=>`<span class="chip neutral" style="margin:2px">${esc(d[0])}: ${esc(d[1])}</span>`).join('')}</dd>
+          <dt>Notación DFD</dt><dd><div class="formula">${esc(dfdColumn(c,t))}</div></dd>
+          <dt>Notación SQL</dt><dd><div class="formula">${esc(c.raw)}</div></dd>
+          <dt>Evidencia</dt><dd>${esc(evidenceOf(c,t))}</dd>
+        </dl>
+      </div>
+    </div>`;
+  };
+  $('#sec-diccionario').innerHTML=secHead(4,'Diccionario de datos',`Ficha académica completa de cada columna de ${esc(t.name)}. Todas las afirmaciones distinguen evidencia confirmada, inferida y no determinable.`,
+    `<button class="btn no-print" onclick="printDoc('dictionary')">${icon(ICONS.export)} Imprimir diccionario</button>`)+`
+  <div class="dict-layout">
+    <div class="card"><div style="padding:10px"><input class="field" id="dictPickerQ" placeholder="Filtrar tablas…" style="width:100%"></div>
+      <div class="table-picker" id="dictPicker">${T.map(x=>`<button data-t="${x.name}" class="${x.name===t.name?'active':''}"><span class="mono">${esc(x.name)}</span><span class="muted">${x.columns.length}</span></button>`).join('')}</div></div>
+    <div>
+      <div class="card pad" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Almacén de datos</span><h2 style="margin:0;font-size:19px" class="mono">${esc(t.name)}</h2><div class="small muted" style="margin-top:4px">${esc(TABLE_DESC[t.name])}</div></div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" onclick="navigate('tablas');openTable('${t.name}')">Ficha de tabla</button><button class="btn sm" onclick="navigate('eer');focusEERNode('${t.name}')">Ver en EER</button></div></div>
+      <div class="divider"></div>
+      <h4 style="font-size:11px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">Composición del almacén</h4>
+      <div class="formula" id="dfdStore">${esc(dfdTable(t))}</div>
+      <div class="toolbar" style="margin:8px 0 0"><button class="btn sm no-print" onclick="copyText(document.getElementById('dfdStore').textContent,'Composición DFD')">Copiar expresión</button><span class="chip">${t.columns.length} atributos · ${t.pk.length} componentes de PK</span></div></div>
+      <div class="card pad" style="margin-bottom:14px"><h4 style="font-size:11px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">Definición de atributos y dominios</h4>
+        <input class="field" id="dictQ" placeholder="Buscar columna, tipo o descripción…" value="${esc(dictState.q)}" style="width:100%">
+        <div class="small muted" style="margin:8px 0">${cols.length} columnas visibles. Cada ficha se expande al hacer clic. Los ejemplos didácticos están en la sección 06 y no se aplican a este esquema.</div>
+        <div>${cols.length?cols.map(ficha).join(''):'<div class="empty small">Sin coincidencias.</div>'}</div></div>
+      <div class="card pad"><h4 style="font-size:11px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)">Leyenda DFD (símbolos de diccionario de flujo de datos)</h4>${dfdLegend()}</div>
+    </div>
+  </div>`;
+  $$('#dictPicker button').forEach(b=>b.onclick=()=>{dictState.table=b.dataset.t;dictState.col=null;dictState.q='';renderDiccionario();});
+  $('#dictPickerQ').oninput=e=>{const q=e.target.value.toLowerCase();$$('#dictPicker button').forEach(b=>b.style.display=b.dataset.t.toLowerCase().includes(q)?'':'none');};
+  $('#dictQ').oninput=e=>{dictState.q=e.target.value;renderDiccionario();$('#dictQ').focus();};
+  if(dictState.col) setTimeout(()=>{const el=$(`.col-card[data-col="${CSS.escape(dictState.col)}"]`);if(el){el.classList.add('open');el.scrollIntoView({block:'center'});}},30);
+}
+function toggleCol(name){ dictState.open.has(name)?dictState.open.delete(name):dictState.open.add(name); const el=$(`.col-card[data-col="${CSS.escape(name)}"]`);if(el)el.classList.toggle('open'); }
+function dfdLegend(){
+  const items=[['=','Está compuesto de / definición','nombre = primer_nombre + apellido'],['+','Concatenación de elementos','primer_nombre + apellido'],['( )','Elemento opcional','(apellido_materno)'],['{ }','Repetición de elementos','{caracter_permitido}'],['[ ]','Selección de una alternativa','[ACTIVO | INACTIVO]'],['* … *','Comentario o aclaración','* Clave primaria *'],['@','Campo clave del almacén','@id_usuario'],['|','Separador de alternativas','[A | I]']];
+  return `<div class="legend">${items.map(x=>`<div class="legend-item"><span class="legend-sym">${esc(x[0])}</span><div><b>${esc(x[1])}</b><div class="mono tiny muted">${esc(x[2])}</div></div></div>`).join('')}</div>`;
+}
+/* ============================================================
+   05 · CLASIFICACIÓN DE ATRIBUTOS
+   ============================================================ */
+let classState={nature:'Todas',role:'Todas',q:''};
+function renderClasificacion(){
+  const all=T.flatMap(t=>t.columns.map(c=>({t,c})));
+  const nat=x=>natureOf(x.c).value, role=x=>x.c.isPK?'Identificador':'No identificador';
+  const list=all.filter(x=>(classState.nature==='Todas'||nat(x)===classState.nature)&&(classState.role==='Todas'||role(x)===classState.role)&&(x.t.name+'.'+x.c.name).toLowerCase().includes(classState.q.toLowerCase()));
+  const nats=[...new Set(all.map(nat))], roles=['Identificador','No identificador'];
+  const counts=Object.entries(all.reduce((a,x)=>{const k=nat(x);a[k]=(a[k]||0)+1;return a;},{})).map(([k,v],i)=>({k:k.replace('Cualitativa ','Cual. ').replace('Cuantitativa ','Cuant. '),v,c:PALETTE[i%PALETTE.length]}));
+  $('#sec-clasificacion').innerHTML=secHead(5,'Clasificación de atributos','Perspectiva entidad-relación sobre los 226 atributos físicos: naturaleza semántica, extensión, cardinalidad, origen, obligatoriedad y rol.')+`
+  <div class="grid g2" style="margin-bottom:16px"><div class="card pad"><h3 style="margin:0 0 10px;font-size:13px">Distribución por naturaleza</h3>${barChart(counts,{max:10,labelWidth:180})}</div>
+  <div class="card pad"><h3 style="margin:0 0 10px;font-size:13px">Criterios aplicados</h3><div class="small">
+  <p><b>Simple / compuesto:</b> se respeta el modelo físico; ninguna columna PHP/MySQL está descompuesta salvo los tipos SET (no presentes). Una clave compuesta es un conjunto de atributos simples, no un atributo compuesto.</p>
+  <p><b>Monovaluado / multivaluado:</b> una columna escalar es monovaluada; ENUM admite una sola alternativa por fila.</p>
+  <p><b>Almacenado / derivado:</b> AUTO_INCREMENT y ON UPDATE CURRENT_TIMESTAMP son valores generados por MySQL; el resto se almacena.</p>
+  <p><b>Naturaleza:</b> un ID numérico es cualitativo nominal (etiqueta), no magnitud. La inferencia se documenta en cada ficha.</p></div></div></div>
+  <div class="toolbar no-print"><input class="field" id="clQ" placeholder="Buscar atributo…" value="${esc(classState.q)}" style="min-width:220px"><select class="field" id="clNat"><option>Todas</option>${nats.map(x=>`<option ${x===classState.nature?'selected':''}>${esc(x)}</option>`).join('')}</select><select class="field" id="clRole"><option>Todas</option>${roles.map(x=>`<option ${x===classState.role?'selected':''}>${esc(x)}</option>`).join('')}</select><span class="chip">${list.length} atributos</span></div>
+  <div class="table-scroll"><table class="data-table"><thead><tr><th>Tabla.Columna</th><th>Tipo</th><th>Naturaleza</th><th>Extensión</th><th>Cardinalidad</th><th>Origen</th><th>Obligatoriedad</th><th>Rol</th><th>Evidencia</th></tr></thead><tbody>${list.map(({t,c})=>{const n=natureOf(c),cl=classifyOf(c);return `<tr style="cursor:pointer" onclick="openColumn('${t.name}','${c.name}')"><td class="mono"><b>${esc(t.name)}</b>.${esc(c.name)}</td><td class="mono">${esc(c.fullType)}</td><td>${esc(n.value)}</td><td>${esc(cl[0][1])}</td><td>${esc(cl[1][1])}</td><td>${esc(cl[2][1])}</td><td>${esc(cl[3][1])}</td><td>${esc(cl[4][1])}</td><td class="small">DDL + inferencia</td></tr>`}).join('')}</tbody></table></div>`;
+  $('#clQ').oninput=e=>{classState.q=e.target.value;renderClasificacion();$('#clQ').focus();};
+  $('#clNat').onchange=e=>{classState.nature=e.target.value;renderClasificacion();};
+  $('#clRole').onchange=e=>{classState.role=e.target.value;renderClasificacion();};
+}
+/* ============================================================
+   06 · DOMINIOS Y NOTACIÓN FORMAL
+   ============================================================ */
+let domState={table:T[0].name};
+function renderDominios(){
+  const t=tableMap[domState.table];
+  $('#sec-dominios').innerHTML=secHead(6,'Dominios y notación formal','Leyenda oficial de símbolos DFD, dominios calculados desde el DDL y separación explícita entre ejemplos didácticos y definiciones reales.')+`
+  <div class="card pad" style="margin-bottom:16px"><span class="eyebrow">Notación simbólica DFD</span><h3 style="margin:0 0 8px">Leyenda de los ocho símbolos</h3>${dfdLegend()}
+  <div class="note" style="margin-top:12px">Esta notación es la del <b>diccionario de datos de Diagramas de Flujo de Datos</b>. No es Crow's Foot ni sustituye al tipo SQL: ambas notaciones se muestran por separado en cada ficha.</div></div>
+  <div class="grid g2" style="margin-bottom:16px">
+    <div class="card pad"><span class="eyebrow">Ejemplos didácticos</span><h3 style="margin:0 0 8px">No son definiciones de db_test</h3>
+      <div class="formula">nombre = primer_nombre + (segundo_nombre) + apellido
+estado_cuenta = [ACTIVO | INACTIVO | SUSPENDIDO]
+id_ejemplo = 1{digito}11 * Identificador ilustrativo *
+digito = [0-9]</div><div class="note warn" style="margin-top:9px">Los rangos, estados y formatos anteriores son ilustrativos. No se trasladan al esquema real. Para VARCHAR sin mínimo declarado se permite longitud cero; para ENTEROS se documenta el rango por tipo y signed/unsigned.</div></div>
+    <div class="card pad"><span class="eyebrow">Reglas de conversión aplicadas</span><h3 style="margin:0 0 8px">Del DDL al dominio formal</h3><div class="small">
+      <p><b>ENUM</b> → selección única <span class="mono">[a | b]</span>; <b>SET</b> → selección múltiple <span class="mono">{a | b}</span> (no hay SET en este respaldo).</p>
+      <p><b>DECIMAL(p,s)</b> → precisión p, escala s y rango por tipo; no por ancho de visualización.</p>
+      <p><b>FK</b> → dominio del atributo referenciado, marcado como FK confirmada.</p>
+      <p><b>NULL</b> ≠ cadena vacía. <b>DEFAULT</b> no convierte un campo en nullable.</p>
+      <p><b>CHECK / trigger</b> → regla confirmada sólo si existe en el objeto; si no, se marca no determinable.</p></div></div>
+  </div>
+  <div class="card pad"><div class="toolbar"><select class="field" id="domTable">${T.map(x=>`<option value="${x.name}" ${x.name===t.name?'selected':''}>${esc(x.name)}</option>`).join('')}</select><span class="chip">${t.columns.length} atributos · ${t.checks.length} CHECK</span></div>
+  <h3 style="font-size:13px;margin:6px 0">Composición formal del almacén <span class="mono">${esc(t.name)}</span></h3><div class="formula">${esc(dfdTable(t))}</div>
+  <div class="divider"></div><h3 style="font-size:13px;margin:0 0 8px">Definición de atributos y dominios (expresiones reales)</h3>
+  <div class="grid g2">${t.columns.map(c=>`<div class="card pad" style="box-shadow:none"><div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap"><b class="mono">${esc(c.name)}</b>${c.isPK?'<span class="chip pk">PK</span>':''}${c.isFK?'<span class="chip fk">FK</span>':''}</div><div class="formula" style="margin-top:7px">${esc(dfdColumn(c,t))}</div><div class="small muted" style="margin-top:7px">${esc(domainOf(c,t))}</div></div>`).join('')}</div></div>`;
+  $('#domTable').onchange=e=>{domState.table=e.target.value;renderDominios();};
+}
+/* ============================================================
+   07 · MODELO EER INTERACTIVO (SVG + DOM, sin librerías)
+   ============================================================ */
+const EER_KEY='atlas_eer_positions_v2';
+const eer={nodes:[],scale:1,tx:30,ty:20,mode:'general',selected:null,hidden:new Set(),search:'',relFilter:'all',expanded:new Set(),drag:null,pan:null,built:false,raf:0};
+function eerLayout(){
+  const order=[...T].sort((a,b)=>catOf(a).localeCompare(catOf(b))||a.name.localeCompare(b.name));
+  return order.map((t,i)=>({id:t.name,x:40+(i%5)*226,y:40+Math.floor(i/5)*154,w:200,h:90}));
+}
+function eerInit(){
+  if(eer.nodes.length) return;
+  let saved=null; try{saved=JSON.parse(localStorage.getItem(EER_KEY)||'null');}catch(e){}
+  eer.nodes=eerLayout().map(n=>{const s=saved?.[n.id];return s?{...n,x:s.x,y:s.y}:n;});
+}
+function eerVisibleNode(n){
+  if(eer.hidden.has(n.id)) return false;
+  if(eer.mode==='focused'&&eer.selected?.kind==='node'){
+    if(n.id===eer.selected.id) return true;
+    const rels=R.filter(r=>r.fromTable===eer.selected.id||r.toTable===eer.selected.id);
+    return rels.some(r=>r.fromTable===n.id||r.toTable===n.id);
+  }
+  return true;
+}
+function eerNodeById(id){return eer.nodes.find(n=>n.id===id);}
+function eerHeight(n){
+  if(eer.mode==='simple') return 52;
+  if(eer.mode==='general') return 90;
+  const t=tableMap[n.id]; return 66+Math.min(t.columns.length,24)*17;
+}
+function renderEER(){
+  eerInit();
+  const s=$('#sec-eer');
+  if(!eer.built){
+    s.innerHTML=secHead(7,'Modelo EER interactivo','Modelo entidad-relación extendido manipulable: arrastre, zoom, pan, cuatro modos, selección de entidades y relaciones, resaltado de conexiones y exportación.',
+      `<button class="btn no-print" onclick="printDoc('all')">${icon(ICONS.export)} Imprimir</button>`)+`
+    <div class="eer-shell" id="eerShell">
+      <div class="eer-toolbar no-print">
+        <button class="btn sm" onclick="eerZoom(1.18)">+ Acercar</button><button class="btn sm" onclick="eerZoom(.85)">− Alejar</button>
+        <span class="zoom-label" id="eerZoomLabel">100%</span>
+        <button class="btn sm" onclick="eerFit()">Ajustar</button><button class="btn sm" onclick="eerCrisp()">100% nítido</button><button class="btn sm" onclick="eerAutoLayout()">Reorganizar</button>
+        <button class="btn sm" onclick="eerReset()">Restablecer</button>
+        <div class="seg"><button class="eer-mode active" data-mode="general">General</button><button class="eer-mode" data-mode="detailed">Detallado</button><button class="eer-mode" data-mode="focused">Enfocado</button><button class="eer-mode" data-mode="simple">Simplificado</button></div>
+        <input class="field" id="eerSearch" placeholder="Buscar entidad…" style="min-width:150px">
+        <select class="field" id="eerRelFilter"><option value="all">Todas las relaciones</option><option value="explicit">Sólo explícitas (FK)</option><option value="inferred">Sólo inferidas (0)</option></select>
+        <details style="position:relative"><summary class="btn sm">Ocultar/mostrar</summary><div class="card" style="position:absolute;top:34px;right:0;width:260px;max-height:320px;overflow:auto;padding:8px;z-index:20">${T.map(t=>`<label style="display:flex;gap:6px;align-items:center;font-size:10.5px;padding:3px"><input type="checkbox" checked data-hide="${t.name}" onchange="eerToggleHide('${t.name}',this.checked)"><span class="mono">${esc(t.name)}</span></label>`).join('')}</div></details>
+        <button class="btn sm" onclick="eerExport('svg')">SVG</button><button class="btn sm" onclick="eerExport('png')">PNG</button>
+        <button class="btn sm" onclick="eerFullscreen()">Pantalla completa</button>
+      </div>
+      <div class="eer-canvas" id="eerCanvas"><div class="eer-world" id="eerWorld"><svg class="eer-edges" id="eerEdges" width="4000" height="3000"></svg><div id="eerNodes"></div></div>
+        <div class="eer-legend"><b>Leyenda EER</b><span style="color:var(--warn)">◆ PK</span> · <span style="color:var(--blue)">◆ FK</span> · <span class="mono">|○</span> uno · <span class="mono">&lt;</span> muchos (Crow's Foot) · línea verde = seleccionada · gris = inferida</div>
+        <div class="eer-hint">Arrastrar entidades · rueda = zoom · 100% nítido = texto sin escalar · Ajustar = vista general</div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:16px"><div class="card pad"><h3 style="font-size:13px;margin:0 0 8px">Lectura del diagrama</h3><div class="small">Las relaciones <b>explícitas</b> proceden de <span class="mono">CONSTRAINT … FOREIGN KEY</span> confirmadas en el DDL. No se han detectado relaciones inferidas por convención de nombres, por lo que el filtro «Sólo inferidas» muestra cero resultados. La cardinalidad por defecto es N:1 desde la tabla que contiene la FK; se marca 1:1 cuando la FK coincide con la clave primera.</div></div>
+    <div class="card pad"><h3 style="font-size:13px;margin:0 0 8px">Estado del modelo</h3><div class="small" id="eerStateInfo"></div></div></div>`;
+    eer.built=true;
+    $$('.eer-mode').forEach(b=>b.onclick=()=>{eer.mode=b.dataset.mode;$$('.eer-mode').forEach(x=>x.classList.toggle('active',x===b));eerRenderNodes();});
+    $('#eerSearch').oninput=e=>{eer.search=e.target.value.toLowerCase();eerRenderNodes();};
+    $('#eerRelFilter').onchange=e=>{eer.relFilter=e.target.value;eerUpdateEdges();};
+    const c=$('#eerCanvas');
+    c.addEventListener('wheel',e=>{e.preventDefault();const r=c.getBoundingClientRect();eerZoomAt(Math.exp(-e.deltaY*.0014),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+    c.addEventListener('mousedown',e=>{
+      if(e.target.closest('.eer-node')) return;
+      eer.pan={x:e.clientX,y:e.clientY,tx:eer.tx,ty:eer.ty};c.classList.add('grabbing');
+    });
+    window.addEventListener('mousemove',e=>{
+      if(eer.pan){eer.tx=eer.pan.tx+e.clientX-eer.pan.x;eer.ty=eer.pan.ty+e.clientY-eer.pan.y;eerApplyTransform();}
+      else if(eer.drag){
+        const n=eerNodeById(eer.drag.id); if(!n)return;
+        n.x=eer.drag.nx+(e.clientX-eer.drag.x)/eer.scale;
+        n.y=eer.drag.ny+(e.clientY-eer.drag.y)/eer.scale;
+        n.h=eerHeight(n);
+        eer.drag.el.style.left=n.x+'px';eer.drag.el.style.top=n.y+'px';
+        if(!eer.raf) eer.raf=requestAnimationFrame(()=>{eerUpdateEdges();eer.raf=0;});
+      }
+    });
+    window.addEventListener('mouseup',()=>{
+      if(eer.pan){eer.pan=null;$('#eerCanvas')?.classList.remove('grabbing');}
+      if(eer.drag){try{localStorage.setItem(EER_KEY,JSON.stringify(Object.fromEntries(eer.nodes.map(n=>[n.id,{x:Math.round(n.x),y:Math.round(n.y)}]))));}catch(e){}eer.drag=null;eerUpdateEdges();}
+    });
+  }
+  eerRenderNodes();
+  eerCrisp();
+}
+function eerRenderNodes(){
+  const host=$('#eerNodes'); if(!host)return;
+  host.innerHTML=eer.nodes.filter(eerVisibleNode).map(n=>{
+    const t=tableMap[n.id]; n.h=eerHeight(n);
+    const match=!eer.search||n.id.toLowerCase().includes(eer.search);
+    const rel=eer.selected&&eer.selected.kind==='node'&&(R.some(r=>(r.fromTable===eer.selected.id&&r.toTable===n.id)||(r.toTable===eer.selected.id&&r.fromTable===n.id))||eer.selected.id===n.id);
+    const dim=(eer.selected&&!rel)?'dim':(!match?'dim':'');
+    let body='';
+    if(eer.mode==='simple') body=`<div class="eer-mini">PK ${t.pk.length} · FK ${t.fks.length}</div>`;
+    else if(eer.mode==='general') body=`<div class="eer-mini">PK ${t.pk.length} · FK ${t.fks.length} · Índices ${t.indexes.length}</div>`;
+    else body=`<div class="nb">${t.columns.map(c=>`<div class="eer-attr" title="${esc(c.raw)}"><span class="k ${c.isPK?'pk':c.isFK?'fk':c.isUnique?'uq':''}">${c.isPK?'◆':c.isFK?'◇':c.isUnique?'U':'·'}</span><span class="nm">${esc(c.name)}</span><span class="ty">${esc(c.fullType.replace(/\([^)]*\)/,m=>m.length>12?'…':m))}</span></div>`).join('')}</div>`;
+    return `<div class="eer-node ${dim} ${eer.selected?.kind==='node'&&eer.selected.id===n.id?'selected':''}" data-node="${esc(n.id)}" style="left:${n.x}px;top:${n.y}px;width:${n.w}px">
+      <div class="nh"><span title="${esc(n.id)}">${esc(n.id)}</span></div>
+      <div class="nq"><span title="${t.columns.length} columnas"><b>${t.columns.length}</b> columnas</span><span title="${fmt(t.rowCount)} filas"><b>${fmt(t.rowCount)}</b> filas</span></div>${body}</div>`;
+  }).join('');
+  $$('.eer-node',host).forEach(el=>{
+    el.onmousedown=e=>{ if(e.button!==0)return; e.stopPropagation(); const n=eerNodeById(el.dataset.node); eer.drag={id:n.id,x:e.clientX,y:e.clientY,nx:n.x,ny:n.y,el}; };
+    el.onclick=e=>{ if(eer.drag)return; eerSelectNode(el.dataset.node); };
+    el.ondblclick=()=>{const n=eerNodeById(el.dataset.node);if(eer.expanded.has(n.id))eer.expanded.delete(n.id);else eer.expanded.add(n.id);};
+  });
+  eerUpdateEdges();
+  const info=$('#eerStateInfo');
+  if(info) info.innerHTML=`Entidades visibles: <b>${$$('.eer-node',host).length}</b> de ${T.length} · Relaciones dibujadas: <b>${$$('#eerEdges path.edge').length}</b> de ${R.length} · Modo <b>${eer.mode}</b> · Zoom <b>${Math.round(eer.scale*100)}%</b>${eer.selected?` · Selección: <span class="mono">${esc(eer.selected.id||eer.selected.name)}</span>`:''}`;
+}
+function eerSelectNode(id){
+  eer.selected={kind:'node',id};
+  eerRenderNodes();
+  openTable(id);
+}
+function eerSelectEdge(id){ eer.selected={kind:'edge',id}; eerRenderNodes(); openRelationship(id); }
+function eerUpdateEdges(){
+  const svg=$('#eerEdges'); if(!svg)return;
+  const visible=new Set(eer.nodes.filter(eerVisibleNode).map(n=>n.id));
+  const rels=R.filter(r=>visible.has(r.fromTable)&&visible.has(r.toTable)&&(eer.relFilter!=='inferred'||r.type==='inferred')&&(eer.relFilter!=='explicit'||r.type==='explicit'));
+  const defs=`<defs>
+    <marker id="crow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M2 2 L10 6 L2 10 M2 6 L10 6" fill="none" style="stroke:#64748b;stroke:context-stroke" stroke-width="1.4"/></marker>
+    <marker id="bar" markerWidth="10" markerHeight="12" refX="3" refY="6" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M3 1 L3 11" fill="none" style="stroke:#64748b;stroke:context-stroke" stroke-width="1.8"/></marker>
+    <marker id="circle" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto" markerUnits="strokeWidth"><circle cx="5" cy="5" r="3" fill="none" style="stroke:#64748b;stroke:context-stroke" stroke-width="1.4"/></marker>
+  </defs>`;
+  const paths=rels.map(r=>{
+    const a=eerNodeById(r.fromTable), b=eerNodeById(r.toTable);
+    const forward=a.x<b.x;
+    const x1=forward?a.x+a.w:a.x, y1=a.y+Math.min(a.h,60)/2+16;
+    const x2=forward?b.x:b.x+b.w, y2=b.y+Math.min(b.h,60)/2+16;
+    const dx=Math.max(60,Math.abs(x2-x1)*.45);
+    const d=`M ${x1} ${y1} C ${x1+(forward?dx:-dx)} ${y1}, ${x2+(forward?-dx:dx)} ${y2}, ${x2} ${y2}`;
+    const sel=eer.selected&&eer.selected.kind==='edge'&&eer.selected.id===r.id;
+    const near=eer.selected&&eer.selected.kind==='node'&&(r.fromTable===eer.selected.id||r.toTable===eer.selected.id);
+    const cls='edge'+(sel||near?' hl':(eer.selected?' dim':''));
+    const start='url(#crow)', end='url(#bar)';
+    return `<path class="${cls}" d="${d}" marker-start="${start}" marker-end="${end}" data-edge="${esc(r.id)}"><title>${esc(r.fromTable)} → ${esc(r.toTable)} · ${esc(r.name)} · ${esc(r.cardinality)}</title></path>`;
+  }).join('');
+  svg.innerHTML=defs+paths;
+  $$('path.edge',svg).forEach(p=>p.onclick=e=>{e.stopPropagation();eerSelectEdge(p.dataset.edge);});
+  const info=$('#eerStateInfo'); if(info){const vis=$$('.eer-node').length;info.innerHTML=`Entidades visibles: <b>${vis}</b> de ${T.length} · Relaciones dibujadas: <b>${rels.length}</b> de ${R.length} · Modo <b>${eer.mode}</b> · Zoom <b>${Math.round(eer.scale*100)}%</b>${eer.selected?` · Selección: <span class="mono">${esc(eer.selected.id||eer.selected.name)}</span>`:''}`;}
+}
+function eerApplyTransform(){ const w=$('#eerWorld'); if(w)w.style.transform=`translate(${eer.tx}px,${eer.ty}px) scale(${eer.scale})`; const z=$('#eerZoomLabel'); if(z)z.textContent=Math.round(eer.scale*100)+'%'; }
+function eerZoom(factor){ const c=$('#eerCanvas'); if(!c)return; eerZoomAt(factor,c.clientWidth/2,c.clientHeight/2); }
+function eerZoomAt(f,px,py){
+  const ns=Math.max(.25,Math.min(2.6,eer.scale*f));
+  eer.tx=px-(px-eer.tx)*(ns/eer.scale); eer.ty=py-(py-eer.ty)*(ns/eer.scale); eer.scale=ns; eerApplyTransform();
+}
+function eerFit(){
+  const c=$('#eerCanvas'); if(!c||!eer.nodes.length)return;
+  const vis=eer.nodes.filter(eerVisibleNode); if(!vis.length)return;
+  const minX=Math.min(...vis.map(n=>n.x)),minY=Math.min(...vis.map(n=>n.y));
+  const maxX=Math.max(...vis.map(n=>n.x+n.w)),maxY=Math.max(...vis.map(n=>n.y+n.h));
+  const sc=Math.min((c.clientWidth-60)/(maxX-minX),(c.clientHeight-60)/(maxY-minY),1.35);
+  eer.scale=Math.max(.25,sc); eer.tx=(c.clientWidth-(maxX-minX)*eer.scale)/2-minX*eer.scale; eer.ty=(c.clientHeight-(maxY-minY)*eer.scale)/2-minY*eer.scale;
+  eerApplyTransform();
+}
+function eerCrisp(){
+  const c=$('#eerCanvas'); if(!c)return;
+  const first=eer.nodes.find(eerVisibleNode);
+  eer.scale=1;
+  eer.tx=first?24-first.x:24; eer.ty=first?24-first.y:24;
+  eerApplyTransform();
+}
+function eerAutoLayout(){ eer.nodes=eerLayout(); eerRenderNodes(); eerCrisp(); toast('Entidades reorganizadas por dominio funcional'); }
+function eerReset(){ localStorage.removeItem(EER_KEY); eer.nodes=eerLayout(); eer.hidden.clear(); eer.selected=null; eer.mode='general'; eer.relFilter='all'; eer.search=''; $$('.eer-mode').forEach(x=>x.classList.toggle('active',x.dataset.mode==='general')); const s=$('#eerSearch');if(s)s.value=''; const f=$('#eerRelFilter');if(f)f.value='all'; $$('[data-hide]').forEach(x=>x.checked=true); eerRenderNodes(); eerCrisp(); toast('Posiciones restablecidas'); }
+function eerToggleHide(name,checked){ checked?eer.hidden.delete(name):eer.hidden.add(name); eerRenderNodes(); }
+function eerFullscreen(){ const el=$('#eerShell'); if(!el)return; if(document.fullscreenElement)document.exitFullscreen();else if(el.requestFullscreen)el.requestFullscreen(); }
+function focusEERNode(name){
+  setTimeout(()=>{
+    const n=eerNodeById(name); if(!n)return;
+    eer.hidden.delete(name); eer.selected={kind:'node',id:name}; eerRenderNodes();
+    const c=$('#eerCanvas'); if(c){ eer.tx=c.clientWidth/2-(n.x+n.w/2)*eer.scale; eer.ty=c.clientHeight/2-(n.y+n.h/2)*eer.scale; eerApplyTransform(); }
+    const el=$(`.eer-node[data-node="${CSS.escape(name)}"]`); if(el){el.classList.add('selected');el.scrollIntoView({block:'nearest'});}
+  },80);
+}
+function highlightEEREdge(id){
+  setTimeout(()=>{const r=relMap[id];if(!r)return;eer.selected={kind:'edge',id};eerRenderNodes();const a=eerNodeById(r.fromTable),b=eerNodeById(r.toTable),c=$('#eerCanvas');if(a&&b&&c){eer.tx=c.clientWidth/2-((a.x+b.x)/2)*eer.scale;eer.ty=c.clientHeight/2-((a.y+b.y)/2)*eer.scale;eerApplyTransform();}},80);
+}
+function eerBuildSVG(){
+  const vis=eer.nodes.filter(eerVisibleNode);
+  const minX=Math.min(...vis.map(n=>n.x))-30,minY=Math.min(...vis.map(n=>n.y))-30;
+  const maxX=Math.max(...vis.map(n=>n.x+n.w))+30,maxY=Math.max(...vis.map(n=>n.y+n.h))+30;
+  const W=maxX-minX,H=maxY-minY;
+  const edges=$('#eerEdges')?.querySelectorAll('path.edge')||[];
+  const edgeSvg=[...edges].map(p=>{const d=p.getAttribute('d');return `<path d="${d}" fill="none" stroke="#64748b" stroke-width="2" marker-start="url(#crow2)" marker-end="url(#bar2)"/>`;}).join('');
+  const nodes=vis.map(n=>{
+    const t=tableMap[n.id];
+    const attrs=eer.mode==='simple'||eer.mode==='general'?'':t.columns.slice(0,24).map((c,i)=>`<text x="15" y="${70+i*17}" font-family="monospace" font-size="9.5" fill="#334155">${esc(c.name)} · ${esc(c.fullType)}</text>`).join('');
+    return `<g transform="translate(${n.x-minX},${n.y-minY})"><rect width="${n.w}" height="${n.h}" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="1.5"/><path d="M0 8 A8 8 0 0 1 8 0 H${n.w-8} A8 8 0 0 1 ${n.w} 8 V28 H0 Z" fill="#0b4a42"/><text x="10" y="18" font-family="monospace" font-size="11" font-weight="bold" fill="#fff">${esc(n.id)}</text><rect y="28" width="${n.w}" height="24" fill="#eef6f3"/><text x="10" y="44" font-family="monospace" font-size="9.5" fill="#334155"><tspan font-weight="bold">${t.columns.length}</tspan> columnas</text><text x="${n.w-10}" y="44" text-anchor="end" font-family="monospace" font-size="9.5" fill="#334155"><tspan font-weight="bold">${fmt(t.rowCount)}</tspan> filas</text>${attrs}</g>`;
+  }).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="100%" height="100%" fill="#f8fafc"/><defs><marker id="crow2" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M2 2 L10 6 L2 10 M2 6 L10 6" fill="none" stroke="#64748b" stroke-width="1.4"/></marker><marker id="bar2" markerWidth="10" markerHeight="12" refX="3" refY="6" orient="auto-start-reverse" markerUnits="strokeWidth"><path d="M3 1 L3 11" fill="none" stroke="#64748b" stroke-width="1.8"/></marker></defs><g transform="translate(${-minX},${-minY})">${edgeSvg}</g>${nodes}</svg>`;
+}
+function eerExport(fmt){
+  const svg=eerBuildSVG();
+  if(fmt==='svg'){download('atlas_eer_db_test.svg',svg,'image/svg+xml;charset=utf-8');toast('Diagrama SVG exportado');return;}
+  const img=new Image(); const url='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  img.onload=()=>{const c=document.createElement('canvas');c.width=img.width*3;c.height=img.height*3;const ctx=c.getContext('2d');ctx.scale(3,3);ctx.fillStyle='#fff';ctx.fillRect(0,0,img.width,img.height);ctx.drawImage(img,0,0);c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='atlas_eer_db_test.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);});toast('Diagrama PNG exportado en alta resolución');};
+  img.onerror=()=>toast('No se pudo rasterizar el SVG; use la exportación SVG');
+  img.src=url;
+}
+/* ============================================================
+   08 · EXPLORADOR DE RELACIONES
+   ============================================================ */
+let relState={q:'',type:'all',card:'all'};
+function renderRelaciones(){
+  const list=R.filter(r=>(relState.type==='all'||r.type===relState.type)&&(relState.card==='all'||r.cardinality.startsWith(relState.card))&&(r.fromTable+' '+r.toTable+' '+r.name).toLowerCase().includes(relState.q.toLowerCase()));
+  const oneone=R.filter(r=>r.cardinality.startsWith('1:1')).length, onemany=R.length-oneone;
+  $('#sec-relaciones').innerHTML=secHead(8,'Explorador de relaciones',`Claves foráneas, cardinalidades, opcionalidad y acciones referenciales de ${R.length} relaciones confirmadas. No se inventan relaciones many-to-many: se muestran las tablas de unión reales.`) + `
+  <div class="grid g4" style="margin-bottom:16px">${[['Relaciones totales',R.length],['1:N (N:1)',onemany],['1:1 inferidas por PK/FK',oneone],['Inferidas por nombre',0]].map(x=>`<div class="card pad"><div class="label small muted">${x[0]}</div><div class="value" style="font-size:24px;font-weight:800">${x[1]}</div></div>`).join('')}</div>
+  <div class="toolbar no-print"><input class="field" id="relQ" placeholder="Buscar tabla o restricción…" value="${esc(relState.q)}" style="min-width:230px"><select class="field" id="relType"><option value="all">Todos los tipos</option><option value="explicit" ${relState.type==='explicit'?'selected':''}>Explícitas (FK)</option><option value="inferred" ${relState.type==='inferred'?'selected':''}>Inferidas</option></select><select class="field" id="relCard"><option value="all">Todas las cardinalidades</option><option value="N:1" ${relState.card==='N:1'?'selected':''}>N:1</option><option value="1:1" ${relState.card==='1:1'?'selected':''}>1:1</option></select><span class="chip">${list.length} resultados</span></div>
+  <div class="grid g2" style="margin-bottom:16px"><div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Mapa visual de dependencias (FK)</h3>${relMapSVG(list.slice(0,18))}</div>
+  <div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Cómo leer la evidencia</h3><div class="small"><p>Cada relación se origina en una restricción <span class="mono">CONSTRAINT … FOREIGN KEY</span> incluida en el <span class="mono">CREATE TABLE</span>. La tabla que declara la FK es el lado N (muchos) y la tabla referenciada es el lado 1.</p><p>La <b>opcionalidad</b> se deduce de la nulabilidad de las columnas locales. Las acciones <b>ON DELETE / ON UPDATE</b> se transcriben literalmente; cuando MySQL no declara acción, se documenta «RESTRICT (implícito)».</p><p>Las relaciones N:M se materializan mediante tablas de unión reales: <span class="mono">tbd_products_categories</span>, <span class="mono">tbd_products_users_providers</span>, <span class="mono">tbd_users_wishlist_products</span>, <span class="mono">tbd_carts_items</span>.</p></div></div></div>
+  <div class="table-scroll"><table class="data-table"><thead><tr><th>Restricción</th><th>Origen (N)</th><th>Columnas</th><th>Destino (1)</th><th>Referencia</th><th>Cardinalidad</th><th>Opcionalidad</th><th>ON DELETE</th><th>ON UPDATE</th><th>Evidencia</th></tr></thead><tbody>${list.map(r=>`<tr style="cursor:pointer" onclick="openRelationship('${r.id}')"><td class="mono">${esc(r.name)}</td><td class="mono">${esc(r.fromTable)}</td><td class="mono">${r.fromColumns.join(', ')}</td><td class="mono">${esc(r.toTable)}</td><td class="mono">${r.toColumns.join(', ')}</td><td>${esc(r.cardinality)}</td><td>${esc(r.optionality)}</td><td class="small">${esc(r.onDelete)}</td><td class="small">${esc(r.onUpdate)}</td><td><span class="chip ok">DDL</span></td></tr>`).join('')||'<tr><td colspan="10" class="empty">Sin relaciones que coincidan.</td></tr>'}</tbody></table></div>`;
+  $('#relQ').oninput=e=>{relState.q=e.target.value;renderRelaciones();$('#relQ').focus();};
+  $('#relType').onchange=e=>{relState.type=e.target.value;renderRelaciones();};
+  $('#relCard').onchange=e=>{relState.card=e.target.value;renderRelaciones();};
+}
+function relMapSVG(rels){
+  const nodes=[...new Set(rels.flatMap(r=>[r.fromTable,r.toTable]))].slice(0,14);
+  const pos=Object.fromEntries(nodes.map((n,i)=>[n,{x:20+(i%4)*150,y:20+Math.floor(i/4)*62}]));
+  const w=620,h=Math.max(160,Math.ceil(nodes.length/4)*62+30);
+  const lines=rels.filter(r=>pos[r.fromTable]&&pos[r.toTable]).map((r,i)=>{const a=pos[r.fromTable],b=pos[r.toTable];return `<line x1="${a.x+65}" y1="${a.y+18}" x2="${b.x+65}" y2="${b.y+18}" stroke="${PALETTE[i%PALETTE.length]}" stroke-width="1.5" opacity=".7"><title>${esc(r.name)}</title></line>`;}).join('');
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-height:260px">${lines}${nodes.map(n=>`<g><rect x="${pos[n].x}" y="${pos[n].y}" width="130" height="34" rx="6" fill="var(--surface-2)" stroke="var(--border-strong)"/><text x="${pos[n].x+65}" y="${pos[n].y+21}" text-anchor="middle" font-size="9" font-family="monospace" fill="var(--text)">${esc(n)}</text></g>`).join('')}</svg>`;
+}
+/* ============================================================
+   09 · TRIGGERS
+   ============================================================ */
+let trState={q:'',table:'Todas',event:'Todas',timing:'Todas',codeQ:'',open:null};
+function renderTriggers(){
+  const s=trState;
+  const filtered=TR.filter(t=>(s.table==='Todas'||t.table===s.table)&&(s.event==='Todas'||t.event===s.event)&&(s.timing==='Todas'||t.timing===s.timing)&&(t.name+' '+t.table).toLowerCase().includes(s.q.toLowerCase()));
+  const shown=s.open?filtered.filter(t=>t.name===s.open):filtered.slice(0,4);
+  const matrix=T.map(t=>{const rs=TR.filter(x=>x.table===t.name);if(!rs.length)return '';
+    const evs=['INSERT','UPDATE','DELETE'];return `<tr><td class="mono">${esc(t.name)}</td>${evs.map(e=>`<td class="center">${['BEFORE','AFTER'].map(tm=>{const found=rs.some(x=>x.event===e&&x.timing===tm);return `<span class="chip ${found?'ok':'neutral'}" style="margin:1px">${tm[0]} ${found?'✓':'—'}</span>`;}).join('')}</td>`).join('')}<td class="center">${rs.length}</td></tr>`;}).join('');
+  $('#sec-triggers').innerHTML=secHead(9,'Documentación de triggers',`${TR.length} triggers declarados en el respaldo. Filtros por nombre, tabla, evento y momento; matriz de cobertura; código SQL original resaltado y explorable.`,
+    `<button class="btn no-print" onclick="printDoc('triggers')">${icon(ICONS.export)} Imprimir triggers</button>`)+`
+  <div class="card pad" style="margin-bottom:16px"><span class="eyebrow">Matriz de cobertura</span><h3 style="margin:0 0 10px;font-size:14px">Eventos implementados por tabla</h3><div class="table-scroll" style="max-height:330px"><table class="data-table"><thead><tr><th>Tabla</th><th>INSERT</th><th>UPDATE</th><th>DELETE</th><th>Total</th></tr></thead><tbody>${matrix}</tbody></table></div></div>
+  <div class="toolbar no-print"><input class="field" id="trQ" placeholder="Buscar trigger o tabla…" value="${esc(s.q)}" style="min-width:220px"><select class="field" id="trTable"><option>Todas</option>${T.map(x=>`<option ${x.name===s.table?'selected':''}>${esc(x.name)}</option>`).join('')}</select><select class="field" id="trEvent"><option>Todas</option>${['INSERT','UPDATE','DELETE'].map(x=>`<option ${x===s.event?'selected':''}>${x}</option>`).join('')}</select><select class="field" id="trTiming"><option>Todas</option>${['BEFORE','AFTER'].map(x=>`<option ${x===s.timing?'selected':''}>${x}</option>`).join('')}</select><span class="chip">${filtered.length} de ${TR.length}</span></div>
+  <div class="grid g2">
+    <div class="card pad"><h3 style="font-size:13px;margin:0 0 8px">Triggers encontrados</h3><div style="max-height:640px;overflow:auto">${filtered.map(t=>`<button class="search-hit ${t.name===s.open?'active':''}" style="width:100%;${t.name===s.open?'background:var(--surface-3)':''}" onclick="chooseTrigger('${t.name}')"><span class="chip ${t.timing==='AFTER'?'ok':'warn'}">${t.timing}</span><span><b class="mono">${esc(t.name)}</b><small>${esc(t.event)} · ${esc(t.table)} · ${(t.operations||[]).slice(0,3).join(', ')}</small></span></button>`).join('')||'<div class="empty small">Sin coincidencias.</div>'}</div></div>
+    <div id="trDetail">${shown.length?shown.map(t=>triggerDetail(t)).join(''):'<div class="empty">Seleccione un trigger para ver su documentación.</div>'}</div>
+  </div>`;
+  $('#trQ').oninput=e=>{trState.q=e.target.value;renderTriggers();$('#trQ').focus();};
+  $('#trTable').onchange=e=>{trState.table=e.target.value;renderTriggers();};
+  $('#trEvent').onchange=e=>{trState.event=e.target.value;renderTriggers();};
+  $('#trTiming').onchange=e=>{trState.timing=e.target.value;renderTriggers();};
+  const cs=$('#trCodeQ'); if(cs) cs.oninput=e=>{
+    trState.codeQ=e.target.value;
+    const body=$('#trDetail .code-body'); if(!body)return;
+    [...body.querySelectorAll('.lc')].forEach(l=>{l.innerHTML=highlightSQL(l.textContent);});
+    if(trState.codeQ){const q=trState.codeQ.toLowerCase();[...body.querySelectorAll('.lc')].forEach(l=>{const txt=l.textContent;if(txt.toLowerCase().includes(q))l.innerHTML=highlightSQL(txt).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>');});}
+  };
+}
+function triggerDetail(t){
+  return `<div class="card pad" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><span class="eyebrow">${t.timing} ${t.event}</span><h3 class="mono" style="margin:0;font-size:15px">${esc(t.name)}</h3></div><button class="btn sm no-print" onclick="openTrigger('${t.name}')">Ficha completa</button></div>
+  <div class="note" style="margin:10px 0">${esc(triggerDesc(t))}</div>
+  <dl class="ficha"><dt>Tabla asociada</dt><dd class="mono">${esc(t.table)}</dd><dt>Objetivo</dt><dd>Registrar y hacer trazable el cambio ocurrido en la tabla asociada.</dd>
+  <dt>Condiciones</dt><dd>${(t.conditions||[]).length?t.conditions.map(esc).join('; '):'Sin condición IF/WHERE declarada en el cuerpo; se ejecuta para cada fila del evento.'}</dd>
+  <dt>Tablas afectadas</dt><dd class="mono">${(t.affectedTables||[]).join(', ')||t.table}</dd><dt>Operaciones</dt><dd>${(t.operations||[]).join(', ')||'—'}</dd><dt>Dependencias</dt><dd class="mono">${(t.dependencies||[]).slice(0,12).join(', ')||'—'}</dd>
+  <dt>Explicación técnica</dt><dd>El trigger se ejecuta ${t.timing.toLowerCase()} de ${t.event.toLowerCase()} sobre ${t.table} con granularidad ${t.level}. Su cuerpo ${(t.operations||[]).join('/')||'modifica datos'} usando NEW/OLD según corresponda; la evidencia es el SQL original.</dd></dl>
+  <div class="flow no-print"><span>EVENTO ${t.event}</span><i>→</i><span>${esc(t.name)}</span><i>→</i><span>VALIDAR / OPERAR</span><i>→</i><span>${esc((t.affectedTables||[])[0]||t.table)}</span></div>
+  <div class="toolbar" style="margin:10px 0 0"><input class="field no-print" id="trCodeQ" placeholder="Buscar dentro del código…" style="min-width:200px"><button class="btn sm no-print" onclick="copyText(${JSON.stringify(t.sql)},'Código SQL')">Copiar código</button><button class="btn sm no-print" onclick="this.closest('.card').querySelector('.code-block').classList.toggle('collapsed')">Expandir / contraer</button></div>
+  ${codeBlock(t.sql,'trigger_'+t.name)}
+  <div class="small muted" style="margin-top:8px">Línea de origen en el respaldo: ${t.line}. Sin resultados de ejecución simulados.</div></div>`;
+}
+function chooseTrigger(name){ trState.open=name; renderTriggers(); setTimeout(()=>{const el=$('#trDetail .card');if(el)el.scrollIntoView({block:'start'});},40); }
+/* ============================================================
+   10 · VISTAS
+   ============================================================ */
+let vwState={q:'',table:'Todas',open:null};
+function renderVistas(){
+  const s=vwState;
+  const list=V.filter(v=>(s.table==='Todas'||v.tables.includes(s.table)||v.external.some(x=>x.includes(s.table)))&&v.name.toLowerCase().includes(s.q.toLowerCase()));
+  const shown=s.open?list.filter(v=>v.name===s.open):list.slice(0,3);
+  $('#sec-vistas').innerHTML=secHead(10,'Documentación de vistas',`${V.length} definiciones finales de vistas, extraídas tras descartar los placeholders temporales generados por mysqldump. Incluye columnas resultantes, dependencias y SQL original.`,
+    `<button class="btn no-print" onclick="printDoc('views')">${icon(ICONS.export)} Imprimir vistas</button>`)+`
+  <div class="toolbar no-print"><input class="field" id="vwQ" placeholder="Buscar vista…" value="${esc(s.q)}" style="min-width:220px"><select class="field" id="vwTable"><option>Todas</option>${[...new Set(V.flatMap(v=>v.tables))].sort().map(x=>`<option ${x===s.table?'selected':''}>${esc(x)}</option>`).join('')}</select><span class="chip">${list.length} de ${V.length}</span></div>
+  <div class="grid g2"><div class="card pad"><h3 style="font-size:13px;margin:0 0 8px">Vistas</h3><div style="max-height:700px;overflow:auto">${list.map(v=>`<button class="search-hit" style="width:100%;${v.name===s.open?'background:var(--surface-3)':''}" onclick="chooseView('${v.name}')"><span class="chip fk">VIEW</span><span><b class="mono">${esc(v.name)}</b><small>${v.tables.length} tablas · ${v.resultColumns.length} columnas${v.external.length?' · '+v.external.length+' externa(s)':''}</small></span></button>`).join('')||'<div class="empty small">Sin coincidencias.</div>'}</div></div>
+  <div>${shown.length?shown.map(v=>viewDetail(v)).join(''):'<div class="empty">Seleccione una vista.</div>'}</div></div>`;
+  $('#vwQ').oninput=e=>{vwState.q=e.target.value;renderVistas();$('#vwQ').focus();};
+  $('#vwTable').onchange=e=>{vwState.table=e.target.value;renderVistas();};
+}
+function viewDetail(v){
+  return `<div class="card pad" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><div><span class="eyebrow">Definición final</span><h3 class="mono" style="margin:0;font-size:15px">${esc(v.name)}</h3></div><button class="btn sm no-print" onclick="openView('${v.name}')">Ficha completa</button></div>
+  <div class="note" style="margin:10px 0">${esc(viewDesc(v))}</div>
+  <dl class="ficha"><dt>Columnas</dt><dd class="mono">${v.resultColumns.length?v.resultColumns.map(esc).join(', '):'No determinables desde el placeholder'}</dd>
+  <dt>Tablas utilizadas</dt><dd class="mono">${v.tables.join(', ')||'—'}</dd><dt>Vistas utilizadas</dt><dd class="mono">${v.views.join(', ')||'—'}</dd>
+  <dt>Dependencias externas</dt><dd class="mono">${v.external.join(', ')||'—'}${v.external.length?' (no son tablas propias del esquema)':''}</dd>
+  <dt>Funciones y expresiones</dt><dd class="mono">${v.functions.join(', ')||'Ver SQL: CONCAT, SUBSTRING_INDEX, CAST, COALESCE…'}</dd>
+  <dt>Filtros</dt><dd class="mono small">${esc(v.filters||'—')}</dd><dt>Agrupaciones</dt><dd class="mono">${esc(v.groups||'—')}</dd></dl>
+  ${viewDepSVG(v)}
+  <div class="toolbar" style="margin:8px 0 0"><button class="btn sm no-print" onclick="copyText(${JSON.stringify(v.sql)},'SQL de vista')">Copiar SQL</button>${v.tables.slice(0,4).map(t=>`<button class="btn sm no-print" onclick="navigate('tablas');openTable('${t}')">${esc(t)}</button>`).join('')}</div>
+  ${codeBlock(v.sql,'view_'+v.name)}</div>`;
+}
+function viewDepSVG(v){
+  const ins=[...v.tables,...v.views.map(x=>'view:'+x),...v.external]; if(!ins.length) return '<div class="small muted">Sin dependencias de tablas: la vista usa expresiones constantes.</div>';
+  const w=560,h=Math.max(110,ins.length*36+30);
+  const xs=70, xo=420;
+  return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;max-height:240px"><defs><marker id="arw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--blue)"/></marker></defs>
+  ${ins.map((x,i)=>`<line x1="${xs+110}" y1="${24+i*36}" x2="${xo-10}" y2="${h/2}" stroke="var(--blue)" stroke-width="1.3" marker-end="url(#arw)" opacity=".6"/><rect x="10" y="${8+i*36}" width="120" height="28" rx="6" fill="var(--surface-2)" stroke="var(--border-strong)"/><text x="70" y="${26+i*36}" text-anchor="middle" font-size="9" font-family="monospace" fill="var(--text)">${esc(x.slice(0,20))}</text>`).join('')}
+  <rect x="${xo}" y="${h/2-20}" width="130" height="40" rx="8" fill="rgba(15,118,110,.12)" stroke="var(--blue)"/><text x="${xo+65}" y="${h/2+4}" text-anchor="middle" font-size="10" font-family="monospace" fill="var(--text)">${esc(v.name.slice(0,20))}</text></svg>`;
+}
+function chooseView(name){vwState.open=name;renderVistas();setTimeout(()=>{const el=$('#sec-vistas .grid>div:nth-child(2) .card');if(el)el.scrollIntoView({block:'start'});},40);}
+/* ============================================================
+   11 · ÍNDICES Y RESTRICCIONES
+   ============================================================ */
+let idxState={q:''};
+function renderIndices(){
+  const q=idxState.q.toLowerCase();
+  const idx=T.flatMap(t=>t.indexes.map(i=>({t,i}))).filter(x=>(x.t.name+' '+x.i.name+' '+x.i.columns.join()).toLowerCase().includes(q));
+  const cks=T.flatMap(t=>t.checks.map(c=>({t,c}))).filter(x=>(x.t.name+' '+x.c.name+' '+x.c.expression).toLowerCase().includes(q));
+  $('#sec-indices').innerHTML=secHead(11,'Índices y restricciones',`Índices (${S.totalIndexes}), restricciones CHECK (${S.totalChecks}), claves primarias y foráneas declaradas en el DDL de cada tabla.`)+
+  `<div class="toolbar no-print"><input class="field" id="idxQ" placeholder="Buscar índice, CHECK o tabla…" value="${esc(idxState.q)}" style="min-width:250px"><span class="chip">${idx.length} índices · ${cks.length} CHECK</span></div>
+  <div class="card pad" style="margin-bottom:16px"><h3 style="font-size:13px;margin:0 0 10px">Índices declarados</h3><div class="table-scroll" style="max-height:380px"><table class="data-table"><thead><tr><th>Tabla</th><th>Nombre</th><th>Columnas</th><th>Tipo</th><th>Único</th><th>Clave</th></tr></thead><tbody>${idx.map(({t,i})=>`<tr id="idx-${CSS.escape(t.name)}-${CSS.escape(i.name)}"><td class="mono">${esc(t.name)}</td><td class="mono">${esc(i.name)}</td><td class="mono">${i.columns.map(esc).join(', ')}</td><td>${esc(i.type)}</td><td>${i.unique?'<span class="chip uq">UNIQUE</span>':'—'}</td><td>${i.columns.every(c=>t.pk.includes(c))?'<span class="chip pk">PK</span>':i.columns.every(c=>t.fks.some(f=>f.columns.includes(c)))?'<span class="chip fk">FK</span>':'—'}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">Sin resultados.</td></tr>'}</tbody></table></div></div>
+  <div class="grid g2"><div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Restricciones CHECK (${cks.length})</h3><div class="table-scroll" style="max-height:440px"><table class="data-table"><thead><tr><th>Tabla</th><th>Restricción</th><th>Expresión</th></tr></thead><tbody>${cks.map(({t,c})=>`<tr id="idx-${CSS.escape(t.name)}-${CSS.escape(c.name)}"><td class="mono">${esc(t.name)}</td><td class="mono">${esc(c.name)}</td><td class="mono small">${esc(c.expression)}</td></tr>`).join('')||'<tr><td colspan="3" class="empty">Sin resultados.</td></tr>'}</tbody></table></div></div>
+  <div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Claves primarias y foráneas</h3><div class="table-scroll" style="max-height:440px"><table class="data-table"><thead><tr><th>Tabla</th><th>PK</th><th>FK</th><th>Detalle FK</th></tr></thead><tbody>${T.filter(t=>(t.name+' '+t.pk.join()+' '+t.fks.map(f=>f.name).join()).toLowerCase().includes(q)).map(t=>`<tr><td class="mono">${esc(t.name)}</td><td class="mono">${esc(t.pk.join(', '))}</td><td>${t.fks.length}</td><td class="small">${t.fks.map(f=>esc(f.name)+' → '+esc(f.table)).join('<br>')||'—'}</td></tr>`).join('')}</tbody></table></div></div></div>`;
+  $('#idxQ').oninput=e=>{idxState.q=e.target.value;renderIndices();$('#idxQ').focus();};
+}
+function scrollToIndex(t,n){ setTimeout(()=>{const el=document.getElementById(`idx-${CSS.escape(t)}-${CSS.escape(n)}`);if(el){navigate('indices');setTimeout(()=>el.scrollIntoView({block:'center'}),100);}},30); }
+/* ============================================================
+   12 · REGISTROS Y ESTADÍSTICAS
+   ============================================================ */
+function renderRegistros(){
+  const rows=[...T].sort((a,b)=>b.rowCount-a.rowCount);
+  const sum=S.totalRows;
+  $('#sec-registros').innerHTML=secHead(12,'Registros y estadísticas',`Conteo de filas presentes en el respaldo, no en un servidor activo. Metodología: ${esc(S.rowMethod)}`)+
+  `<div class="grid g4" style="margin-bottom:16px"><div class="card pad"><div class="small muted">Total verificable</div><div style="font-size:28px;font-weight:800">${fmt(sum)}</div><div class="small muted">filas en ${T.length} tablas</div></div><div class="card pad"><div class="small muted">Clasificación</div><div style="font-weight:800;color:var(--ok)">Conteo exacto verificable</div><div class="small muted">${S.rowStatus==='exacto'?'Sin modificadores de datos a nivel superior':'Revisar modificadores'}</div></div><div class="card pad"><div class="small muted">Sentencias INSERT</div><div style="font-size:28px;font-weight:800">${fmt(Object.values(S.insertsPerTable).reduce((a,b)=>a+b,0))}</div><div class="small muted">inserciones múltiples contabilizadas por tuplas</div></div><div class="card pad"><div class="small muted">Tabla con más filas</div><div style="font-weight:800" class="mono">${esc(rows[0].name)}</div><div class="small muted">${fmt(rows[0].rowCount)} filas (${Math.round(rows[0].rowCount/sum*100)}% del total)</div></div></div>
+  <div class="grid g2" style="margin-bottom:16px"><div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Distribución de registros</h3>${barChart(rows.map(t=>({k:t.name.replace(/^t[bdc]_/,''),v:t.rowCount})),{max:14,labelWidth:150})}</div>
+  <div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Nota metodológica</h3><div class="small"><p>Se contabilizan las <b>tuplas dentro de VALUES</b>, no el número de instrucciones INSERT. El analizador respeta comillas simples/dobles, escapes con barra invertida, comillas duplicadas y paréntesis anidados.</p><p>Las operaciones dentro de los cuerpos de los ${TR.length} triggers <b>no</b> se ejecutan en el respaldo y por tanto no alteran este conteo.</p><p>No se afirma que estos sean datos actuales de un servidor MySQL en ejecución: corresponden al contenido de <b>${esc(DATA.meta.source)}</b>, finalizado el ${esc(DATA.meta.dumpCompleted||'—')}.</p><p>No se embebieron valores de filas en el HTML: sólo conteos, estructura y estadísticas anonimizadas.</p></div></div></div>
+  <div class="table-scroll"><table class="data-table"><thead><tr><th>Tabla</th><th>Filas verificables</th><th>Sentencias INSERT</th><th>Porcentaje</th><th>Conteo exacto por tabla</th></tr></thead><tbody>${rows.map(t=>`<tr style="cursor:pointer" onclick="openTable('${t.name}')"><td class="mono">${esc(t.name)}</td><td><b>${fmt(t.rowCount)}</b></td><td>${t.insertStatements}</td><td>${(t.rowCount/sum*100).toFixed(2)}%</td><td><div class="progress" style="width:120px"><i style="width:${t.rowCount/rows[0].rowCount*100}%"></i></div></td></tr>`).join('')}</tbody></table></div>`;
+}
+/* ============================================================
+   13 · DEPENDENCIAS Y TRAZABILIDAD
+   ============================================================ */
+let depState={type:'all'};
+function renderDependencias(){
+  const kinds=[
+    {k:'Tablas de auditoría',n:1,detail:'tb_logs concentra la bitácora; ${n} tabla de auditoría.'},
+    {k:'Triggers → tb_logs',n:TR.filter(t=>(t.affectedTables||[]).includes('tb_logs')).length,detail:'Triggers que escriben en la bitácora.'},
+    {k:'Triggers → vistas',n:TR.filter(t=>(t.affectedTables||[]).some(x=>x.startsWith('vw_')||x.startsWith('tb_'))).length,detail:'Triggers con tablas o vistas destino.'},
+    {k:'Vistas → tablas propias',n:V.reduce((a,v)=>a+v.tables.length,0),detail:'Enlaces vista-tabla declarados en SQL.'},
+    {k:'Vistas → dependencias externas',n:V.reduce((a,v)=>a+v.external.length,0),detail:'mysql.role_edges y otras tablas de sistema.'},
+    {k:'Vistas → vistas',n:V.reduce((a,v)=>a+v.views.length,0),detail:'Enlaces entre vistas.'},
+    {k:'FK confirmadas',n:R.length,detail:'Restricciones referenciales del DDL.'}
+  ];
+  const ext=[...new Set(V.flatMap(v=>v.external))];
+  $('#sec-dependencias').innerHTML=secHead(13,'Dependencias y trazabilidad',`Mapa de objetos que participan en la auditoría: tablas, ${TR.length} triggers, ${V.length} vistas y dependencias externas al esquema.`)+
+  `<div class="grid g4" style="margin-bottom:16px">${kinds.map(k=>`<div class="card pad"><div class="small muted">${esc(k.k)}</div><div style="font-size:25px;font-weight:800">${k.n}</div><div class="small muted">${esc(k.detail)}</div></div>`).join('')}</div>
+  <div class="grid g2"><div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Cadena de trazabilidad documentada</h3>
+  <div class="flow"><span>Operación SQL sobre tabla</span><i>→</i><span>Trigger BEFORE/AFTER</span><i>→</i><span>INSERT en tb_logs o vista</span><i>→</i><span>Vistas vw_trazabilidad_*</span></div>
+  <div class="note" style="margin-top:14px">Los triggers insertan descripciones con USER(), valores NEW/OLD y marcas de estado. Las vistas de trazabilidad filtran <span class="mono">tb_logs</span> por <span class="mono">table_name</span> y, en algunos casos, consultan <span class="mono">mysql.role_edges</span> para mostrar roles. Estas tablas de sistema se representan como <b>dependencias externas</b>, no como tablas físicas propias.</div></div>
+  <div class="card pad"><h3 style="font-size:13px;margin:0 0 10px">Dependencias externas detectadas</h3>${ext.length?ext.map(x=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)"><span class="mono">${esc(x)}</span><span class="chip warn">Externa</span></div>`).join(''):'<div class="empty small">Sin dependencias externas.</div>'}
+  <div class="divider"></div><h3 style="font-size:13px;margin:0 0 8px">Objetos de auditoría</h3><button class="btn sm" onclick="navigate('tablas');openTable('tb_logs')">Abrir tb_logs</button> <button class="btn sm" onclick="navigate('vistas',{filter:'tb_logs'})">Vistas sobre tb_logs</button></div></div>
+  <div class="card pad" style="margin-top:16px"><h3 style="font-size:13px;margin:0 0 10px">Relación trigger → tabla → vista (muestra documentada)</h3><div class="table-scroll" style="max-height:420px"><table class="data-table"><thead><tr><th>Trigger</th><th>Tabla origen</th><th>Tablas/vistas afectadas</th><th>Vistas dependientes de la tabla</th></tr></thead><tbody>${TR.slice(0,40).map(t=>`<tr><td class="mono">${esc(t.name)}</td><td class="mono">${esc(t.table)}</td><td class="mono">${(t.affectedTables||[]).join(', ')||'—'}</td><td class="small mono">${(tableMap[t.table]?.viewNames||[]).slice(0,4).join(', ')||'—'}</td></tr>`).join('')}</tbody></table></div></div>`;
+}
+/* ============================================================
+   14 · CONCLUSIONES
+   ============================================================ */
+function renderConclusiones(){
+  $('#sec-conclusiones').innerHTML=secHead(14,'Conclusiones técnicas','Hallazgos verificables, discrepancias y límites del análisis estático del respaldo.')+`
+  <div class="grid g2"><div class="card pad"><span class="eyebrow">Hallazgos</span><h3 style="margin:0 0 10px">Lo que el respaldo confirma</h3><ol class="small" style="padding-left:20px;line-height:1.9">
+  <li>La base de datos se denomina <b>${esc(DATA.meta.database)}</b>, coincidiendo con el nombre esperado.</li>
+  <li>Existen <b>${T.length} tablas</b> y <b>${TR.length} triggers</b>, ambos iguales a lo esperado.</li>
+  <li>Se documentan <b>${V.length} vistas finales</b>, siete más de las 28 esperadas; el valor real se conserva.</li>
+  <li>Hay <b>${S.totalColumns} columnas</b>, <b>${S.totalPK} componentes de PK</b>, <b>${S.totalFK} FK</b>, <b>${S.totalIndexes} índices</b> y <b>${S.totalChecks} CHECK</b>.</li>
+  <li>${S.totalRows.toLocaleString('es-MX')} filas son verificables a partir de los VALUES del respaldo, con conteo exacto por tupla.</li>
+  <li>La auditoría se apoya en <span class="mono">tb_logs</span>, triggers AFTER y vistas <span class="mono">vw_trazabilidad_*</span>.</li>
+  <li>No hay procedimientos ni funciones almacenadas en el archivo analizado.</li></ol></div>
+  <div class="card pad"><span class="eyebrow">Límites</span><h3 style="margin:0 0 10px">Lo que no puede afirmarse</h3><ol class="small" style="padding-left:20px;line-height:1.9">
+  <li>Las descripciones funcionales y las clasificaciones semánticas son <b>inferencias técnicas</b> basadas en nombres, tipos y relaciones; no texto documental del DDL.</li>
+  <li>No se conocen reglas de negocio no expresadas en DDL, CHECK o triggers.</li>
+  <li>No se exponen credenciales, correos ni hashes: los VALUES de INSERT quedan fuera del HTML.</li>
+  <li>Las estadísticas corresponden al respaldo, no a un servidor activo; no se simulan resultados de ejecución.</li>
+  <li>Las vistas que consultan <span class="mono">mysql.role_edges</span> dependen de tablas de sistema externas al esquema.</li>
+  <li>El EER usa posiciones automáticas por dominio funcional; no son coordenadas originales de ningún modelo previo.</li></ol></div></div>
+  <div class="card pad" style="margin-top:16px"><h3 style="font-size:14px;margin:0 0 10px">Evaluación de criterios de aceptación</h3><div class="table-scroll"><table class="data-table"><thead><tr><th>Criterio</th><th>Estado</th><th>Evidencia en esta aplicación</th></tr></thead><tbody>
+  ${[['Datos fieles al respaldo','Cumplido','Parser con DELIMITER, comentarios, cadenas y comentarios ejecutables; 1,912 sentencias analizadas.'],['Diccionario completo','Cumplido',`${T.length} tablas y ${S.totalColumns} columnas con composición DFD, dominio, naturaleza, clasificación y evidencia.`],['EER interactivo','Cumplido','Arrastre, zoom, pan, cuatro modos, selección, resaltado y exportación SVG/PNG.'],['Triggers y vistas','Cumplido',`${TR.length} y ${V.length} objetos documentados con SQL y filtros.`],['Estadísticas verificables','Cumplido','Gráficas construidas desde el dataset embebido, con metodología de conteo.'],['Impresión','Ver sección 15','Estilos @media print y portada académica.'],['Autonomía del archivo','Cumplido','Sin fetch, sin CDN, sin backend; funciona por file:// y GitHub Pages.']].map(r=>`<tr><td>${r[0]}</td><td><span class="chip ok">${r[1]}</span></td><td class="small">${r[2]}</td></tr>`).join('')}
+  </tbody></table></div></div>`;
+}
+/* ============================================================
+   15 · EXPORTACIÓN
+   ============================================================ */
+function renderExportacion(){
+  $('#sec-exportacion').innerHTML=secHead(15,'Exportación de documentación','Impresión, PDF mediante el navegador, copia de definiciones y exportación del modelo EER. Todo se genera en el cliente.')+`
+  <div class="grid g2"><div class="card pad"><span class="eyebrow">Impresión / PDF</span><h3 style="margin:0 0 12px">Documentos</h3><div style="display:flex;gap:9px;flex-wrap:wrap">
+  <button class="btn primary" onclick="printDoc('all')">Documento completo + portada</button><button class="btn" onclick="printDoc('dictionary')">Diccionario de datos</button><button class="btn" onclick="printDoc('triggers')">Documentación de triggers</button><button class="btn" onclick="printDoc('views')">Documentación de vistas</button>
+  <button class="btn" onclick="window.print()">Imprimir sección actual</button></div><div class="note" style="margin-top:14px">El PDF se genera con la función de impresión del navegador (Ctrl/Cmd + P → Guardar como PDF). La portada incluye los mismos datos académicos y se ocultan menús y botones.</div></div>
+  <div class="card pad"><span class="eyebrow">Modelo EER</span><h3 style="margin:0 0 12px">Exportación gráfica</h3><div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn primary" onclick="navigate('eer');setTimeout(()=>eerExport('svg'),120)">Exportar SVG</button><button class="btn" onclick="navigate('eer');setTimeout(()=>eerExport('png'),120)">Exportar PNG</button></div><div class="small muted" style="margin-top:12px">El SVG se construye a partir del estado real del diagrama; el PNG se rasteriza en el navegador. Si el navegador bloquea la rasterización, se ofrece el SVG como alternativa válida.</div></div></div>
+  <div class="card pad" style="margin-top:16px"><span class="eyebrow">Copiar definiciones</span><h3 style="margin:0 0 12px">SQL de las tablas</h3><div style="display:flex;gap:8px;flex-wrap:wrap">${T.map(t=>`<button class="btn sm" data-copy-ddl="${esc(t.name)}">${esc(t.name)}</button>`).join('')}</div><div class="small muted" style="margin-top:10px">No se copian datos de filas: únicamente el DDL confirmado.</div></div>
+  <div class="card pad" style="margin-top:16px"><span class="eyebrow">Trazabilidad de la exportación</span><dl class="kv"><dt>Archivo fuente</dt><dd class="mono">${esc(DATA.meta.source)}</dd><dt>Base de datos</dt><dd class="mono">${esc(DATA.meta.database)}</dd><dt>Fecha del respaldo</dt><dd>${esc(DATA.meta.dumpCompleted||'—')}</dd><dt>Generación del atlas</dt><dd>${new Date(DATA.meta.generatedAt).toLocaleString('es-MX')}</dd><dt>Dependencias externas</dt><dd>${V.reduce((a,v)=>a+v.external.length,0)} referencias en vistas</dd></dl></div>`;
+  $$('[data-copy-ddl]').forEach(b=>b.onclick=()=>copyText(tableMap[b.dataset.copyDdl].rawDDL,'DDL de '+b.dataset.copyDdl));
+}
+function printFrontHTML(){
+  const toc=SECTIONS.map((s,i)=>`<tr><td class="pf-num">${String(i+1).padStart(2,'0')}</td><td>${esc(s[1])}</td><td class="pf-page">—</td></tr>`).join('');
+  return `<section class="print-cover">
+    <div class="pf-inst">Universidad Tecnológica de Xicotepec de Juárez</div>
+    <div class="pf-kicker">Atlas documental · Ingeniería inversa MySQL</div>
+    <h1>Atlas de la Base de Datos</h1>
+    <div class="pf-db">${esc(DATA.meta.database)}</div>
+    <div class="pf-practice">Práctica 04 – Procesos de Simulación de Compra</div>
+    <div class="pf-rule"></div>
+    <dl class="pf-grid">
+      <div><dt>Materia</dt><dd>Optativa I. Bases de Datos en la Nube</dd></div>
+      <div><dt>Alumna</dt><dd>Yazmin Ariana Esquivel Marquez</dd></div>
+      <div><dt>Matrícula</dt><dd>240235</dd></div>
+      <div><dt>Docente</dt><dd>M.T.I. Marco Antonio Ramírez Hernández</dd></div>
+      <div><dt>Gestor</dt><dd>MySQL 8.0</dd></div>
+      <div><dt>Repositorio</dt><dd>Practicas_BDN_240235</dd></div>
+      <div><dt>Fuente única</dt><dd>${esc(DATA.meta.source)}</dd></div>
+      <div><dt>Versión del servidor</dt><dd>${esc(DATA.meta.serverVersion||'MySQL 8.0')}</dd></div>
+    </dl>
+    <div class="pf-foot">Documento generado desde análisis estático · ${new Date(DATA.meta.generatedAt).toLocaleDateString('es-MX')}</div>
+  </section>
+  <section class="print-index">
+    <div class="pf-inst">Índice general</div>
+    <h2>Contenido del documento</h2>
+    <table class="pf-toc"><tbody>${toc}</tbody></table>
+    <div class="pf-note">Las páginas se numeran automáticamente según la configuración de impresión del navegador. Los conteos y definiciones proceden exclusivamente de ${esc(DATA.meta.source)}.</div>
+  </section>`;
+}
+function printDoc(scope){
+  const all=scope==='all';
+  const secKey=({dictionary:'diccionario',triggers:'triggers',views:'vistas'})[scope]||scope;
+  if(all) SECTIONS.forEach(([id])=>RENDER[id]?.()); else RENDER[secKey]?.();
+  document.body.className=all?'printing-all':'print-scope-'+scope;
+  if(!all) $$('.section').forEach(s=>s.classList.toggle('active',s.id==='sec-'+secKey));
+  setTimeout(()=>{window.print();setTimeout(()=>{document.body.className='';if(!all)navigate(current);},300);},80);
+}
+/* ============================================================
+   INICIALIZACIÓN
+   ============================================================ */
+const RENDER={inicio:renderInicio,dashboard:renderDashboard,tablas:renderTablas,diccionario:renderDiccionario,clasificacion:renderClasificacion,dominios:renderDominios,eer:renderEER,relaciones:renderRelaciones,triggers:renderTriggers,vistas:renderVistas,indices:renderIndices,registros:renderRegistros,dependencias:renderDependencias,conclusiones:renderConclusiones,exportacion:renderExportacion};
+function initTheme(){
+  let t='light';try{t=localStorage.getItem('atlas_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch(e){}
+  document.documentElement.dataset.theme=t;
+  $('#themeBtn').onclick=()=>{t=t==='dark'?'light':'dark';document.documentElement.dataset.theme=t;try{localStorage.setItem('atlas_theme',t);}catch(e){}toast('Tema '+(t==='dark'?'oscuro':'claro'));};
+}
+function init(){
+  buildNav(); buildSearchIndex(); initTheme();
+  $('#printFront').innerHTML=printFrontHTML();
+  $('#brandDb').textContent=DATA.meta.database+' · MySQL 8.0';
+  $('#collapseBtn').onclick=()=>$('#app').classList.toggle('collapsed');
+  $('#mobileMenu').onclick=()=>$('#app').classList.toggle('mobile-open');
+  $('#drawerBackdrop').onclick=closeDrawer;
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();$('#searchResults').classList.remove('show');}});
+  const si=$('#globalSearch'); si.oninput=e=>runSearch(e.target.value); si.onfocus=()=>{if(si.value.length>=2)runSearch(si.value)};
+  document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))$('#searchResults').classList.remove('show');});
+  $('#helpBtn').onclick=()=>openDrawer(drawerHead('Ayuda','Guía del explorador','Interfaz de una sola página')+`<div class="drawer-section"><h4>Recorrido recomendado</h4><ol class="help-list"><li><b>Inicio</b>: portada académica y validación de conteos.</li><li><b>Dashboard</b>: estadísticas reales del respaldo.</li><li><b>Explorador de tablas</b>: busca y abre una tabla.</li><li><b>Diccionario</b>: expande cualquier columna para ver su ficha completa.</li><li><b>EER</b>: arrastra entidades, usa la rueda para acercar y haz clic en relaciones.</li><li><b>Triggers y vistas</b>: filtra y consulta el SQL original.</li></ol></div>
+  <div class="drawer-section"><h4>Atajos y controles</h4><ul class="help-list"><li><span class="mono">Esc</span> cierra el panel de detalles.</li><li>El buscador superior agrupa resultados por categoría.</li><li>El interruptor de tema conserva la preferencia en localStorage.</li><li>Las posiciones del EER también se guardan localmente.</li></ul></div>
+  <div class="drawer-section"><h4>Leyenda de evidencia</h4><div class="small"><span class="chip ok">Confirmada</span> procede del DDL. <span class="chip warn">Inferida</span> interpretación técnica. <span class="chip neutral">No determinable</span> sin evidencia suficiente.</div></div>`);
+  const h=location.hash.slice(1).split('/'); const start=SECTIONS.some(s=>s[0]===h[0])?h[0]:'inicio';
+  renderInicio(); navigate(start);
+  $$('.section').forEach(s=>{ if(s.classList.contains('active')) RENDER[s.id.slice(4)]?.(); });
+}
+window.addEventListener('error',e=>console.error('Atlas error:',e.message));
+init();
+
+</script>
+</body>
+</html>
